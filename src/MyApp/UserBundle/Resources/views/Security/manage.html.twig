@@ -1,0 +1,225 @@
+{# empty Twig template #}
+{% extends 'MyAppEspritBundle:BackOffice:administration.html.twig' %}
+
+ {% block manageuser %} 
+
+<header><h3 class="tabs_involved">Content User Manager</h3>
+    <ul class="tabs">
+        <li><a href="#tab1" id="showtab1users">Details</a></li>
+        <li><a href="#tab2" id="showtab2users">Roles</a></li>
+    </ul>
+</header>  
+                {## show hide div edit tag ##}
+<script type="text/javascript">
+    $("a#showtab1users").click(function() {
+        $("div.Roles").hide();
+        $("div.DetailsUsers").show();
+    });
+    $("a#showtab2users").click(function() {
+       $("div.Roles").show();
+        $("div.DetailsUsers").hide();
+    });
+</script>
+ 
+<div class="Roles">
+
+    <table> 
+        <tr> 
+
+            <td> &nbsp;  </td>
+            <td><b> UserName </b> </td>  
+            <td width="36"> &nbsp;  </td>
+
+            <td><b> Roles </b></td>  
+            <td width="450"> &nbsp;  </td>
+            <td> <b>Enable</b> </td>     
+            <td width=""> &nbsp;  </td>
+
+        </tr>
+    </table>  
+</div> 
+
+<div class="DetailsUsers">
+
+    <table> 
+        <tr> 
+            <td width="0"> &nbsp;  </td>
+            <td><b> UserName </b> </td>  
+            <td width="90"> &nbsp;  </td>
+
+            <td><b> Roles </b></td>  
+            <td width="150"> &nbsp;  </td>
+            <td> <b>Created On</b> </td>     
+            <td width="120"> &nbsp;  </td>
+            <td><b>Actions</b></td> 
+        </tr>
+    </table>  
+</div>
+
+{#     <thead> 
+            <tr> 
+                <th></th> 
+                <th>User Name</th> 
+                <th>Role</th> 
+                <th>Created On</th> 
+                <th>Actions</th> 
+            </tr> 
+        </thead> #}
+
+<div id="tab1" class="tab_content" style="height:250px;overflow: auto; display: block;">
+    <table class="tablesorter" cellspacing="0"> 
+
+        <tbody> 
+            {% for users in users %} 
+            <tr> 
+              {#  <td><input type="checkbox"></td> #}
+                <td>{{users.username}}</td> 
+                {% set rol=users.roles|join|replace({'ROLE_USER': ' '}) %}
+                {%if rol ==' '%}
+                <td>USER</td>
+                {%else%}
+                
+                <td> {{rol }}</td> 
+
+                {%endif%}
+                <td>{{users.datedeCreationUser|date('Y-M-d')}}</td> 
+
+
+                <td>
+                    {#<a href="{{ path('fos_user_profile_edit') }}">
+                        <img src="{{ asset('bundles/myappesprit/images/admin/icn_edit.png') }}" alt="" />
+                    </a>   #} &nbsp;&nbsp;
+                      {% if "SUPERADMINROLE_USER" not in users.roles|join %}
+                        <a href="{{ path('my_app_user_delete',{'id':users.id}) }}" id="submitdeleteuser">
+                            <img src="{{ asset('bundles/myappesprit/images/admin/icn_trash.png') }}" alt="" />
+                        </a> 
+                    {%endif%}
+                    
+                      <script type="text/javascript">
+                             document.querySelector('#submitdeleteuser').onclick = function(){
+                             swal({
+                                    title: "Alert automatique!",
+                                    text: "Veuillez patienter un peu",
+                                    timer: 6000,
+                                    showConfirmButton: false
+                                  });
+                              };
+                    </script>
+                    
+                    
+                </td>
+            </tr> 
+            {%endfor%}
+
+
+
+        </tbody> 
+    </table>
+</div> 
+
+
+
+
+<form  action='{{path('my_app_user_manage')}}' method="post" {{ form_enctype(form) }} > 
+    <div id="tab2" class="tab_content" style="height: 250px; /*width: 680px;*/ overflow: auto; display: block;">
+        <table class="tablesorter" cellspacing="0"> 
+
+            <tbody> 
+
+            {% for users in users %} 
+
+                <tr> 
+
+                    <td>{{users.username}}</td> 
+
+
+
+                    <td> 
+
+    {% set role = users.roles|join%}
+
+
+
+
+     {% if "EDITORROLE_USER" == role%}
+                        <input type="checkbox" name="SuperAdmin[]" value="{{users.id}}"   /><label>SuperAdmin</label>&nbsp;
+                        <input type="checkbox" name="Admin[]" value="{{users.id}}"  /><label>Admin</label>&nbsp;
+                        <input type="checkbox" name="SuperSol[]" value="{{users.id}}"  /><label>SuperSol</label>&nbsp;
+                        <input type="checkbox" name="Editor[]" value="{{users.id}}" checked="checked" /><label>Editor</label>   &nbsp;
+                        <input type="checkbox" name="User[]" value="{{users.id}}"  /><label>User</label>     &nbsp;
+    
+
+     {% elseif "SUPERSOLROLE_USER" == role %}
+                        <input type="checkbox" name="SuperAdmin[]" value="{{users.id}}"   /><label>SuperAdmin</label>&nbsp;
+                        <input type="checkbox" name="Admin[]" value="{{users.id}}"  /><label>Admin</label>&nbsp;
+                        <input type="checkbox" name="SuperSol[]" value="{{users.id}}" checked="checked" /><label>SuperSol</label>&nbsp;
+                        <input type="checkbox" name="Editor[]" value="{{users.id}}" /><label>Editor</label>   &nbsp;
+                        <input type="checkbox" name="User[]" value="{{users.id}}"  /><label>User</label>   &nbsp;  
+   
+
+
+  {% elseif "ADMINROLE_USER" == role %}
+                        <input type="checkbox" name="SuperAdmin[]" value="{{users.id}}"   /><label>SuperAdmin</label>&nbsp;
+                        <input type="checkbox" name="Admin[]" value="{{users.id}}" checked="checked" /><label>Admin</label>&nbsp;
+                        <input type="checkbox" name="SuperSol[]" value="{{users.id}}" /><label>SuperSol</label>&nbsp;
+                        <input type="checkbox" name="Editor[]" value="{{users.id}}" /><label>Editor</label>  &nbsp; 
+                        <input type="checkbox" name="User[]" value="{{users.id}}" /><label>User</label>  &nbsp;   
+   
+
+    {% elseif "SUPERADMINROLE_USER" == role %}
+                        <input type="checkbox" name="SuperAdmin[]" value="{{users.id}}" disabled="disabled" checked="checked" /><label>SuperAdmin</label>&nbsp;
+                        <input type="checkbox" name="Admin[]" value="{{users.id}}" disabled="disabled" /><label>Admin</label>&nbsp;
+                        <input type="checkbox" name="SuperSol[]" value="{{users.id}}"  disabled="disabled" /><label>SuperSol</label>&nbsp;
+                        <input type="checkbox" name="Editor[]" value="{{users.id}}" disabled="disabled" /><label>Editor</label>   &nbsp;
+                        <input type="checkbox" name="User[]" value="{{users.id}}" disabled="disabled" /><label>User</label>     &nbsp;
+     
+      {% else  %}
+                        <input type="checkbox" name="SuperAdmin[]" value="{{users.id}}"  /><label>SuperAdmin</label>&nbsp;
+                        <input type="checkbox" name="Admin[]" value="{{users.id}}"  /><label>Admin</label>&nbsp;
+                        <input type="checkbox" name="SuperSol[]" value="{{users.id}}" /><label>SuperSol</label>&nbsp;
+                        <input type="checkbox" name="Editor[]" value="{{users.id}}" /><label>Editor</label>   &nbsp;
+                        <input type="checkbox" name="User[]" value="{{users.id}}"checked="checked" /><label>User</label>     &nbsp;
+     {%endif%}                  
+                        
+                        
+
+
+                    </td>
+       {% if users.enabled == 1 %}          
+                    <td><input type="checkbox" name="enable[]" value="{{users.id}}" checked="checked" /></td>
+         {%else%}       
+                    <td><input type="checkbox" name="enable[]" value="{{users.id}}"  /></td> 
+         {%endif%}
+                    </div>
+                </tr> 
+            {%endfor%}
+
+
+
+            </tbody> 
+        </table>
+
+
+
+ {{form_widget(form._token)}}  
+
+
+
+        </br></br>
+        <center>  <div style="  position: absolute;  top: 340px;  left: 720px;"> 
+                <input type="submit"  value="changer" id="submitchangeuser"  style="width:150px;background-color: transparent;"/>
+            </div> </center>
+    </div>   
+</form>
+  <script type="text/javascript">
+        document.querySelector('#submitchangeuser').onclick = function(){
+                swal({
+                        title: "Alert automatique!",
+                        text: "Veuillez patienter un peu",
+                        timer: 6000,
+                        showConfirmButton: false
+                });
+        };
+</script>
+
+ {% endblock  %}

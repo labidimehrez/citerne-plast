@@ -1,0 +1,3 @@
+my_app_backoffice_homepage:
+    path:     /
+    defaults: { _controller: MyAppBackofficeBundle:admin:index }

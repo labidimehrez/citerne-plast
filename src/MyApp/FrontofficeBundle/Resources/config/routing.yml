@@ -1,0 +1,3 @@
+my_app_frontoffice_homepage:
+    path:     /index.php
+    defaults: { _controller: MyAppFrontofficeBundle:Default:index }

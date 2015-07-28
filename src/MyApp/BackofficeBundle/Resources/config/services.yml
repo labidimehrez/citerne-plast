@@ -1,0 +1,4 @@
+services:
+#    my_app_backoffice.example:
+#        class: MyApp\BackofficeBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

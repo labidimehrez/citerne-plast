@@ -1,0 +1,18 @@
+my_app_user:
+    resource: "@MyAppUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+my_app_frontoffice:
+    resource: "@MyAppFrontofficeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+my_app_backoffice:
+    resource: "@MyAppBackofficeBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+# app/config/routing.yml
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+ 
