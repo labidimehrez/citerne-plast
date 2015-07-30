@@ -13,7 +13,7 @@ class DefaultController extends Controller
     
     
      public function authentificationAction()
-    {
+    { 
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig');
     }
     

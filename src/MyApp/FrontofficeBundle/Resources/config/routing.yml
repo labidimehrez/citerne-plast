@@ -12,3 +12,4 @@ my_app_frontoffice_authentification:
 my_app_frontoffice_about:
     path:     /about
     defaults: { _controller: MyAppFrontofficeBundle:Default:about }
+    

@@ -1,7 +1,19 @@
 my_app_backoffice_homepage:
-    path:     /
+    path:     /index.php
     defaults: { _controller: MyAppBackofficeBundle:admin:index }
     
     
+    
+fos_user_registration_register_admin:
+    path:     /register
+    defaults: { _controller: FOSUserBundle:Registration:register }
+    
+fos_user_security_login_admin:
+    path:     /login
+    defaults: { _controller: FOSUserBundle:Security:login }
+    
+fos_user_security_logout_admin:
+    path:     /logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
     
  
