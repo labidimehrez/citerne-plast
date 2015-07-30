@@ -1,7 +1,14 @@
 
 
-
-
 my_app_frontoffice_homepage:
     path:     /index.php
     defaults: { _controller: MyAppFrontofficeBundle:Default:index }
+    
+    
+my_app_frontoffice_authentification:
+    path:     /authentification
+    defaults: { _controller: MyAppFrontofficeBundle:Default:authentification }
+    
+my_app_frontoffice_about:
+    path:     /about
+    defaults: { _controller: MyAppFrontofficeBundle:Default:about }
