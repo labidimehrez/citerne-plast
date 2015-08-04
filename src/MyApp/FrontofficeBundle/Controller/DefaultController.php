@@ -23,4 +23,31 @@ class DefaultController extends Controller
         return $this->render('MyAppFrontofficeBundle:client:about.html.twig');
     }
     
+       public function contactAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:contact.html.twig');
+    }
+    
+    
+          public function blogAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:blog.html.twig');
+    }
+    
+   
+          public function faqAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:faq.html.twig');
+    }
+    
+          public function termsAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:terms.html.twig');
+    }
+    
+    
+          public function checkoutAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig');
+    }
 }
