@@ -10,7 +10,7 @@
         <meta name="author" content="">
         <meta name="keywords" content="MediaCenter, Template, eCommerce">
         <meta name="robots" content="all">
-  {#<img src="{{ asset('bundles/myappfrontoffice/images/favicon.ico') }}"  />#}
+		{#<img src="{{ asset('bundles/myappfrontoffice/images/favicon.ico') }}"  />#}
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" /> 
         <title>MediaCenter - Responsive eCommerce Template</title>
 
@@ -104,11 +104,11 @@
                                     <li><a href="category-grid-2.html">Category 2 - Grid/List</a></li>
                                     <li><a href="single-product.html">Single Product</a></li>
                                     <li><a href="single-product-sidebar.html">Single Product with Sidebar</a></li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
+                                    <li><a href="{{path('my_app_frontoffice_cart')}}">Shopping Cart</a></li>
                                     <li><a href="{{path('my_app_frontoffice_checkout')}}">Checkout</a></li>
                                     <li><a href="{{path('my_app_frontoffice_about') }}">About Us</a></li>
                                     <li><a href="{{path('my_app_frontoffice_contact')}}">Contact Us</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="{{path('my_app_frontoffice_blog')}}">Blog</a></li>
                                     <li><a href="blog-fullwidth.html">Blog Full Width</a></li>
                                     <li><a href="blog-post.html">Blog Post</a></li>
                                     <li><a href="{{path('my_app_frontoffice_faq')}}">FAQ</a></li>
@@ -347,6 +347,8 @@
 
 {% block checkout%}{% endblock %}
 
+
+{% block cart%}{% endblock%}
 
 
  

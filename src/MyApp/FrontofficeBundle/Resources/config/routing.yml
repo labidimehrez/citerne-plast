@@ -37,12 +37,14 @@ my_app_frontoffice_terms:
     path:     /terms
     defaults: { _controller: MyAppFrontofficeBundle:Default:terms }    
     
-    
-    
 my_app_frontoffice_checkout:
     path:     /checkout
-    defaults: { _controller: MyAppFrontofficeBundle:Default:checkout }    
+    defaults: { _controller: MyAppFrontofficeBundle:Default:checkout }     
     
+my_app_frontoffice_cart:
+    path:     /cart
+    defaults: { _controller: MyAppFrontofficeBundle:Default:cart }    
+ 
 #    
 #fos_user_registration_register_client:
 #    path:     /register

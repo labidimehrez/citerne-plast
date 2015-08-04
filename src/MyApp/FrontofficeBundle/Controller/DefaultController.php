@@ -50,4 +50,10 @@ class DefaultController extends Controller
     {
         return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig');
     }
+    
+            public function cartAction()
+    {
+        return $this->render('MyAppFrontofficeBundle:client:cart.html.twig');
+    }
+    
 }
