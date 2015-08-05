@@ -3,5 +3,30 @@ my_app_backoffice_homepage:
     defaults: { _controller: MyAppBackofficeBundle:admin:index }
     
     
+my_app_backoffice_form:
+    path:     /form
+    defaults: { _controller: MyAppBackofficeBundle:admin:form }
 
- 
+my_app_backoffice_chart:
+    path:     /chart
+    defaults: { _controller: MyAppBackofficeBundle:admin:chart }
+    
+my_app_backoffice_login:
+    path:     /login
+    defaults: { _controller: MyAppBackofficeBundle:admin:login }
+    
+my_app_backoffice_register:
+    path:     /register
+    defaults: { _controller: MyAppBackofficeBundle:admin:register }
+    
+my_app_backoffice_tabpanel:
+    path:     /tabpanel 
+    defaults: { _controller: MyAppBackofficeBundle:admin:tabpanel }
+    
+my_app_backoffice_table:
+    path:     /table
+    defaults: { _controller: MyAppBackofficeBundle:admin:table }
+    
+my_app_backoffice_ui:
+    path:     /ui
+    defaults: { _controller: MyAppBackofficeBundle:admin:ui }
