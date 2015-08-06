@@ -1,0 +1,28 @@
+
+my_app_backoffice_user_add:
+    pattern:  /add
+    defaults: { _controller: MyAppBackofficeBundle:user:add }
+    
+my_app_backoffice_user_show:
+    pattern:  /show
+    defaults: { _controller: MyAppBackofficeBundle:user:show }
+    
+my_app_backoffice_user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: MyAppBackofficeBundle:user:delete }  
+       
+my_app_backoffice_user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: MyAppBackofficeBundle:user:edit }  
+    
+my_app_backoffice_user_voir:
+    pattern:  /{id}/voir
+    defaults: { _controller: MyAppBackofficeBundle:user:voir }    
+    
+    
+    
+my_app_backoffice_user_manage:
+    pattern:  /manage
+    defaults: { _controller: MyAppBackofficeBundle:user:manage}
+    
+ 

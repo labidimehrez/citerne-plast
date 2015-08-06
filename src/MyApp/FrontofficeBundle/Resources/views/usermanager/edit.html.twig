@@ -1,0 +1,21 @@
+{# empty Twig template #}
+<form role="form" method="post" {{ form_enctype(form) }} >
+
+ <td>   {{ form_widget(form.login) }} </td></br>
+  <td>   {{ form_widget(form.password) }} </td></br>
+
+
+ <td> {{form_widget(form._token)}} </td></br>	
+                         
+	 
+ 
+
+ 
+ 
+ 
+ 
+			<input type="submit"  value="submit" class="form-submit" />
+			<input type="reset" value="reset" class="form-reset"  />
+
+
+</form>

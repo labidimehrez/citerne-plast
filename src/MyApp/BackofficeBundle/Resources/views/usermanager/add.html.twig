@@ -1,0 +1,21 @@
+{# empty Twig template #}
+<form  action='{{path('my_app_backoffice_user_add')}}' method="post" {{ form_enctype(form) }} >
+
+ 
+  <td>   {{ form_widget(form.nom) }} </td></br>
+ <td>   {{ form_widget(form.login) }} </td></br>
+  <td>   {{ form_widget(form.password) }} </td></br>
+ <td>   {{ form_widget(form.email) }} </td></br>
+ 
+ <td> {{form_widget(form._token)}} </td></br>	
+                         
+	 
+ 
+ 
+ 
+ 
+<input type="submit"  value="submit" class="form-submit" />
+<input type="reset" value="reset" class="form-reset"  />
+
+
+</form>

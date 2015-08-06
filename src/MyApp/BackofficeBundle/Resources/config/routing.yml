@@ -36,3 +36,8 @@ my_app_backoffice_table:
 my_app_backoffice_ui:
     path:     /ui
     defaults: { _controller: MyAppBackofficeBundle:admin:ui }
+    
+    
+utilisateur:
+    resource: "@MyAppBackofficeBundle/Resources/config/routing/utilisateur.yml"
+    prefix: /utilisateur 

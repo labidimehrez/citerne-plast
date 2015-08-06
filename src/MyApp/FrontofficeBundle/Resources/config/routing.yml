@@ -44,7 +44,11 @@ my_app_frontoffice_checkout:
 my_app_frontoffice_cart:
     path:     /cart
     defaults: { _controller: MyAppFrontofficeBundle:Default:cart }    
- 
+
+utilisateur:
+    resource: "@MyAppBackofficeBundle/Resources/config/routing/utilisateur.yml"
+    prefix: /utilisateur 
+    
 #    
 #fos_user_registration_register_client:
 #    path:     /register
