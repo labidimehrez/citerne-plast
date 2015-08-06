@@ -18,14 +18,7 @@ class Utilisateur {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255,unique=true,nullable=true)
-     */
-    private $nom;
-
+ 
     /**
      * @var string
      *
@@ -48,7 +41,7 @@ class Utilisateur {
 
     /**
      * @var string $privilege
-     * @ORM\Column(name="privilege", type="string", length=255,unique=true,nullable=true)
+     * @ORM\Column(name="privilege", type="string", length=255,nullable=true)
      */
     private $privilege;
 
@@ -127,9 +120,6 @@ class Utilisateur {
         $this->privilege = $privilege;
     }
 
-            public function __construct() {
-
-        $this->datelog = new \DateTime();
-    }
+     
 
 }

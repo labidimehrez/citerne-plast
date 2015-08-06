@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MyApp\UtilisateurBundle\Form\UtilisateurType;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
+
+
 class userController extends Controller {
 
     public function showAction() {
@@ -40,7 +42,7 @@ class userController extends Controller {
 
         $form = $this->createFormBuilder($user)
                 ->add('login', 'text')
-              ->add('password', 'text')
+                ->add('password', 'text')
                 ->getForm();
 
         $form->handleRequest($request);

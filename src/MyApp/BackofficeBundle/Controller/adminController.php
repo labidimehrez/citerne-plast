@@ -2,13 +2,21 @@
 
 namespace MyApp\BackofficeBundle\Controller;
 
+use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class adminController extends Controller {
 
     public function indexAction(Request $request) {
-        return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
+        
+         $session = $this->getRequest()->getSession();   
+         $usersession = $session->get('user');      
+//         var_dump($session);
+//         var_dump($usersession);
+//        var_dump($this->getRequest()->getSession()->get('user'));
+        if($usersession->getPrivilege()=='ADMIN'){return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
+        else{  return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
     }
 
     public function formAction(Request $request) {
@@ -31,19 +39,60 @@ class adminController extends Controller {
     }
 
     public function logoutAction(Request $request) {
-        //    détruire la session ici
+        
+         $this->getRequest()->getSession()->invalidate();//    détruire la session ici
+        // var_dump($this->getRequest()->getSession()->get('user'));  // null current user
         return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
 
     public function registerAction(Request $request) {
 
+        $em = $this->getDoctrine()->getManager();
+        $user = new Utilisateur();
+
         $form = $this->createFormBuilder()
-                ->add('identifiant', 'text')
-                ->add('password', 'password')
+                ->add('login', 'text')
+                ->add('email', 'text')
+                ->add('password', 'repeated', array(
+                    'type' => 'password',
+                    'invalid_message' => 'Les mots de passe doivent correspondre',
+                    'options' => array('required' => true),
+                    'first_options' => array('label' => 'Mot de passe'),
+                    'second_options' => array('label' => 'Mot de passe (validation)'),)
+                )
                 ->getForm();
-        return $this->render('MyAppBackofficeBundle:admin:register.html.twig', array(
-                    'form' => $form->createView(),
-        ));
+
+        $request = $this->getRequest();
+        $form->bind($request);
+
+        $login = $form["login"]->getData();
+        $email = $form["email"]->getData();
+        $password = $form["password"]->getData();
+        $OK = false;
+        if (($login != NULL) && ($email != NULL) && ($password != NULL)) {
+            $user->setLogin($login);
+            $user->setEmail($email);
+            $user->setPassword(sha1(md5($password)));
+            $user->setPrivilege('ADMIN');
+            $user->setDatelog(new \DateTime());
+            $em->persist($user);
+            $em->flush();
+            $OK = TRUE;
+        }
+        if ($OK === TRUE) {
+            
+            $session = $this->getRequest()->getSession();
+            $session->start();
+                    $session->set('user', $user);
+                    $usersession = $session->get('user');
+        
+            
+            return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
+        } else {
+            return $this->render('MyAppBackofficeBundle:admin:register.html.twig', array(
+                        'form' => $form->createView()
+            ));
+        }
     }
 
     public function tableAction(Request $request) {
