@@ -2,6 +2,7 @@
 
 namespace MyApp\BackofficeBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Session\Session;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,14 +10,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class adminController extends Controller {
 
     public function indexAction(Request $request) {
-        
-         $session = $this->getRequest()->getSession();   
-         $usersession = $session->get('user');      
-//         var_dump($session);
-//         var_dump($usersession);
-//        var_dump($this->getRequest()->getSession()->get('user'));
-        if($usersession->getPrivilege()=='ADMIN'){return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
-        else{  return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+        //      $session = $this->get('session');
+        //var_dump($session);exit;
+        $session = $this->getRequest()->getSession();
+        $usersession = $session->get('user');
+        //       var_dump($session);exit;
+        //         var_dump($usersession);
+        //        var_dump($this->getRequest()->getSession()->get('user'));
+        if ($this->getRequest()->getSession()->get('user') != NULL) {
+            if ($usersession->getPrivilege() === 'ADMIN') {
+                return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
+            } else {
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            }
+        } else {
+            return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+        }
     }
 
     public function formAction(Request $request) {
@@ -28,6 +37,9 @@ class adminController extends Controller {
     }
 
     public function loginAction(Request $request) {
+        $session = new Session();
+        $session->start();
+        $session->set('user', $user);
 
         $form = $this->createFormBuilder()
                 ->add('identifiant', 'text')
@@ -39,8 +51,8 @@ class adminController extends Controller {
     }
 
     public function logoutAction(Request $request) {
-        
-         $this->getRequest()->getSession()->invalidate();//    détruire la session ici
+
+        $this->getRequest()->getSession()->invalidate(); //    détruire la session ici
         // var_dump($this->getRequest()->getSession()->get('user'));  // null current user
         return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
@@ -80,13 +92,14 @@ class adminController extends Controller {
             $OK = TRUE;
         }
         if ($OK === TRUE) {
-            
-            $session = $this->getRequest()->getSession();
+
+            //    $session = $this->getRequest()->getSession();
+            $session = new Session();
             $session->start();
-                    $session->set('user', $user);
-                    $usersession = $session->get('user');
-        
-            
+            $session->set('user', $user);
+//                    $usersession = $session->get('user');
+
+
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             return $this->render('MyAppBackofficeBundle:admin:register.html.twig', array(

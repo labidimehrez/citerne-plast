@@ -56,14 +56,12 @@ class userController extends Controller {
     }
     
        public function addAction() {
-    
          $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
         $form = $this->createForm(new UtilisateurType, $user);
         $request = $this->getRequest();
         if ($request->isMethod('Post')) {
             $form->bind($request);
-
             if ($form->isValid()) {
                 $user = $form->getData();
                 $em = $this->getDoctrine()->getManager();
@@ -72,8 +70,6 @@ class userController extends Controller {
                 return $this->redirect($this->generateUrl('my_app_backoffice_user_show'));
             }
         } 
-         
-   
         return $this->render('MyAppBackofficeBundle:usermanager:add.html.twig', array(
                'form' => $form->createView(),
         ));
