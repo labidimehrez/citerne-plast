@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MyApp\UtilisateurBundle\Form\UtilisateurType;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 
-
 class userController extends Controller {
 
     public function showAction() {
@@ -19,8 +18,9 @@ class userController extends Controller {
                     'users' => $user
         ));
     }
+
     public function deleteAction($id) {
-        /*         * **** delete d'une user si il existe deja *** */
+        /*         * **** delete d'un  user si il existe deja *** */
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('MyAppUtilisateurBundle:Utilisateur')->find($id);
         if (!$user) {
@@ -31,18 +31,18 @@ class userController extends Controller {
 
         return $this->redirect($this->generateUrl('my_app_backoffice_user_show'));
     }
-    
-        public function editAction($id, Request $request) {
+
+    public function editAction($id, Request $request) {
 
         $em = $this->getDoctrine()->getManager();
-       $user = $em->getRepository('MyAppUtilisateurBundle:Utilisateur')->find($id);
+        $user = $em->getRepository('MyAppUtilisateurBundle:Utilisateur')->find($id);
         if (!$user) {
             throw $this->createNotFoundException('No user found for id ' . $id);
         }
 
         $form = $this->createFormBuilder($user)
                 ->add('login', 'text')
-              ->add('password', 'text')
+                ->add('password', 'text')
                 ->getForm();
 
         $form->handleRequest($request);
@@ -54,9 +54,9 @@ class userController extends Controller {
 
         return $this->render('MyAppBackofficeBundle:usermanager:edit.html.twig', array('form' => $form->createView()));
     }
-    
-       public function addAction() {
-         $em = $this->getDoctrine()->getManager();
+
+    public function addAction() {
+        $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
         $form = $this->createForm(new UtilisateurType, $user);
         $request = $this->getRequest();
@@ -69,11 +69,10 @@ class userController extends Controller {
                 $em->flush();
                 return $this->redirect($this->generateUrl('my_app_backoffice_user_show'));
             }
-        } 
+        }
         return $this->render('MyAppBackofficeBundle:usermanager:add.html.twig', array(
-               'form' => $form->createView(),
+                    'form' => $form->createView(),
         ));
     }
 
-    
 }
