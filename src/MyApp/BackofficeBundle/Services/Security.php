@@ -40,9 +40,8 @@ class Security {
 
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
-            $userpassword = sha1(md5($user->getPassword()));
-            
-     //       var_dump($userpassword);
+            $userpassword = $user->getPassword(); //sha1(md5($user->getPassword()));
+     
 //     $user->setPassword(sha1(md5($password)));
             if ((($identifiant === $userlog) && ($userpassword === $password) ) || (($identifiant === $usermail) && ($userpassword === $password))) {
                // $authentifsucces = 
