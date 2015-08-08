@@ -9,10 +9,13 @@ services:
     collectify_security_manager:
         class: %collectify.security.manager.class%
         arguments: [@doctrine.orm.entity_manager]
-
+        
+    collectify_mail_manager:
+        class: %collectify.mail.manager.class%
+        arguments: ['@service_container']
 
 parameters:
     collectify.security.manager.class: MyApp\BackofficeBundle\Services\Security
-    
+    collectify.mail.manager.class: MyApp\BackofficeBundle\Services\Mail 
     
     

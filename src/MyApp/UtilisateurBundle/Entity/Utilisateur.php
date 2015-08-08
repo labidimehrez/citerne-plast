@@ -36,7 +36,9 @@ class Utilisateur {
     /**
      * @var string $email
      * @ORM\Column(name="email", type="string", length=255,unique=true,nullable=true)
+     * 
      */
+    
     private $email;
 
     /**
@@ -52,6 +54,12 @@ class Utilisateur {
      */
     private $datelog;
     
+   /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled")
+     */
+    private $enabled;    
     public function getId() {
         return $this->id;
     }
@@ -96,7 +104,15 @@ class Utilisateur {
         $this->privilege = $privilege;
     }
 
-    public function setDatelog(\DateTime $datelog) {
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
+        public function setDatelog(\DateTime $datelog) {
         $this->datelog = $datelog;
     }
 }

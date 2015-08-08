@@ -1,68 +1,83 @@
 {{dump(app.session.get('user'))}} {# connected user #}
 
 
- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/bootstrap.css') }}"/> 
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/font-awesome.css') }}"/> 
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/custom.css') }}"/> 
-    
-    
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/bootstrap.css') }}"/> 
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/font-awesome.css') }}"/> 
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/custom.css') }}"/> 
+
+
 <div class="container">
-        <div class="row text-center ">
-            <div class="col-md-12">
-                <br /><br />
-                <h2> Binary Admin : Login</h2>
-               
-                <h5>( Login yourself to get access )</h5>
-                 <br />
-            </div>
-        </div>
-         <div class="row ">
-               
-                  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                        <strong>   Enter Details To Login </strong>  
-                            </div>
-                            <div class="panel-body">
-  <form action=" " method="post">
-    <input type="hidden" name="_csrf_token" value="{#{ csrf_token }#}" />   
-                                       <br />
-                                     <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-     <input type="text" id="identifiant" name="identifiant" value="{#{ last_username }#}" required="required"  class="form-control" placeholder=" Username Or Mail " />
-                                           
-                                        </div>
-                                                                              <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                                          
-   <input type="password" id="password" name="password" required="required"  class="form-control"  placeholder="Your Password"  />
-                                        </div>
-                                    <div class="form-group">
-                                            <label class="checkbox-inline">
-                                           
-           <input type="checkbox" id="remember_me" name="_remember_me" value="on" />                                      
-                                                Remember me
-                                            </label>
-                                            <span class="pull-right">
-                                                   <a href="#" >Forget password ? </a> 
-                                            </span>
-                                        </div>
-                                       <input type="submit" id="_submit" name="_submit" value="Login Now" class="btn btn-primary " />                                
-                               {#   <a href="index.html" class="btn btn-primary ">Login Now</a>  #}
-                                    <hr />
-                                    Not register ? 
-                                      <a href="{{ path('my_app_backoffice_register') }}"> click here </a> 
-                                      
-                                    </form>
-                            </div>
-                           
-                        </div>
-                    </div>
-                
-                
+    <div class="row text-center ">
+        <div class="col-md-12">
+            <br /><br />
+            <h2> Binary Admin : Login</h2>
+
+            <h5>( Login yourself to get access )</h5>
+            <br />
         </div>
     </div>
+    <div class="row ">
+
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>   Enter Details To Login </strong>  
+                </div>
+                <div class="panel-body">
+                    <form action=" " method="post" id="formsubmitid">
+                        <input type="hidden" name="_csrf_token" value="{#{ csrf_token }#}" />   
+                        <br />
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                            <input type="text" id="identifiant" name="identifiant" value="{#{ last_username }#}" required="required"  class="form-control" placeholder=" Username Or Mail " />
+
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+
+                            <input type="password" id="password" name="password" required="required"  class="form-control"  placeholder="Your Password"  />
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-inline">
+
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />                                      
+                                Remember me
+                            </label>
+                            <span class="pull-right">
+                                <a href="#" >Forget password ? </a> 
+                            </span>
+                            
+                        </div>
+                        
+                        <div style="float: right;width: 200px;font-family: monospace;color: slategrey;">
+                                 {% for flashMessage in app.session.flashbag.get('message') %}                  
+                                        {{ flashMessage }}
+                             {% endfor %}
+                        </div>
+                        
+                        <input type="submit" id="_submit" name="_submit" value="Login Now" class="btn btn-primary " />                                
+                               {#   <a href="index.html" class="btn btn-primary ">Login Now</a>  #}
+                        <hr />
+                        Not register ? 
+                        <a href="{{ path('my_app_backoffice_register') }}"> click here </a> 
+
+                    </form>
+                    <script type="text/javascript">
+                        document.getElementById('password').onkeypress = function(e) {
+                            if (e.keyCode === 13) {
+                                $("#formsubmitid").submit();
+                            }
+                        };
+                    </script> 
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
         {#% extends 'MyAppEspritBundle:publicite:show.html.twig' %#}
  {#
  {% if error %}
@@ -87,5 +102,4 @@
     <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
  #}   
-    
-    
+

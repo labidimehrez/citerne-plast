@@ -38,26 +38,27 @@ class adminController extends Controller {
     public function loginAction(Request $request) {
 
         $form = $this->createFormBuilder()
-                ->add('identifiant', 'text')
-                ->add('password', 'password')
+                ->add('identifiant', 'text', array('required' => TRUE))
+                ->add('password', 'password', array('required' => TRUE))
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
         $password = $this->getRequest()->get('password');
-      // var_dump($identifiant);var_dump($password);
+        // var_dump($identifiant);var_dump($password);
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
         // $user = $manager->login($identifiant, $password);
         $user = $manager->getUserByPassword($password);
-       // var_dump($authentifsucces);var_dump($user);exit;
+        // var_dump($authentifsucces);var_dump($user);exit;
         if (($authentifsucces == TRUE) && ($user != NULL)) {
 //            var_dump($authentifsucces);var_dump($user);exit;
             $session = new Session();
-
             $session->start();
-
             $session->set('user', $user[0]);
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
+            $session = $this->getRequest()->getSession();
+            $session->clear();
+            $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
             ));
@@ -76,11 +77,22 @@ class adminController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
-
         $form = $this->createFormBuilder()
-                ->add('login', 'text')
-                ->add('email', 'text')
+                ->add('login', 'text', array(
+                    'required' => TRUE,
+                    'attr' => array(
+                        'placeholder' => 'What\'s your name?',
+                        'pattern' => '.{5,}' //minlength
+                    )
+                ))
+                ->add('email', 'email', array(
+                    'required' => TRUE,
+                    'attr' => array(
+                        'placeholder' => 'So I can get back to you.'
+                    )
+                ))
                 ->add('password', 'repeated', array(
+                    'required' => TRUE,
                     'type' => 'password',
                     'invalid_message' => 'Les mots de passe doivent correspondre',
                     'options' => array('required' => true),
@@ -101,13 +113,16 @@ class adminController extends Controller {
             $user->setEmail($email);
             $user->setPassword($password); // $user->setPassword(sha1(md5($password)));      
             $user->setPrivilege('ADMIN');
+            $user->setEnabled(TRUE);
             $user->setDatelog(new \DateTime());
             $em->persist($user);
             $em->flush();
+            $manager = $this->get('collectify_mail_manager');/** equivalent de em manager * */
+           // $manager->envoiMail($user);  /// renvoie de mail au membre
+          
             $OK = TRUE;
         }
         if ($OK === TRUE) {
-
             $session = new Session();
             $session->clear(); /// detruire la session avant de la start
             $session->start();

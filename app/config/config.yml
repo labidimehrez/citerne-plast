@@ -72,13 +72,24 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
+#swiftmailer:
+#    transport: "%mailer_transport%"
+#    host:      "%mailer_host%"
+#    username:  "%mailer_user%"
+#    password:  "%mailer_password%"
+#    spool:     { type: memory }
+ # app/config/config.yml
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-
+    transport:  smtp
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.msn.com
+    username:   mehrez.labidi@esprit.tn
+    password:   ak47ak47ak47
+    #delivery_address: lamehrez@yahoo.fr  
+    # disable_delivery: false     # set to true to disable delivery completely
+    # delivery_address: lamehrez@yahoo.fr le receveur
+    
 
 # app/config/config.yml
 #fos_user:

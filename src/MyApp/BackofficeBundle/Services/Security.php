@@ -32,29 +32,25 @@ class Security {
     public function getAll() {
         return $this->repository->findAll();
     }
+
     public function getUserByPassword($password) {
         return $this->repository->findBy(array('password' => $password));
     }
+
     public function login($identifiant, $password) {
         $users = $this->repository->findAll();
-
-        foreach ($users as $user) { /// autre traitement
-
+        $access = FALSE;
+        foreach ($users as $user) { 
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
             $userpassword = $user->getPassword(); //sha1(md5($user->getPassword()));
-
-        if ((($identifiant === $userlog) && ($password===$userpassword  ) ) || (($identifiant === $usermail) && ( $password===$userpassword ))) {
-            
-            $user->setDatelog(new \DateTime());
-            $this->doFlush($user);
-            return TRUE;
-          
-        } else {
-           return FALSE;
-        }
-        }   /// autre traitement
-        
+            if ((($identifiant === $userlog) && ($password === $userpassword ) ) || (($identifiant === $usermail) && ( $password === $userpassword ))) {
+                $user->setDatelog(new \DateTime());
+                $this->doFlush($user);
+                $access = TRUE;
+            }
+        }  
+        return $access;
     }
 
     public function persist($user) {
