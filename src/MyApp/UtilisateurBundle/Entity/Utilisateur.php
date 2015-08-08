@@ -52,17 +52,8 @@ class Utilisateur {
      */
     private $datelog;
     
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
     public function getId() {
         return $this->id;
-    }
-
-    public function getNom() {
-        return $this->nom;
     }
 
     public function getLogin() {
@@ -76,22 +67,17 @@ class Utilisateur {
     public function getEmail() {
         return $this->email;
     }
- 
-   /**
-     * Get datelog
-     *
-     * @return \DateTime 
-     */
+
+    public function getPrivilege() {
+        return $this->privilege;
+    }
+
     public function getDatelog() {
         return $this->datelog;
     }
 
     public function setId($id) {
         $this->id = $id;
-    }
-
-    public function setNom($nom) {
-        $this->nom = $nom;
     }
 
     public function setLogin($login) {
@@ -106,20 +92,11 @@ class Utilisateur {
         $this->email = $email;
     }
 
-   
-
-    public function setDatelog(\DateTime $datelog) {
-        $this->datelog = $datelog;
-    }
- 
-    public function getPrivilege() {
-        return $this->privilege;
-    }
-
     public function setPrivilege($privilege) {
         $this->privilege = $privilege;
     }
 
-     
-
+    public function setDatelog(\DateTime $datelog) {
+        $this->datelog = $datelog;
+    }
 }

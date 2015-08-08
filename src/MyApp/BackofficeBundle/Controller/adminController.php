@@ -11,16 +11,26 @@ class adminController extends Controller {
 
     public function indexAction(Request $request) {
 
+        /*
+          if ($this->getRequest()->getSession()->get('user') == NULL) {
+          return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+          }
 
-        if ($this->getRequest()->getSession()->get('user') == NULL) {
-            return $this->redirect($this->generateUrl('my_app_backoffice_login'));
-        } elseif (
-                ($this->getRequest()->getSession()->get('user') != NULL) && ($this->getRequest()->getSession()->get('user')->getPrivilege() = 'ADMIN')
-        ) {
+          if(!($this->getRequest()->getSession()->get('user')) && ($this->getRequest()->getSession()->get('user')->getPrivilege() = 'ADMIN'))
+          {return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
 
-            return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
-        } 
-        else {
+          else {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+         */
+
+        $userSession = $this->getRequest()->getSession()->get('user');
+        if ((!empty($userSession))) {
+            if ($userSession->getPrivilege() === 'ADMIN') {
+                return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
+            }
+            if ($userSession->getPrivilege() != 'ADMIN') {
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            }
+        } else {
             return $this->redirect($this->generateUrl('my_app_backoffice_login'));
         }
     }
@@ -33,16 +43,19 @@ class adminController extends Controller {
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
         $password = $this->getRequest()->get('password');
-
+      // var_dump($identifiant);var_dump($password);
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
-        $user = $manager->login($identifiant, $password);
-
-        if ($authentifsucces == TRUE) {
+        // $user = $manager->login($identifiant, $password);
+        $user = $manager->getUserByPassword($password);
+       // var_dump($authentifsucces);var_dump($user);exit;
+        if (($authentifsucces == TRUE) && ($user != NULL)) {
+//            var_dump($authentifsucces);var_dump($user);exit;
             $session = new Session();
-            $session->invalidate();
+
             $session->start();
-            $session->set('user', $user);
+
+            $session->set('user', $user[0]);
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
@@ -52,8 +65,9 @@ class adminController extends Controller {
     }
 
     public function logoutAction(Request $request) {
-
-        $this->getRequest()->getSession()->invalidate(); //    détruire la session ici
+        $session = $this->getRequest()->getSession(); // Récupération du tableau de session
+        $session->clear();
+        //$this->getRequest()->getSession()->invalidate(); //    détruire la session ici
         // var_dump($this->getRequest()->getSession()->get('user'));  // null current user
         return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
@@ -95,7 +109,7 @@ class adminController extends Controller {
         if ($OK === TRUE) {
 
             $session = new Session();
-            $session->invalidate(); /// detruire la session avant de la start
+            $session->clear(); /// detruire la session avant de la start
             $session->start();
             $session->set('user', $user);
 
