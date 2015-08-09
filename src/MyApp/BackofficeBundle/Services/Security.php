@@ -40,17 +40,32 @@ class Security {
     public function login($identifiant, $password) {
         $users = $this->repository->findAll();
         $access = FALSE;
-        foreach ($users as $user) { 
+        foreach ($users as $user) {
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
-            $userpassword = $user->getPassword(); //sha1(md5($user->getPassword()));
+            $userpassword = $user->getPassword(); //
+           
             if ((($identifiant === $userlog) && ($password === $userpassword ) ) || (($identifiant === $usermail) && ( $password === $userpassword ))) {
                 $user->setDatelog(new \DateTime());
                 $this->doFlush($user);
                 $access = TRUE;
             }
-        }  
+        }
         return $access;
+    }
+
+    public function donneruservalid($user) {
+        $users = $this->repository->findAll();
+        $EXISTE = FALSE;
+        foreach ($users as $u) {
+            $userlog = $u->getLogin();
+            $usermail = $u->getEmail();
+            $userpassword = $u->getPassword(); //sha1(md5($user->getPassword()));
+            if (($user->getLogin() === $userlog) || ($user->getPassword() === $userpassword ) || (($user->getEmail() === $usermail) )) {
+                $EXISTE = TRUE;
+            }
+        }
+        return $EXISTE;
     }
 
     public function persist($user) {

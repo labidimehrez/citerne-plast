@@ -22,20 +22,20 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=255,unique=true,nullable=true)
+     * @ORM\Column(name="login", type="string", length=255,nullable=true)
      */
     private $login;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255,unique=true,nullable=true)
+     * @ORM\Column(name="password", type="string", length=255,nullable=true)
      */
     private $password;
 
     /**
      * @var string $email
-     * @ORM\Column(name="email", type="string", length=255,unique=true,nullable=true)
+     * @ORM\Column(name="email", type="string", length=255,nullable=true)
      * 
      */
     

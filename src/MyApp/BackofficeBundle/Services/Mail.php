@@ -6,10 +6,13 @@ namespace MyApp\BackofficeBundle\Services;
 
 class Mail {
 
-    protected  $container;
+    protected $container;
 
-    public function __construct(Container $container) {
+    public function setContainer($container) {
         $this->container = $container;
+    }
+
+    public function __construct() {
     }
 
     public function envoiMail($user) {

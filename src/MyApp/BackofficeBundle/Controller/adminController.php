@@ -28,6 +28,7 @@ class adminController extends Controller {
                 return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
             }
             if ($userSession->getPrivilege() != 'ADMIN') {
+                $this->get('session')->getFlashBag()->set('message', 'Not Authorized');
                 return $this->redirect($this->generateUrl('my_app_backoffice_login'));
             }
         } else {
@@ -42,7 +43,14 @@ class adminController extends Controller {
                 ->add('password', 'password', array('required' => TRUE))
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
-        $password = $this->getRequest()->get('password');
+        $password = sha1(md5($this->getRequest()->get('password'))) ;
+      
+ 
+        if (($identifiant == NULL) && ($password == NULL)) {
+            return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
+                        'form' => $form->createView()
+            ));
+        }
         // var_dump($identifiant);var_dump($password);
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
@@ -74,7 +82,8 @@ class adminController extends Controller {
     }
 
     public function registerAction(Request $request) {
-
+        $manager = $this->get('collectify_security_manager');
+//        $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
         $form = $this->createFormBuilder()
@@ -107,20 +116,24 @@ class adminController extends Controller {
         $login = $form["login"]->getData();
         $email = $form["email"]->getData();
         $password = $form["password"]->getData();
+        
         $OK = false;
         if (($login != NULL) && ($email != NULL) && ($password != NULL)) {
             $user->setLogin($login);
             $user->setEmail($email);
-            $user->setPassword($password); // $user->setPassword(sha1(md5($password)));      
+            $user->setPassword(sha1(md5($password)));
             $user->setPrivilege('ADMIN');
             $user->setEnabled(TRUE);
             $user->setDatelog(new \DateTime());
-            $em->persist($user);
-            $em->flush();
-            $manager = $this->get('collectify_mail_manager');/** equivalent de em manager * */
-           // $manager->envoiMail($user);  /// renvoie de mail au membre
-          
-            $OK = TRUE;
+            $EXISTE = $manager->donneruservalid($user);
+            if ($EXISTE != TRUE) {
+                $em->persist($user);
+                $em->flush();     
+                $OK = TRUE;
+//                $managermail->envoiMail($user);  /// renvoie de mail au membre  
+            } else {
+                $this->get('session')->getFlashBag()->set('message', 'Existe déja');
+            }
         }
         if ($OK === TRUE) {
             $session = new Session();

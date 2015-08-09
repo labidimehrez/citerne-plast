@@ -60,7 +60,11 @@
                            
                           <td> {{form_widget(form.password.second, { 'attr': {'placeholder': ' Retype Password ','class':'form-control'} }) }}   </td>   
                             </div> 
-                            
+                              <div style="float: right;width: 200px;font-family: monospace;color: slategrey;">
+                                 {% for flashMessage in app.session.flashbag.get('message') %}                  
+                                        {{ flashMessage }}
+                             {% endfor %}
+                        </div>
                             
                             
                            <input type="submit" value="Register Me"  class="btn btn-success " />
