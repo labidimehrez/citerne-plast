@@ -83,7 +83,7 @@ class adminController extends Controller {
 
     public function registerAction(Request $request) {
         $manager = $this->get('collectify_security_manager');
-//        $managermail = $this->get('collectify_mail_manager');
+        $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
         $form = $this->createFormBuilder()
@@ -130,7 +130,7 @@ class adminController extends Controller {
                 $em->persist($user);
                 $em->flush();     
                 $OK = TRUE;
-//                $managermail->envoiMail($user);  /// renvoie de mail au membre  
+                $managermail->envoiMail($user);  /// renvoie de mail au membre  
             } else {
                 $this->get('session')->getFlashBag()->set('message', 'Existe déja');
             }

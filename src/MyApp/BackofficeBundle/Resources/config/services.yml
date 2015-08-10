@@ -12,7 +12,7 @@ services:
         
     collectify_mail_manager:
         class: %collectify.mail.manager.class%
-        arguments: ['@service_container']
+        arguments: [@service_container]
 
 parameters:
     collectify.security.manager.class: MyApp\BackofficeBundle\Services\Security
