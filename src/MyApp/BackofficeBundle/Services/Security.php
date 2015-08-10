@@ -37,6 +37,11 @@ class Security {
         return $this->repository->findBy(array('password' => $password));
     }
 
+
+    public function getUserByMail($email) {
+        return $this->repository->findBy(array('email' => $email));
+    }
+
     public function login($identifiant, $password) {
         $users = $this->repository->findAll();
         $access = FALSE;
@@ -44,7 +49,7 @@ class Security {
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
             $userpassword = $user->getPassword(); //
-           
+
             if ((($identifiant === $userlog) && ($password === $userpassword ) ) || (($identifiant === $usermail) && ( $password === $userpassword ))) {
                 $user->setDatelog(new \DateTime());
                 $this->doFlush($user);

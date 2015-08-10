@@ -15,6 +15,9 @@ my_app_backoffice_login:
     path:     /login
     defaults: { _controller: MyAppBackofficeBundle:admin:login }
     
+my_app_backoffice_changepassword:
+    path:     /changepassword
+    defaults: { _controller: MyAppBackofficeBundle:admin:changepassword }  
     
 my_app_backoffice_logout:
     path:     /logout

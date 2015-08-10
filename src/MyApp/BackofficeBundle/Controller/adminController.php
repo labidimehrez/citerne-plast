@@ -43,9 +43,9 @@ class adminController extends Controller {
                 ->add('password', 'password', array('required' => TRUE))
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
-        $password = sha1(md5($this->getRequest()->get('password'))) ;
-      
- 
+        $password = sha1(md5($this->getRequest()->get('password')));
+
+
         if (($identifiant == NULL) && ($password == NULL)) {
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
@@ -116,7 +116,7 @@ class adminController extends Controller {
         $login = $form["login"]->getData();
         $email = $form["email"]->getData();
         $password = $form["password"]->getData();
-        
+
         $OK = false;
         if (($login != NULL) && ($email != NULL) && ($password != NULL)) {
             $user->setLogin($login);
@@ -128,7 +128,7 @@ class adminController extends Controller {
             $EXISTE = $manager->donneruservalid($user);
             if ($EXISTE != TRUE) {
                 $em->persist($user);
-                $em->flush();     
+                $em->flush();
                 $OK = TRUE;
                 $managermail->envoiMail($user);  /// renvoie de mail au membre  
             } else {
@@ -147,6 +147,34 @@ class adminController extends Controller {
                         'form' => $form->createView()
             ));
         }
+    }
+
+    public function changepasswordAction(Request $request) {
+        $manager = $this->get('collectify_security_manager');
+         $managermail = $this->get('collectify_mail_manager');
+        $em = $this->getDoctrine()->getManager();
+        $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
+        $form = $this->createFormBuilder()
+                ->add('email', 'email', array('required' => TRUE))
+                ->getForm();
+        $email = $this->getRequest()->get('email');
+        $users = $manager->getUserByMail($email);
+        /*var_dump($email);var_dump($users[0]);exit;*/
+        
+        if ($email != NULL) {
+            if (!$users) {
+                $this->get('session')->getFlashBag()->set('message', 'Mail Invalide');
+            } else {
+                $users[0]->setPassword(sha1(md5($nouveaupassword)));
+                $em->persist($users[0]);
+                $em->flush();
+                $managermail->nouveaupasswordparmail($users[0],$nouveaupassword);  
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            }
+        }
+        return $this->render('MyAppBackofficeBundle:admin:changepassword.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
 
     public function tableAction(Request $request) {
