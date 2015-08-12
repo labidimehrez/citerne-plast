@@ -13,7 +13,7 @@
  */
 
 namespace MyApp\BackofficeBundle\Services;
-
+ 
 use Doctrine\ORM\EntityManager;
 
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -36,7 +36,6 @@ class Security {
     public function getUserByPassword($password) {
         return $this->repository->findBy(array('password' => $password));
     }
-
 
     public function getUserByMail($email) {
         return $this->repository->findBy(array('email' => $email));
@@ -87,5 +86,5 @@ class Security {
         $this->em->flush();
         return $user;
     }
-
+ 
 }

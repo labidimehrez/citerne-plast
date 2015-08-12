@@ -10,19 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class adminController extends Controller {
 
     public function indexAction(Request $request) {
-
-        /*
-          if ($this->getRequest()->getSession()->get('user') == NULL) {
-          return $this->redirect($this->generateUrl('my_app_backoffice_login'));
-          }
-
-          if(!($this->getRequest()->getSession()->get('user')) && ($this->getRequest()->getSession()->get('user')->getPrivilege() = 'ADMIN'))
-          {return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
-
-          else {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-         */
-
-        $userSession = $this->getRequest()->getSession()->get('user');
+     $userSession = $this->getRequest()->getSession()->get('user');
         if ((!empty($userSession))) {
             if ($userSession->getPrivilege() === 'ADMIN') {
                 return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
@@ -34,6 +22,18 @@ class adminController extends Controller {
         } else {
             return $this->redirect($this->generateUrl('my_app_backoffice_login'));
         }
+        /*
+          if ($this->getRequest()->getSession()->get('user') == NULL) {
+          return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+          }
+
+          if(!($this->getRequest()->getSession()->get('user')) && ($this->getRequest()->getSession()->get('user')->getPrivilege() = 'ADMIN'))
+          {return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
+
+          else {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+         */
+
+   
     }
 
     public function loginAction(Request $request) {
@@ -44,9 +44,9 @@ class adminController extends Controller {
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
-
-
+ 
         if (($identifiant == NULL) && ($password == NULL)) {
+           
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
             ));
@@ -65,7 +65,7 @@ class adminController extends Controller {
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             $session = $this->getRequest()->getSession();
-            $session->clear();
+            $session->clear(); 
             $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
@@ -178,22 +178,48 @@ class adminController extends Controller {
     }
 
     public function tableAction(Request $request) {
+               $userSession = $this->getRequest()->getSession()->get('user');
+            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
+            }
         return $this->render('MyAppBackofficeBundle:admin:table.html.twig');
     }
 
     public function uiAction(Request $request) {
+          $userSession = $this->getRequest()->getSession()->get('user');
+            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
+            }
+            
         return $this->render('MyAppBackofficeBundle:admin:ui.html.twig');
     }
 
     public function tabpanelAction(Request $request) {
+               $userSession = $this->getRequest()->getSession()->get('user');
+            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
+            }
         return $this->render('MyAppBackofficeBundle:admin:tabpanel.html.twig');
     }
 
     public function formAction(Request $request) {
+               $userSession = $this->getRequest()->getSession()->get('user');
+            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
+            }
         return $this->render('MyAppBackofficeBundle:admin:form.html.twig');
     }
 
-    public function chartAction(Request $request) {
+    public function chartAction(Request $request ) {
+            $userSession = $this->getRequest()->getSession()->get('user');
+            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
+            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
+                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
+            } 
         return $this->render('MyAppBackofficeBundle:admin:chart.html.twig');
     }
 
