@@ -1,8 +1,8 @@
 <?php
-
+namespace MyApp\BackofficeBundle\Services;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
-namespace MyApp\BackofficeBundle\Services;
+
 
 class Mail {
 

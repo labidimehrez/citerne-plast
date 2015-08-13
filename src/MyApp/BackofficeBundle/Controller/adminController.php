@@ -1,7 +1,7 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Controller;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class adminController extends Controller {
 
     public function indexAction(Request $request) {
-     $userSession = $this->getRequest()->getSession()->get('user');
+        var_dump($this->getRequest()->headers->get('referer'));
+        $userSession = $this->getRequest()->getSession()->get('user');
         if ((!empty($userSession))) {
             if ($userSession->getPrivilege() === 'ADMIN') {
                 return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
@@ -44,7 +45,7 @@ class adminController extends Controller {
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
- 
+
         if (($identifiant == NULL) && ($password == NULL)) {
            
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
@@ -62,10 +63,11 @@ class adminController extends Controller {
             $session = new Session();
             $session->start();
             $session->set('user', $user[0]);
+            var_dump($this->getRequest()->headers->get('referer'));
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             $session = $this->getRequest()->getSession();
-            $session->clear(); 
+            $session->clear();
             $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
@@ -125,12 +127,12 @@ class adminController extends Controller {
             $user->setPrivilege('ADMIN');
             $user->setEnabled(TRUE);
             $user->setDatelog(new \DateTime());
-            $EXISTE = $manager->donneruservalid($user);
-            if ($EXISTE != TRUE) {
+            $EXIST = $manager->donneruservalid($user);
+            if ($EXIST!= TRUE) {
                 $em->persist($user);
                 $em->flush();
                 $OK = TRUE;
-                $managermail->envoiMail($user);  /// renvoie de mail au membre  
+                $managermail->envoiMail($user);  /// renvoie de mail au membre
             } else {
                 $this->get('session')->getFlashBag()->set('message', 'Existe déja');
             }
@@ -177,49 +179,40 @@ class adminController extends Controller {
         ));
     }
 
-    public function tableAction(Request $request) {
-               $userSession = $this->getRequest()->getSession()->get('user');
-            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
-                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
-            }
+    public function tableAction(  ) {
+        $security = $this->get('collectify_security_manager');
+        $security->security();// verif security et filtre
+        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
+
         return $this->render('MyAppBackofficeBundle:admin:table.html.twig');
     }
 
-    public function uiAction(Request $request) {
-          $userSession = $this->getRequest()->getSession()->get('user');
-            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
-                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
-            }
+    public function uiAction( ) {
+        $security = $this->get('collectify_security_manager');
+        $security->security();// verif security et filtre
+        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
             
         return $this->render('MyAppBackofficeBundle:admin:ui.html.twig');
     }
 
-    public function tabpanelAction(Request $request) {
-               $userSession = $this->getRequest()->getSession()->get('user');
-            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
-                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
-            }
+    public function tabpanelAction( ) {
+        $security = $this->get('collectify_security_manager');
+        $security->security();// verif security et filtre
+        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
         return $this->render('MyAppBackofficeBundle:admin:tabpanel.html.twig');
     }
 
-    public function formAction(Request $request) {
-               $userSession = $this->getRequest()->getSession()->get('user');
-            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
-                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
-            }
+    public function formAction( ) {
+        $security = $this->get('collectify_security_manager');
+        $security->security();// verif security et filtre
+        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
         return $this->render('MyAppBackofficeBundle:admin:form.html.twig');
     }
 
-    public function chartAction(Request $request ) {
-            $userSession = $this->getRequest()->getSession()->get('user');
-            if ((empty($userSession))) {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-            if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {             
-                return $this->redirect($this->generateUrl('my_app_backoffice_login'));      
-            } 
+    public function chartAction( ) {
+        $security = $this->get('collectify_security_manager');
+        $security->security();// verif security et filtre
+        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
         return $this->render('MyAppBackofficeBundle:admin:chart.html.twig');
     }
 

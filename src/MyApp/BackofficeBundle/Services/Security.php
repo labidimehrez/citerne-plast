@@ -13,20 +13,27 @@
  */
 
 namespace MyApp\BackofficeBundle\Services;
- 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManager;
-
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Security {
 
     //put your code here
     private $em;
+    protected $router;
     private $repository;
+    private $container;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em,ContainerInterface $container, $router ) {
         $this->em = $em;
         $this->repository = $em->getRepository('MyAppUtilisateurBundle:Utilisateur');
+        $this->container = $container;
+        $this->router = $router;
     }
 
     public function getAll() {
@@ -86,5 +93,17 @@ class Security {
         $this->em->flush();
         return $user;
     }
- 
+    public function security() {
+        $userSession = $this->container->get('request_stack')->getCurrentRequest()->getSession()->get('user');
+        $url = $this->router->generate('my_app_backoffice_login');
+        if ((empty($userSession))) {
+           // return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            return $url;
+
+        }
+        if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {
+            // return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            return $url;
+        }
+    }
 }
