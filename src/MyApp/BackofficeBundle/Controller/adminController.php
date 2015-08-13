@@ -1,16 +1,15 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class adminController extends Controller {
 
     public function indexAction(Request $request) {
-        var_dump($this->getRequest()->headers->get('referer'));
         $userSession = $this->getRequest()->getSession()->get('user');
         if ((!empty($userSession))) {
             if ($userSession->getPrivilege() === 'ADMIN') {
@@ -23,18 +22,6 @@ class adminController extends Controller {
         } else {
             return $this->redirect($this->generateUrl('my_app_backoffice_login'));
         }
-        /*
-          if ($this->getRequest()->getSession()->get('user') == NULL) {
-          return $this->redirect($this->generateUrl('my_app_backoffice_login'));
-          }
-
-          if(!($this->getRequest()->getSession()->get('user')) && ($this->getRequest()->getSession()->get('user')->getPrivilege() = 'ADMIN'))
-          {return $this->render('MyAppBackofficeBundle:admin:index.html.twig');}
-
-          else {return $this->redirect($this->generateUrl('my_app_backoffice_login'));}
-         */
-
-   
     }
 
     public function loginAction(Request $request) {
@@ -47,7 +34,7 @@ class adminController extends Controller {
         $password = sha1(md5($this->getRequest()->get('password')));
 
         if (($identifiant == NULL) && ($password == NULL)) {
-           
+
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                         'form' => $form->createView()
             ));
@@ -59,11 +46,11 @@ class adminController extends Controller {
         $user = $manager->getUserByPassword($password);
         // var_dump($authentifsucces);var_dump($user);exit;
         if (($authentifsucces == TRUE) && ($user != NULL)) {
-//            var_dump($authentifsucces);var_dump($user);exit;
+
             $session = new Session();
             $session->start();
             $session->set('user', $user[0]);
-            var_dump($this->getRequest()->headers->get('referer'));
+
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             $session = $this->getRequest()->getSession();
@@ -86,7 +73,7 @@ class adminController extends Controller {
     public function registerAction(Request $request) {
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
-        $em = $this->getDoctrine()->getManager();
+        /* $em = $this->getDoctrine()->getManager();*/
         $user = new Utilisateur();
         $form = $this->createFormBuilder()
                 ->add('login', 'text', array(
@@ -111,26 +98,18 @@ class adminController extends Controller {
                     'second_options' => array('label' => 'Mot de passe (validation)'),)
                 )
                 ->getForm();
-
         $request = $this->getRequest();
         $form->bind($request);
 
-        $login = $form["login"]->getData();
-        $email = $form["email"]->getData();
-        $password = $form["password"]->getData();
-
         $OK = false;
-        if (($login != NULL) && ($email != NULL) && ($password != NULL)) {
-            $user->setLogin($login);
-            $user->setEmail($email);
-            $user->setPassword(sha1(md5($password)));
-            $user->setPrivilege('ADMIN');
-            $user->setEnabled(TRUE);
-            $user->setDatelog(new \DateTime());
+        $Valid = $this->get('Valid');
+
+        if ($Valid->validerInscri($form)) {
+
             $EXIST = $manager->donneruservalid($user);
             if ($EXIST!= TRUE) {
-                $em->persist($user);
-                $em->flush();
+
+                $manager->persistUser($user, $form["login"]->getData(), $form["email"]->getData(), $form["password"]->getData());
                 $OK = TRUE;
                 $managermail->envoiMail($user);  /// renvoie de mail au membre
             } else {

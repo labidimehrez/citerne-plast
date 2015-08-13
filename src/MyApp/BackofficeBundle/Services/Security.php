@@ -13,19 +13,17 @@
  */
 
 namespace MyApp\BackofficeBundle\Services;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Security {
 
     //put your code here
-    private $em;
     protected $router;
+    private $em;
     private $repository;
     private $container;
 
@@ -65,6 +63,26 @@ class Security {
         return $access;
     }
 
+    public function doFlush($user)
+    {
+        $this->em->persist($user);
+        $this->em->flush();
+        return $user;
+    }
+
+    public function persistUser($user, $login, $email, $password)
+    {
+
+
+        $user->setLogin($login);
+        $user->setEmail($email);
+        $user->setPassword(sha1(md5($password)));
+        $user->setPrivilege('ADMIN');
+        $user->setEnabled(TRUE);
+        $user->setDatelog(new \DateTime());
+        $this->doFlush($user);
+    }
+
     public function donneruservalid($user) {
         $users = $this->repository->findAll();
         $EXISTE = FALSE;
@@ -88,11 +106,6 @@ class Security {
         $this->em->flush();
     }
 
-    public function doFlush($user) {
-        $this->em->persist($user);
-        $this->em->flush();
-        return $user;
-    }
     public function security() {
         $userSession = $this->container->get('request_stack')->getCurrentRequest()->getSession()->get('user');
         $url = $this->router->generate('my_app_backoffice_login');

@@ -3,26 +3,35 @@
     <words>
       <w>activer</w>
       <w>authentifsucces</w>
+      <w>avant</w>
       <w>backoffice</w>
       <w>changepassword</w>
       <w>cliquer</w>
       <w>collectify</w>
       <w>compte</w>
       <w>datelog</w>
+      <w>detruire</w>
       <w>donneruservalid</w>
       <w>dropdown</w>
+      <w>détruire</w>
       <w>envoi</w>
       <w>existe</w>
       <w>filtre</w>
       <w>gmail</w>
       <w>identifiant</w>
+      <w>inscri</w>
       <w>invalide</w>
+      <w>isvalid</w>
       <w>labidi</w>
       <w>managermail</w>
       <w>mehrez</w>
+      <w>membre</w>
+      <w>minlength</w>
       <w>nouveau</w>
       <w>nouveaupassword</w>
       <w>nouveaupasswordparmail</w>
+      <w>renvoie</w>
+      <w>récupération</w>
       <w>smtp</w>
       <w>symfony</w>
       <w>tabpanel</w>
@@ -31,6 +40,7 @@
       <w>usermanager</w>
       <w>userpassword</w>
       <w>utilisateur</w>
+      <w>valider</w>
       <w>verif</w>
       <w>veuiller</w>
       <w>votre</w>
