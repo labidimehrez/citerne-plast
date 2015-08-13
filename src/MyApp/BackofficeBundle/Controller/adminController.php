@@ -25,6 +25,7 @@ class adminController extends Controller {
     }
 
     public function loginAction(Request $request) {
+        $this->getRequest()->getSession()->clear();//détruire la session ici
 
         $form = $this->createFormBuilder()
                 ->add('identifiant', 'text', array('required' => TRUE))
@@ -32,13 +33,6 @@ class adminController extends Controller {
                 ->getForm();
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
-
-        if (($identifiant == NULL) && ($password == NULL)) {
-
-            return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
-                        'form' => $form->createView()
-            ));
-        }
         // var_dump($identifiant);var_dump($password);
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
@@ -46,37 +40,46 @@ class adminController extends Controller {
         $user = $manager->getUserByPassword($password);
         // var_dump($authentifsucces);var_dump($user);exit;
         if (($authentifsucces == TRUE) && ($user != NULL)) {
-
+            //  var_dump($request);exit;
             $session = new Session();
-            $session->start();
-            $session->set('user', $user[0]);
 
+            if ($session->isStarted() != FALSE) {
+                $session->start();
+            }
+
+            $session->set('user', $user[0]);
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
-        } else {
-            $session = $this->getRequest()->getSession();
-            $session->clear();
+        }
+        if ($authentifsucces != TRUE) {
+            $this->getRequest()->getSession()->clear();
+
             $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
             return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
-                        'form' => $form->createView()
+                'form' => $form->createView()
             ));
         }
+
+        return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
+            'form' => $form->createView()
+        ));
+
     }
 
     public function logoutAction(Request $request) {
-        $session = $this->getRequest()->getSession(); // Récupération du tableau de session
-        $session->clear();
-        //$this->getRequest()->getSession()->invalidate(); //    détruire la session ici
-        // var_dump($this->getRequest()->getSession()->get('user'));  // null current user
-        return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+        $this->getRequest()->getSession()->clear();//détruire la session ici
+        $this->generateUrl('my_app_backoffice_login');
     }
 
     public function registerAction(Request $request) {
+
+        $this->getRequest()->getSession()->clear();//détruire la session ici
+
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         /* $em = $this->getDoctrine()->getManager();*/
         $user = new Utilisateur();
         $form = $this->createFormBuilder()
-                ->add('login', 'text', array(
+            ->add('login', 'text', array(
                     'required' => TRUE,
                     'attr' => array(
                         'placeholder' => 'What\'s your name?',
@@ -101,7 +104,7 @@ class adminController extends Controller {
         $request = $this->getRequest();
         $form->bind($request);
 
-        $OK = false;
+        $OK = FALSE;
         $Valid = $this->get('Valid');
 
         if ($Valid->validerInscri($form)) {
@@ -119,7 +122,9 @@ class adminController extends Controller {
         if ($OK === TRUE) {
             $session = new Session();
             $session->clear(); /// detruire la session avant de la start
-            $session->start();
+            if ($session->isStarted() != FALSE) {
+                $session->start();
+            }
             $session->set('user', $user);
 
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
@@ -131,6 +136,8 @@ class adminController extends Controller {
     }
 
     public function changepasswordAction(Request $request) {
+        $this->getRequest()->getSession()->clear();//détruire la session ici
+
         $manager = $this->get('collectify_security_manager');
          $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
