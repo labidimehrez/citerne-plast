@@ -24,16 +24,20 @@
       <w>invalide</w>
       <w>isvalid</w>
       <w>labidi</w>
+      <w>labidimehrez</w>
       <w>managermail</w>
       <w>mehrez</w>
       <w>membre</w>
       <w>minlength</w>
+      <w>myappbackoffice</w>
       <w>nouveau</w>
       <w>nouveaupassword</w>
       <w>nouveaupasswordparmail</w>
+      <w>nullable</w>
       <w>onkeypress</w>
       <w>renvoie</w>
       <w>récupération</w>
+      <w>securityadmin</w>
       <w>smtp</w>
       <w>symfony</w>
       <w>tabpanel</w>

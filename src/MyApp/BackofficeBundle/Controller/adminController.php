@@ -31,6 +31,7 @@ class adminController extends Controller {
                 ->add('identifiant', 'text', array('required' => TRUE))
                 ->add('password', 'password', array('required' => TRUE))
                 ->getForm();
+
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
         // var_dump($identifiant);var_dump($password);
@@ -39,24 +40,26 @@ class adminController extends Controller {
         // $user = $manager->login($identifiant, $password);
         $user = $manager->getUserByPassword($password);
         // var_dump($authentifsucces);var_dump($user);exit;
-        if (($authentifsucces == TRUE) && ($user != NULL)) {
-            //  var_dump($request);exit;
-            $session = new Session();
+        if (($identifiant != NULL) && ($password != NULL)) {
+            if (($authentifsucces == TRUE) && ($user != NULL)) {
+                //  var_dump($request);exit;
+                $session = new Session();
 
-            if ($session->isStarted() != FALSE) {
-                $session->start();
+                if ($session->isStarted() != FALSE) {
+                    $session->start();
+                }
+
+                $session->set('user', $user[0]);
+                return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
             }
+            if ($authentifsucces != TRUE) {
+                $this->getRequest()->getSession()->clear();//détruire la session ici
 
-            $session->set('user', $user[0]);
-            return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
-        }
-        if ($authentifsucces != TRUE) {
-            $this->getRequest()->getSession()->clear();
-
-            $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
-            return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
-                'form' => $form->createView()
-            ));
+                $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
+                return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
+                    'form' => $form->createView()
+                ));
+            }
         }
 
         return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
@@ -67,7 +70,7 @@ class adminController extends Controller {
 
     public function logoutAction(Request $request) {
         $this->getRequest()->getSession()->clear();//détruire la session ici
-        $this->generateUrl('my_app_backoffice_login');
+        return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
 
     public function registerAction(Request $request) {
@@ -167,38 +170,47 @@ class adminController extends Controller {
 
     public function tableAction(  ) {
         $security = $this->get('collectify_security_manager');
-        $security->security();// verif security et filtre
-        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
-
+        $security->securityadmin();// verif security et filtre
+        if ($security->securityadmin() != NULL) {
+            return new RedirectResponse($security->securityadmin());
+        }
         return $this->render('MyAppBackofficeBundle:admin:table.html.twig');
     }
 
     public function uiAction( ) {
         $security = $this->get('collectify_security_manager');
-        $security->security();// verif security et filtre
-        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
+        $security->securityadmin();// verif security et filtre
+        if ($security->securityadmin() != NULL) {
+            return new RedirectResponse($security->securityadmin());
+        }
             
         return $this->render('MyAppBackofficeBundle:admin:ui.html.twig');
     }
 
     public function tabpanelAction( ) {
         $security = $this->get('collectify_security_manager');
-        $security->security();// verif security et filtre
-        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
+        $security->securityadmin();// verif security et filtre
+        if ($security->securityadmin() != NULL) {
+            return new RedirectResponse($security->securityadmin());
+        }
         return $this->render('MyAppBackofficeBundle:admin:tabpanel.html.twig');
     }
 
     public function formAction( ) {
         $security = $this->get('collectify_security_manager');
-        $security->security();// verif security et filtre
-        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
+        $security->securityadmin();// verif security et filtre
+        if ($security->securityadmin() != NULL) {
+            return new RedirectResponse($security->securityadmin());
+        }
         return $this->render('MyAppBackofficeBundle:admin:form.html.twig');
     }
 
     public function chartAction( ) {
         $security = $this->get('collectify_security_manager');
-        $security->security();// verif security et filtre
-        if($security->security() !=NULL) {return new RedirectResponse($security->security());}
+        $security->securityadmin();// verif security et filtre
+        if ($security->securityadmin() != NULL) {
+            return new RedirectResponse($security->securityadmin());
+        }
         return $this->render('MyAppBackofficeBundle:admin:chart.html.twig');
     }
 

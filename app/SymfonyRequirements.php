@@ -181,16 +181,6 @@ class RequirementCollection implements IteratorAggregate
     }
 
     /**
-     * Adds a Requirement.
-     *
-     * @param Requirement $requirement A Requirement instance
-     */
-    public function add(Requirement $requirement)
-    {
-        $this->requirements[] = $requirement;
-    }
-
-    /**
      * Adds a mandatory requirement.
      *
      * @param bool        $fulfilled   Whether the requirement is fulfilled
@@ -201,6 +191,16 @@ class RequirementCollection implements IteratorAggregate
     public function addRequirement($fulfilled, $testMessage, $helpHtml, $helpText = null)
     {
         $this->add(new Requirement($fulfilled, $testMessage, $helpHtml, $helpText, false));
+    }
+
+    /**
+     * Adds a Requirement.
+     *
+     * @param Requirement $requirement A Requirement instance
+     */
+    public function add(Requirement $requirement)
+    {
+        $this->requirements[] = $requirement;
     }
 
     /**
@@ -638,7 +638,7 @@ class SymfonyRequirements extends RequirementCollection
         }
 
         $this->addRecommendation(
-            class_exists('Locale'),
+            extension_loaded('intl'),
             'intl extension should be available',
             'Install and enable the <strong>intl</strong> extension (used for validators).'
         );

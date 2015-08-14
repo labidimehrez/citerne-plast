@@ -14,7 +14,6 @@
 
 namespace MyApp\BackofficeBundle\Services;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -106,7 +105,8 @@ class Security {
         $this->em->flush();
     }
 
-    public function security() {
+    public function securityadmin()
+    {
         $userSession = $this->container->get('request_stack')->getCurrentRequest()->getSession()->get('user');
         $url = $this->router->generate('my_app_backoffice_login');
         if ((empty($userSession))) {
