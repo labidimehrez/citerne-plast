@@ -13,13 +13,23 @@ services:
     collectify_mail_manager:
         class: %collectify.mail.manager.class%
         arguments: [@service_container]
+
+
     Valid:
         class: %collectify.Valid.manager.class%
         arguments: [@service_container]
+
+    collectify_user_manager:
+        class: %collectify.user.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    entities:
+        class: %entities.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
 
 parameters:
     collectify.security.manager.class: MyApp\BackofficeBundle\Services\Security
     collectify.mail.manager.class: MyApp\BackofficeBundle\Services\Mail
     collectify.Valid.manager.class: MyApp\BackofficeBundle\Services\Valid
-    
-    
+    collectify.user.manager.class: MyApp\BackofficeBundle\Services\UserManager
+    entities.manager.class: MyApp\BackofficeBundle\Services\Entities

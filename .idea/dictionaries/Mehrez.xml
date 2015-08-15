@@ -5,10 +5,13 @@
       <w>authentifsucces</w>
       <w>avant</w>
       <w>backoffice</w>
+      <w>changecolor</w>
       <w>changepassword</w>
       <w>cliquer</w>
       <w>collectify</w>
       <w>compte</w>
+      <w>datecurrentlog</w>
+      <w>datelastlog</w>
       <w>datelog</w>
       <w>detruire</w>
       <w>donneruservalid</w>
@@ -18,6 +21,8 @@
       <w>envoi</w>
       <w>existe</w>
       <w>filtre</w>
+      <w>frontoffice</w>
+      <w>frontofficebundle</w>
       <w>gmail</w>
       <w>identifiant</w>
       <w>inscri</w>
@@ -26,10 +31,13 @@
       <w>labidi</w>
       <w>labidimehrez</w>
       <w>managermail</w>
+      <w>megamenu</w>
       <w>mehrez</w>
       <w>membre</w>
       <w>minlength</w>
       <w>myappbackoffice</w>
+      <w>myappfrontoffice</w>
+      <w>navbar</w>
       <w>nouveau</w>
       <w>nouveaupassword</w>
       <w>nouveaupasswordparmail</w>
@@ -50,6 +58,7 @@
       <w>verif</w>
       <w>veuiller</w>
       <w>votre</w>
+      <w>yamm</w>
     </words>
   </dictionary>
 </component>

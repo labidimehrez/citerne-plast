@@ -49,10 +49,16 @@ class Utilisateur {
 
     /**
      * @var \DateTime
-     * 
-     * @ORM\Column(name="date_log",type="datetime",nullable=true)
+     *
+     * @ORM\Column(name="current_log",type="datetime",nullable=true)
      */
-    private $datelog;
+    private $datecurrentlog;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_log",type="datetime",nullable=true)
+     */
+    private $datelastlog;
     
    /**
      * @var boolean
@@ -64,55 +70,88 @@ class Utilisateur {
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function getLogin() {
         return $this->login;
+    }
+
+    public function setLogin($login)
+    {
+        $this->login = $login;
     }
 
     public function getPassword() {
         return $this->password;
     }
 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
     public function getEmail() {
         return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     public function getPrivilege() {
         return $this->privilege;
     }
 
-    public function getDatelog() {
-        return $this->datelog;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function setLogin($login) {
-        $this->login = $login;
-    }
-
-    public function setPassword($password) {
-        $this->password = $password;
-    }
-
-    public function setEmail($email) {
-        $this->email = $email;
-    }
-
-    public function setPrivilege($privilege) {
+    public function setPrivilege($privilege)
+    {
         $this->privilege = $privilege;
     }
 
-    public function getEnabled() {
+    public function getEnabled()
+    {
         return $this->enabled;
     }
 
-    public function setEnabled($enabled) {
+    public function setEnabled($enabled)
+    {
         $this->enabled = $enabled;
     }
 
-        public function setDatelog(\DateTime $datelog) {
-        $this->datelog = $datelog;
+    /**
+     * @return \DateTime
+     */
+    public function getDatecurrentlog()
+    {
+        return $this->datecurrentlog;
     }
+
+    /**
+     * @param \DateTime $datecurrentlog
+     */
+    public function setDatecurrentlog($datecurrentlog)
+    {
+        $this->datecurrentlog = $datecurrentlog;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatelastlog()
+    {
+        return $this->datelastlog;
+    }
+
+    /**
+     * @param \DateTime $datelastlog
+     */
+    public function setDatelastlog($datelastlog)
+    {
+        $this->datelastlog = $datelastlog;
+    }
+
+
 }

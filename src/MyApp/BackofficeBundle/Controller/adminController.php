@@ -142,7 +142,7 @@ class adminController extends Controller {
         $this->getRequest()->getSession()->clear();//détruire la session ici
 
         $manager = $this->get('collectify_security_manager');
-         $managermail = $this->get('collectify_mail_manager');
+        $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
         $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
         $form = $this->createFormBuilder()

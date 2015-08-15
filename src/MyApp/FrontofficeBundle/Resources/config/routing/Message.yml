@@ -1,0 +1,28 @@
+
+my_app_frontoffice_message_add:
+    pattern:  /add
+    defaults: { _controller: MyAppFrontofficeBundle:message:add }
+    
+my_app_frontoffice_message_show:
+    pattern:  /show
+    defaults: { _controller: MyAppFrontofficeBundle:message:show }
+    
+my_app_frontoffice_message_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: MyAppFrontofficeBundle:message:delete }
+       
+my_app_frontoffice_message_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: MyAppFrontofficeBundle:message:edit }
+    
+my_app_frontoffice_message_voir:
+    pattern:  /{id}/voir
+    defaults: { _controller: MyAppFrontofficeBundle:message:voir }
+    
+    
+    
+my_app_frontoffice_message_manage:
+    pattern:  /manage
+    defaults: { _controller: MyAppFrontofficeBundle:message:manage}
+    
+ 

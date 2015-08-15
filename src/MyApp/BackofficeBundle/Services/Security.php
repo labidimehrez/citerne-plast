@@ -54,7 +54,8 @@ class Security {
             $userpassword = $user->getPassword(); //
 
             if ((($identifiant === $userlog) && ($password === $userpassword ) ) || (($identifiant === $usermail) && ( $password === $userpassword ))) {
-                $user->setDatelog(new \DateTime());
+                $user->setDatelastlog($user->getDatecurrentlog());
+                $user->setDatecurrentlog(new \DateTime());
                 $this->doFlush($user);
                 $access = TRUE;
             }
@@ -78,7 +79,8 @@ class Security {
         $user->setPassword(sha1(md5($password)));
         $user->setPrivilege('ADMIN');
         $user->setEnabled(TRUE);
-        $user->setDatelog(new \DateTime());
+        $user->setDatelastlog($user->getDatecurrentlog());
+        $user->setDatecurrentlog(new \DateTime());
         $this->doFlush($user);
     }
 

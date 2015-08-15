@@ -1,0 +1,4 @@
+
+my_app_backoffice_manage_message:
+    pattern:  /message
+    defaults: { _controller: MyAppBackofficeBundle:manage:message }

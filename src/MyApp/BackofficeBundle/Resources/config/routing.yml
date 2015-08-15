@@ -43,4 +43,8 @@ my_app_backoffice_ui:
     
 utilisateur:
     resource: "@MyAppBackofficeBundle/Resources/config/routing/utilisateur.yml"
-    prefix: /utilisateur 
+    prefix: /utilisateur
+
+manage:
+    resource: "@MyAppBackofficeBundle/Resources/config/routing/manage.yml"
+    prefix: /manage

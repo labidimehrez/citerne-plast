@@ -336,28 +336,35 @@
 				<section class="section leave-a-message">
 					<h2 class="bordered">Leave a Message</h2>
 					<p>Maecenas dolor elit, semper a sem sed, pulvinar molestie lacus. Aliquam dignissim, elit non mattis ultrices, neque odio ultricies tellus, eu porttitor nisl ipsum eu massa.</p>
-					<form id="contact-form" class="contact-form cf-style-1 inner-top-xs" method="post" >
+
+                    <form id="contact-form" class="contact-form cf-style-1 inner-top-xs" method="post"
+                          action='{{ path('my_app_frontoffice_message_add') }}'>
                         <div class="row field-row">
                             <div class="col-xs-12 col-sm-6">
                                 <label>Your Name*</label>
-                                <input class="le-input" >
+                                <!--  <input class="le-input" >-->
+                                {{ form_widget(form.name, { 'attr': {'placeholder': '  Your Name ','class':'le-input'} }) }}
+
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <label>Your Email*</label>
-                                <input class="le-input" >
+                                <!--   <input class="le-input" >-->
+                                {{ form_widget(form.email, { 'attr': {'placeholder': ' Your Email ','class':'le-input'} }) }}
                             </div>
                         </div><!-- /.field-row -->
                         
                         <div class="field-row">
                             <label>Subject</label>
-                            <input type="text" class="le-input">
+                            <!--  <input type="text" class="le-input"> -->
+                            {{ form_widget(form.subject, { 'attr': {'placeholder': ' Subject ','class':'le-input'} }) }}
                         </div><!-- /.field-row -->
 
                         <div class="field-row">
                             <label>Your Message</label>
-                            <textarea rows="8" class="le-input"></textarea>
+                            <!--   <textarea rows="8" class="le-input"></textarea> -->
+                            {{ form_widget(form.message, { 'attr': {'placeholder': ' Your Message ','class':'le-input' ,'rows':'8'} }) }}
                         </div><!-- /.field-row -->
-
+                        {{ form_widget(form._token) }}
                         <div class="buttons-holder">
                             <button type="submit" class="le-button huge">Send Message</button>
                         </div><!-- /.buttons-holder -->
