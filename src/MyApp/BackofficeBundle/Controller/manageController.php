@@ -4,16 +4,11 @@ namespace MyApp\BackofficeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+class manageController extends Controller {
 
-class manageController extends Controller
-{
+    public function messageAction() {
 
-
-    public function messageAction()
-    {
-
-        $manager_entities = $this->get('entities');
-        /** equivalent de em manager * */
+        $manager_entities = $this->get('entities');/** equivalent de em manager * */
         $messages = $manager_entities->AllMessages();
         var_dump($messages);
         exit;
@@ -22,5 +17,16 @@ class manageController extends Controller
         // ));
     }
 
+    public function rubriqueAction() {
+        
+    }
 
+    public function categorieAction() {
+        
+    }
+
+    public function produitAction()
+    {
+
+    }
 }

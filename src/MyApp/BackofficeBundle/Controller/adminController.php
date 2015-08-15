@@ -1,15 +1,20 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Controller;
+
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class adminController extends Controller {
 
-    public function indexAction(Request $request) {
+class adminController extends Controller
+{
+
+    public function indexAction(Request $request)
+    {
+
         $userSession = $this->getRequest()->getSession()->get('user');
         if ((!empty($userSession))) {
             if ($userSession->getPrivilege() === 'ADMIN') {
@@ -24,13 +29,14 @@ class adminController extends Controller {
         }
     }
 
-    public function loginAction(Request $request) {
+    public function loginAction(Request $request)
+    {
         $this->getRequest()->getSession()->clear();//détruire la session ici
 
         $form = $this->createFormBuilder()
-                ->add('identifiant', 'text', array('required' => TRUE))
-                ->add('password', 'password', array('required' => TRUE))
-                ->getForm();
+            ->add('identifiant', 'text', array('required' => TRUE))
+            ->add('password', 'password', array('required' => TRUE))
+            ->getForm();
 
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
@@ -68,12 +74,14 @@ class adminController extends Controller {
 
     }
 
-    public function logoutAction(Request $request) {
+    public function logoutAction(Request $request)
+    {
         $this->getRequest()->getSession()->clear();//détruire la session ici
         return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
 
-    public function registerAction(Request $request) {
+    public function registerAction(Request $request)
+    {
 
         $this->getRequest()->getSession()->clear();//détruire la session ici
 
@@ -83,27 +91,27 @@ class adminController extends Controller {
         $user = new Utilisateur();
         $form = $this->createFormBuilder()
             ->add('login', 'text', array(
-                    'required' => TRUE,
-                    'attr' => array(
-                        'placeholder' => 'What\'s your name?',
-                        'pattern' => '.{5,}' //minlength
-                    )
-                ))
-                ->add('email', 'email', array(
-                    'required' => TRUE,
-                    'attr' => array(
-                        'placeholder' => 'So I can get back to you.'
-                    )
-                ))
-                ->add('password', 'repeated', array(
+                'required' => TRUE,
+                'attr' => array(
+                    'placeholder' => 'What\'s your name?',
+                    'pattern' => '.{5,}' //minlength
+                )
+            ))
+            ->add('email', 'email', array(
+                'required' => TRUE,
+                'attr' => array(
+                    'placeholder' => 'So I can get back to you.'
+                )
+            ))
+            ->add('password', 'repeated', array(
                     'required' => TRUE,
                     'type' => 'password',
                     'invalid_message' => 'Les mots de passe doivent correspondre',
                     'options' => array('required' => true),
                     'first_options' => array('label' => 'Mot de passe'),
                     'second_options' => array('label' => 'Mot de passe (validation)'),)
-                )
-                ->getForm();
+            )
+            ->getForm();
         $request = $this->getRequest();
         $form->bind($request);
 
@@ -113,7 +121,7 @@ class adminController extends Controller {
         if ($Valid->validerInscri($form)) {
 
             $EXIST = $manager->donneruservalid($user);
-            if ($EXIST!= TRUE) {
+            if ($EXIST != TRUE) {
 
                 $manager->persistUser($user, $form["login"]->getData(), $form["email"]->getData(), $form["password"]->getData());
                 $OK = TRUE;
@@ -133,12 +141,13 @@ class adminController extends Controller {
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             return $this->render('MyAppBackofficeBundle:admin:register.html.twig', array(
-                        'form' => $form->createView()
+                'form' => $form->createView()
             ));
         }
     }
 
-    public function changepasswordAction(Request $request) {
+    public function changepasswordAction(Request $request)
+    {
         $this->getRequest()->getSession()->clear();//détruire la session ici
 
         $manager = $this->get('collectify_security_manager');
@@ -146,12 +155,12 @@ class adminController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
         $form = $this->createFormBuilder()
-                ->add('email', 'email', array('required' => TRUE))
-                ->getForm();
+            ->add('email', 'email', array('required' => TRUE))
+            ->getForm();
         $email = $this->getRequest()->get('email');
         $users = $manager->getUserByMail($email);
         /*var_dump($email);var_dump($users[0]);exit;*/
-        
+
         if ($email != NULL) {
             if (!$users) {
                 $this->get('session')->getFlashBag()->set('message', 'Mail Invalide');
@@ -159,16 +168,17 @@ class adminController extends Controller {
                 $users[0]->setPassword(sha1(md5($nouveaupassword)));
                 $em->persist($users[0]);
                 $em->flush();
-                $managermail->nouveaupasswordparmail($users[0],$nouveaupassword);  
+                $managermail->nouveaupasswordparmail($users[0], $nouveaupassword);
                 return $this->redirect($this->generateUrl('my_app_backoffice_login'));
             }
         }
         return $this->render('MyAppBackofficeBundle:admin:changepassword.html.twig', array(
-                    'form' => $form->createView()
+            'form' => $form->createView()
         ));
     }
 
-    public function tableAction(  ) {
+    public function tableAction()
+    {
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {
@@ -177,17 +187,19 @@ class adminController extends Controller {
         return $this->render('MyAppBackofficeBundle:admin:table.html.twig');
     }
 
-    public function uiAction( ) {
+    public function uiAction()
+    {
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {
             return new RedirectResponse($security->securityadmin());
         }
-            
+
         return $this->render('MyAppBackofficeBundle:admin:ui.html.twig');
     }
 
-    public function tabpanelAction( ) {
+    public function tabpanelAction()
+    {
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {
@@ -196,7 +208,8 @@ class adminController extends Controller {
         return $this->render('MyAppBackofficeBundle:admin:tabpanel.html.twig');
     }
 
-    public function formAction( ) {
+    public function formAction()
+    {
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {
@@ -205,7 +218,8 @@ class adminController extends Controller {
         return $this->render('MyAppBackofficeBundle:admin:form.html.twig');
     }
 
-    public function chartAction( ) {
+    public function chartAction()
+    {
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {

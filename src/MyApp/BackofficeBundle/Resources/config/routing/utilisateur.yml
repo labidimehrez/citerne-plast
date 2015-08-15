@@ -10,14 +10,14 @@ my_app_backoffice_user_show:
 my_app_backoffice_user_delete:
     pattern:  /{id}/delete
     defaults: { _controller: MyAppBackofficeBundle:user:delete }  
-       
-my_app_backoffice_user_edit:
-    pattern:  /{id}/edit
-    defaults: { _controller: MyAppBackofficeBundle:user:edit }  
-    
-my_app_backoffice_user_voir:
-    pattern:  /{id}/voir
-    defaults: { _controller: MyAppBackofficeBundle:user:voir }    
+#       
+#my_app_backoffice_user_edit:
+#    pattern:  /{id}/edit
+#    defaults: { _controller: MyAppBackofficeBundle:user:edit }  
+#    
+#my_app_backoffice_user_voir:
+#    pattern:  /{id}/voir
+#    defaults: { _controller: MyAppBackofficeBundle:user:voir }    
     
     
     

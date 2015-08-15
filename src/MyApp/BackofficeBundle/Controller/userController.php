@@ -39,14 +39,12 @@ class userController extends Controller {
         if (!$user) {
             throw $this->createNotFoundException('No user found for id ' . $id);
         }
-
         $form = $this->createFormBuilder($user)
                 ->add('login', 'text')
                 ->add('password', 'text')
                 ->getForm();
 
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em->flush();
             return $this->redirect($this->generateUrl('my_app_backoffice_user_show'));

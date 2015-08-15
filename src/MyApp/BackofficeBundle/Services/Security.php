@@ -84,6 +84,19 @@ class Security {
         $this->doFlush($user);
     }
 
+    public function persistclient($user, $email, $password)
+    {
+
+
+        $user->setEmail($email);
+        $user->setPassword(sha1(md5($password)));
+        $user->setPrivilege('USER');
+        $user->setEnabled(TRUE);
+        $user->setDatelastlog($user->getDatecurrentlog());
+        $user->setDatecurrentlog(new \DateTime());
+        $this->doFlush($user);
+    }
+
     public function donneruservalid($user) {
         $users = $this->repository->findAll();
         $EXISTE = FALSE;

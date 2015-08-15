@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\UtilisateurBundl\Services;
+namespace MyApp\UtilisateurBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 
