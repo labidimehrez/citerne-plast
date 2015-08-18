@@ -2,6 +2,7 @@
   <dictionary name="Mehrez">
     <words>
       <w>activer</w>
+      <w>authentification</w>
       <w>authentifsucces</w>
       <w>avant</w>
       <w>backoffice</w>
@@ -38,14 +39,19 @@
       <w>myappbackoffice</w>
       <w>myappfrontoffice</w>
       <w>navbar</w>
+      <w>netbeans</w>
       <w>nouveau</w>
       <w>nouveaupassword</w>
       <w>nouveaupasswordparmail</w>
       <w>nullable</w>
       <w>onkeypress</w>
+      <w>persistclient</w>
+      <w>projectui</w>
       <w>renvoie</w>
       <w>récupération</w>
       <w>securityadmin</w>
+      <w>singleproduct</w>
+      <w>singleproductsidebar</w>
       <w>smtp</w>
       <w>symfony</w>
       <w>tabpanel</w>
