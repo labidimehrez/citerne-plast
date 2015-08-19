@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Mehrez">
     <words>
+      <w>abcdefghijklmnopqrstuvwxyz</w>
       <w>activer</w>
       <w>authentification</w>
       <w>authentifsucces</w>
@@ -8,13 +9,16 @@
       <w>backoffice</w>
       <w>changecolor</w>
       <w>changepassword</w>
+      <w>citerne</w>
       <w>cliquer</w>
       <w>collectify</w>
       <w>compte</w>
+      <w>correspondre</w>
       <w>datecurrentlog</w>
       <w>datelastlog</w>
       <w>datelog</w>
       <w>detruire</w>
+      <w>doivent</w>
       <w>donneruservalid</w>
       <w>dropdown</w>
       <w>déja</w>
@@ -28,6 +32,7 @@
       <w>frontofficebundle</w>
       <w>gmail</w>
       <w>identifiant</w>
+      <w>idtoken</w>
       <w>inscri</w>
       <w>invalide</w>
       <w>isvalid</w>
@@ -48,6 +53,7 @@
       <w>nullable</w>
       <w>onkeypress</w>
       <w>persistclient</w>
+      <w>plast</w>
       <w>projectui</w>
       <w>renvoie</w>
       <w>récupération</w>

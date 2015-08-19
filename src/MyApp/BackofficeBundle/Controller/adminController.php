@@ -84,7 +84,6 @@ class adminController extends Controller
     {
 
         $this->getRequest()->getSession()->clear();//détruire la session ici
-
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         /* $em = $this->getDoctrine()->getManager();*/
@@ -114,15 +113,11 @@ class adminController extends Controller
             ->getForm();
         $request = $this->getRequest();
         $form->bind($request);
-
         $OK = FALSE;
         $Valid = $this->get('Valid');
-
         if ($Valid->validerInscri($form)) {
-
             $EXIST = $manager->donneruservalid($user);
             if ($EXIST != TRUE) {
-
                 $manager->persistUser($user, $form["login"]->getData(), $form["email"]->getData(), $form["password"]->getData());
                 $OK = TRUE;
                 $managermail->envoiMail($user);  /// renvoie de mail au membre
@@ -133,11 +128,12 @@ class adminController extends Controller
         if ($OK === TRUE) {
             $session = new Session();
             $session->clear(); /// detruire la session avant de la start
-            if ($session->isStarted() != FALSE) {
-                $session->start();
-            }
-            $session->set('user', $user);
-
+            /*
+             if ($session->isStarted() != FALSE) {
+                  $session->start();
+              }
+              $session->set('user', $user);
+            */
             return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
         } else {
             return $this->render('MyAppBackofficeBundle:admin:register.html.twig', array(
@@ -149,7 +145,6 @@ class adminController extends Controller
     public function changepasswordAction(Request $request)
     {
         $this->getRequest()->getSession()->clear();//détruire la session ici
-
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
@@ -160,7 +155,6 @@ class adminController extends Controller
         $email = $this->getRequest()->get('email');
         $users = $manager->getUserByMail($email);
         /*var_dump($email);var_dump($users[0]);exit;*/
-
         if ($email != NULL) {
             if (!$users) {
                 $this->get('session')->getFlashBag()->set('message', 'Mail Invalide');
@@ -189,6 +183,7 @@ class adminController extends Controller
 
     public function uiAction()
     {
+
         $security = $this->get('collectify_security_manager');
         $security->securityadmin();// verif security et filtre
         if ($security->securityadmin() != NULL) {
@@ -228,4 +223,18 @@ class adminController extends Controller
         return $this->render('MyAppBackofficeBundle:admin:chart.html.twig');
     }
 
+    public function activerCompteAdminAction($idtoken)
+    {
+        $security = $this->get('collectify_security_manager');
+        $security->activerCompte($idtoken);
+        $users = $security->getUserByIdtoken($idtoken);
+        $session = new Session();
+        if ($session->isStarted() != FALSE) {
+            $session->start();
+        }
+        if (count($users) > 0) {
+            $session->set('user', $users);
+        }
+        return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
+    }
 }

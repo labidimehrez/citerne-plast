@@ -14,6 +14,10 @@ my_app_backoffice:
     resource: "@MyAppBackofficeBundle/Resources/config/routing.yml"
     prefix:   /admin
 
+activerCompte:
+    path:     /account/activate/{idtoken}
+    defaults: { _controller: MyAppBackofficeBundle:admin:activerCompteAdmin }
+
 # app/config/routing.yml
 
 #fos_user:

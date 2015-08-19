@@ -1,7 +1,5 @@
 <?php
 namespace MyApp\BackofficeBundle\Services;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
-
 
 
 class Mail {
@@ -23,7 +21,9 @@ protected $container;
                 ->setSubject('Confirmation de l\'inscription')
                 ->setFrom('mehrez.labidi@esprit.tn')
                 ->setTo($user->getEmail())
-                ->setBody('Pour activer votre compte veuiller cliquer sur le lien ');
+            ->setBody('Pour activer votre compte veuiller cliquer sur le lien ' . "\n" .
+                'http://localhost/citerne-plast/web/app_dev.php/' . 'account/activate/' .
+                $user->getIdtoken());
       //  $this->get('mailer')->send($message);
         $result = $mailer->send($message);
         return $result;

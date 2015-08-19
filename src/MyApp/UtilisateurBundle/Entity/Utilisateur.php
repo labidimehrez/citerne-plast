@@ -42,6 +42,13 @@ class Utilisateur {
     private $email;
 
     /**
+     * @var string $idtoken
+     * @ORM\Column(name="idtoken", type="string", length=255,nullable=true)
+     *
+     */
+
+    private $idtoken;
+    /**
      * @var string $privilege
      * @ORM\Column(name="privilege", type="string", length=255,nullable=false)
      */
@@ -151,6 +158,22 @@ class Utilisateur {
     public function setDatelastlog($datelastlog)
     {
         $this->datelastlog = $datelastlog;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdtoken()
+    {
+        return $this->idtoken;
+    }
+
+    /**
+     * @param string $idtoken
+     */
+    public function setIdtoken($idtoken)
+    {
+        $this->idtoken = $idtoken;
     }
 
 

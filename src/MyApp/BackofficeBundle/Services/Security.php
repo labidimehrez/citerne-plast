@@ -13,12 +13,14 @@
  */
 
 namespace MyApp\BackofficeBundle\Services;
+
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Security {
+class Security
+{
 
     //put your code here
     protected $router;
@@ -26,40 +28,53 @@ class Security {
     private $repository;
     private $container;
 
-    public function __construct(EntityManager $em,ContainerInterface $container, $router ) {
+    public function __construct(EntityManager $em, ContainerInterface $container, $router)
+    {
         $this->em = $em;
         $this->repository = $em->getRepository('MyAppUtilisateurBundle:Utilisateur');
         $this->container = $container;
         $this->router = $router;
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return $this->repository->findAll();
     }
 
-    public function getUserByPassword($password) {
+    public function getUserByPassword($password)
+    {
         return $this->repository->findOneBy(array('password' => $password));
 
     }
 
-    public function getUserByMail($email) {
+    public function getUserByIdtoken($idtoken)
+    {
+        return $this->repository->findOneBy(array('idtoken' => $idtoken));
+
+    }
+
+    public function getUserByMail($email)
+    {
         return $this->repository->findOneBy(array('email' => $email));
     }
 
-    public function login($identifiant, $password) {
+    public function login($identifiant, $password)
+    {
         $users = $this->repository->findAll();
         $access = FALSE;
         foreach ($users as $user) {
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
             $userpassword = $user->getPassword(); //
-
-            if ((($identifiant === $userlog) && ($password === $userpassword ) ) || (($identifiant === $usermail) && ( $password === $userpassword ))) {
+            if ((($identifiant === $userlog) && ($password === $userpassword)) || (($identifiant === $usermail) && ($password === $userpassword))) {
                 $user->setDatelastlog($user->getDatecurrentlog());
                 $user->setDatecurrentlog(new \DateTime());
                 $this->doFlush($user);
-                $access = TRUE;
+                if ($user->getEnabled == 'TRUE') {
+                    $access = TRUE;
+                }
             }
+
         }
         return $access;
     }
@@ -71,15 +86,23 @@ class Security {
         return $user;
     }
 
+    public function activerCompte($idtoken)
+    {
+        $user = $this->repository->findOneBy(array('idtoken' => $idtoken));
+        $this->em->persist($user);
+        $user->setEnabled(TRUE);
+        $this->em->flush();
+        return $user;
+    }
+
     public function persistUser($user, $login, $email, $password)
     {
-
-
         $user->setLogin($login);
         $user->setEmail($email);
         $user->setPassword(sha1(md5($password)));
         $user->setPrivilege('ADMIN');
-        $user->setEnabled(TRUE);
+        $user->setEnabled(FALSE);
+        $user->setIdtoken(substr(md5(rand(0, 1000000)), 0, 20000));
         $user->setDatelastlog($user->getDatecurrentlog());
         $user->setDatecurrentlog(new \DateTime());
         $this->doFlush($user);
@@ -87,36 +110,38 @@ class Security {
 
     public function persistclient($user, $email, $password)
     {
-
-
         $user->setEmail($email);
         $user->setPassword(sha1(md5($password)));
         $user->setPrivilege('USER');
         $user->setEnabled(TRUE);
+        //  $user->setIdtoken(substr(md5(rand(0, 1000000)), 0, 20000));
         $user->setDatelastlog($user->getDatecurrentlog());
         $user->setDatecurrentlog(new \DateTime());
         $this->doFlush($user);
     }
 
-    public function donneruservalid($user) {
+    public function donneruservalid($user)
+    {
         $users = $this->repository->findAll();
         $EXISTE = FALSE;
         foreach ($users as $u) {
             $userlog = $u->getLogin();
             $usermail = $u->getEmail();
             $userpassword = $u->getPassword(); //sha1(md5($user->getPassword()));
-            if (($user->getLogin() === $userlog) || ($user->getPassword() === $userpassword ) || (($user->getEmail() === $usermail) )) {
+            if (($user->getLogin() === $userlog) || ($user->getPassword() === $userpassword) || (($user->getEmail() === $usermail))) {
                 $EXISTE = TRUE;
             }
         }
         return $EXISTE;
     }
 
-    public function persist($user) {
+    public function persist($user)
+    {
         $this->doFlush($user);
     }
 
-    public function remove($user) {
+    public function remove($user)
+    {
         $this->em->remove($user);
         $this->em->flush();
     }
@@ -126,13 +151,14 @@ class Security {
         $userSession = $this->container->get('request_stack')->getCurrentRequest()->getSession()->get('user');
         $url = $this->router->generate('my_app_backoffice_login');
         if ((empty($userSession))) {
-           // return $this->redirect($this->generateUrl('my_app_backoffice_login'));
+            // return $this->redirect($this->generateUrl('my_app_backoffice_login'));
             return $url;
-
         }
-        if ((!empty($userSession))&&($userSession->getPrivilege() != 'ADMIN')) {
+        if ((!empty($userSession)) && ($userSession->getPrivilege() != 'ADMIN')) {
             // return $this->redirect($this->generateUrl('my_app_backoffice_login'));
             return $url;
         }
     }
+
+
 }
