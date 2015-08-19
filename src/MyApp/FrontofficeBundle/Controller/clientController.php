@@ -22,38 +22,54 @@ class clientController extends Controller
         $this->getRequest()->getSession()->clear();//détruire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
-        $user = new Utilisateur();
+
         $form1 = $this->createFormBuilder()
-            ->add('email', 'email', array(
-                'required' => TRUE,
-                'attr' => array(
-                    'placeholder' => 'Put your mail here'
-                )
-            ))
-            ->getForm();
+            ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))->getForm();
         $request = $this->getRequest();
-        $form1->bind($request); //  var_dump($form1["email"]->getData());exit;
-        $EXIST = $manager->getUserByMail($form1["email"]->getData());
-        if (empty($EXIST)) {
+        $form1->bind($request);
+        if (($form1["email"]->getData() != NULL)) {
+            $EXIST = $manager->getUserByMail($form1["email"]->getData());
+            // var_dump($form1);  exit;
 
-            $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
-
-            $manager->persistclient($user, $form1["email"]->getData(), $nouveaupassword);
-            $managermail->nouveaupasswordparmail($user, $nouveaupassword);  /// renvoie de mail au membre
-            $session = new Session();
-
-            if ($session->isStarted() != FALSE) {
-                $session->start();
+            if (empty($EXIST)) {
+                $user = new Utilisateur();
+                $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
+                $manager->persistclient($user, $form1["email"]->getData(), $nouveaupassword);
+                $managermail->nouveaupasswordparmail($user, $nouveaupassword);  /// renvoie de mail au membre
+                $session = new Session();
+                if ($session->isStarted() != FALSE) {
+                    $session->start();
+                }
+                $session->set('user', $user);
+                return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
             }
-
-            $session->set('user', $user[0]);
-            return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
-
         }
-
+        /*********************************************************************************************************/
+        $form2 = $this->createFormBuilder()
+            ->add('login', 'text',
+                array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
+            ->add('password', 'password',
+                array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
+            ->getForm();
+        $form2->bind($request);
+        if (($form2["login"]->getData() != NULL) && ($form2["password"]->getData() != NULL)) {
+            $password = sha1(md5($form2["password"]->getData()));
+            $user = $manager->getUserByPassword($password);
+            if ($user) {
+                $connected = $manager->login($form2["login"]->getData(), $password);
+                if ($connected != FALSE) {
+                    $session = new Session();
+                    if ($session->isStarted() != FALSE) {
+                        $session->start();
+                    }
+                    $session->set('user', $user);
+                    return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
+                }
+            }
+        }
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
-            'form1' => $form1->createView()
-        ));
+            'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView()));
+
     }
 
 

@@ -1,7 +1,7 @@
 {% extends 'MyAppFrontofficeBundle:Default:layout.html.twig' %}
 
 {% block index%}
-
+    {{ dump(app.session.get('user')) }} {# connected user #}
 <div id="top-banner-and-menu">
     <div class="container">
 

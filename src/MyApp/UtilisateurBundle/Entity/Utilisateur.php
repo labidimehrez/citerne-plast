@@ -43,7 +43,7 @@ class Utilisateur {
 
     /**
      * @var string $privilege
-     * @ORM\Column(name="privilege", type="string", length=255,nullable=true)
+     * @ORM\Column(name="privilege", type="string", length=255,nullable=false)
      */
     private $privilege;
 

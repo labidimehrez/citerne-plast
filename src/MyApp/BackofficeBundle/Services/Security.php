@@ -38,11 +38,12 @@ class Security {
     }
 
     public function getUserByPassword($password) {
-        return $this->repository->findBy(array('password' => $password));
+        return $this->repository->findOneBy(array('password' => $password));
+
     }
 
     public function getUserByMail($email) {
-        return $this->repository->findBy(array('email' => $email));
+        return $this->repository->findOneBy(array('email' => $email));
     }
 
     public function login($identifiant, $password) {

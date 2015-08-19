@@ -1,7 +1,7 @@
 {% extends 'MyAppFrontofficeBundle:Default:layout.html.twig' %}
 
 {% block authentification%}
-   
+    {{ dump(app.session.get('user')) }} {# connected user #}
 <nav id="top-megamenu-nav" class="megamenu-vertical animate-dropdown">
     <div class="container">
         <div class="yamm navbar">
@@ -383,15 +383,19 @@
 						</div>
 					</div>
 
-					<form role="form" class="login-form cf-style-1">
-						<div class="field-row">
+                    <form action='{{ path('my_app_frontoffice_authentification_inscription') }}'
+                          method="post" {{ form_enctype(formconnexion) }} class="login-form cf-style-1">
+
+                        <div class="field-row">
                             <label>Email</label>
-                            <input type="text" class="le-input">
+                            <!--   <input type="text" class="le-input"> -->
+                            {{ form_widget(formconnexion.login, { 'attr': {'class':'le-input'} }) }}
                         </div><!-- /.field-row -->
 
                         <div class="field-row">
                             <label>Password</label>
-                            <input type="text" class="le-input">
+                            <!--    <input type="text" class="le-input">-->
+                            {{ form_widget(formconnexion.password, { 'attr': {'class':'le-input'} }) }}
                         </div><!-- /.field-row -->
 
                         <div class="field-row clearfix">
@@ -417,12 +421,12 @@
 					<p>Create your own Media Center account</p>
 
                     <form action='{{ path('my_app_frontoffice_authentification_inscription') }}'
-                          method="post" {{ form_enctype(form1) }} class="register-form cf-style-1">
+                          method="post" {{ form_enctype(forminscri) }} class="register-form cf-style-1">
 						<div class="field-row">
                             <label>Email</label>
                             <!--   <input type="text" class="le-input">-->
 
-                            {{ form_widget(form1.email, { 'attr': {'class':'le-input'} }) }}
+                            {{ form_widget(forminscri.email, { 'attr': {'class':'le-input'} }) }}
                         </div><!-- /.field-row -->
 
                         <div class="buttons-holder">
