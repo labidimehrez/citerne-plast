@@ -67,10 +67,11 @@ class Security
             $usermail = $user->getEmail();
             $userpassword = $user->getPassword(); //
             if ((($identifiant === $userlog) && ($password === $userpassword)) || (($identifiant === $usermail) && ($password === $userpassword))) {
-                $user->setDatelastlog($user->getDatecurrentlog());
-                $user->setDatecurrentlog(new \DateTime());
-                $this->doFlush($user);
-                if ($user->getEnabled == 'TRUE') {
+
+                if ($user->getEnabled() == TRUE) {
+                    $user->setDatelastlog($user->getDatecurrentlog());
+                    $user->setDatecurrentlog(new \DateTime());
+                    $this->doFlush($user);
                     $access = TRUE;
                 }
             }

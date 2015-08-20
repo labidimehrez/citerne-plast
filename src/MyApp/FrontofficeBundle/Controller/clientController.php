@@ -2,6 +2,8 @@
 
 namespace MyApp\FrontofficeBundle\Controller;
 
+use MyApp\FrontofficeBundle\Form\loginType;
+use MyApp\FrontofficeBundle\Form\registrerType;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,20 +19,21 @@ class clientController extends Controller
 
     public function authentificationAction(Request $request)
     {
-
-
         $this->getRequest()->getSession()->clear();//détruire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
-
-        $form1 = $this->createFormBuilder()
-            ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))->getForm();
+        /* $form1 = $this->createFormBuilder()
+             ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))
+             ->getForm();*/
+        $form1 = $this->createForm(new loginType());
         $request = $this->getRequest();
         $form1->bind($request);
         if (($form1["email"]->getData() != NULL)) {
             $EXIST = $manager->getUserByMail($form1["email"]->getData());
-            // var_dump($form1);  exit;
-
+            if (!empty($EXIST)) {
+                $this->get('session')->getFlashBag()->set('messageinscrit', 'Existe deja');
+                return $this->redirect($this->generateUrl('my_app_frontoffice_authentification_inscription'));
+            }
             if (empty($EXIST)) {
                 $user = new Utilisateur();
                 $nouveaupassword = substr(sha1(md5(rand())), 0, 10);
@@ -45,18 +48,27 @@ class clientController extends Controller
             }
         }
         /*********************************************************************************************************/
-        $form2 = $this->createFormBuilder()
-            ->add('login', 'text',
-                array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
-            ->add('password', 'password',
-                array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
-            ->getForm();
+        /* $form2 = $this->createFormBuilder()
+             ->add('login', 'text',
+                 array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
+             ->add('password', 'password',
+                 array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
+             ->getForm();*/
+        $form2 = $this->createForm(new registrerType());
         $form2->bind($request);
         if (($form2["login"]->getData() != NULL) && ($form2["password"]->getData() != NULL)) {
             $password = sha1(md5($form2["password"]->getData()));
             $user = $manager->getUserByPassword($password);
+            if (!$user) {
+                $this->get('session')->getFlashBag()->set('message', 'Compte Inexistant');
+                return $this->redirect($this->generateUrl('my_app_frontoffice_authentification_inscription'));
+            }
             if ($user) {
                 $connected = $manager->login($form2["login"]->getData(), $password);
+                if ($connected == FALSE) {
+                    $this->get('session')->getFlashBag()->set('message', 'Donnees invalides');
+                    return $this->redirect($this->generateUrl('my_app_frontoffice_authentification_inscription'));
+                }
                 if ($connected != FALSE) {
                     $session = new Session();
                     if ($session->isStarted() != FALSE) {

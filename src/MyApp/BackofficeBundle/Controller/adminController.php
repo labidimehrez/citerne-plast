@@ -2,12 +2,13 @@
 
 namespace MyApp\BackofficeBundle\Controller;
 
+use MyApp\BackofficeBundle\Form\loginType;
+use MyApp\BackofficeBundle\Form\registrerType;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-
 
 class adminController extends Controller
 {
@@ -32,30 +33,19 @@ class adminController extends Controller
     public function loginAction(Request $request)
     {
         $this->getRequest()->getSession()->clear();//détruire la session ici
-
-        $form = $this->createFormBuilder()
-            ->add('identifiant', 'text', array('required' => TRUE))
-            ->add('password', 'password', array('required' => TRUE))
-            ->getForm();
-
+        $form = $this->createForm(new loginType());
         $identifiant = $this->getRequest()->get('identifiant');
         $password = sha1(md5($this->getRequest()->get('password')));
-        // var_dump($identifiant);var_dump($password);
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
-        // $user = $manager->login($identifiant, $password);
         $user = $manager->getUserByPassword($password);
-        // var_dump($authentifsucces);var_dump($user);exit;
         if (($identifiant != NULL) && ($password != NULL)) {
             if (($authentifsucces == TRUE) && ($user != NULL)) {
-                //  var_dump($request);exit;
                 $session = new Session();
-
                 if ($session->isStarted() != FALSE) {
                     $session->start();
                 }
-
-                $session->set('user', $user[0]);
+                $session->set('user', $user);
                 return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
             }
             if ($authentifsucces != TRUE) {
@@ -67,7 +57,6 @@ class adminController extends Controller
                 ));
             }
         }
-
         return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
             'form' => $form->createView()
         ));
@@ -86,31 +75,9 @@ class adminController extends Controller
         $this->getRequest()->getSession()->clear();//détruire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
-        /* $em = $this->getDoctrine()->getManager();*/
+
         $user = new Utilisateur();
-        $form = $this->createFormBuilder()
-            ->add('login', 'text', array(
-                'required' => TRUE,
-                'attr' => array(
-                    'placeholder' => 'What\'s your name?',
-                    'pattern' => '.{5,}' //minlength
-                )
-            ))
-            ->add('email', 'email', array(
-                'required' => TRUE,
-                'attr' => array(
-                    'placeholder' => 'So I can get back to you.'
-                )
-            ))
-            ->add('password', 'repeated', array(
-                    'required' => TRUE,
-                    'type' => 'password',
-                    'invalid_message' => 'Les mots de passe doivent correspondre',
-                    'options' => array('required' => true),
-                    'first_options' => array('label' => 'Mot de passe'),
-                    'second_options' => array('label' => 'Mot de passe (validation)'),)
-            )
-            ->getForm();
+        $form = $this->createForm(new registrerType());
         $request = $this->getRequest();
         $form->bind($request);
         $OK = FALSE;
@@ -122,7 +89,7 @@ class adminController extends Controller
                 $OK = TRUE;
                 $managermail->envoiMail($user);  /// renvoie de mail au membre
             } else {
-                $this->get('session')->getFlashBag()->set('message', 'Existe déja');
+                $this->get('session')->getFlashBag()->set('message', 'Existe deja');
             }
         }
         if ($OK === TRUE) {
@@ -159,10 +126,10 @@ class adminController extends Controller
             if (!$users) {
                 $this->get('session')->getFlashBag()->set('message', 'Mail Invalide');
             } else {
-                $users[0]->setPassword(sha1(md5($nouveaupassword)));
-                $em->persist($users[0]);
+                $users->setPassword(sha1(md5($nouveaupassword)));
+                $em->persist($users);
                 $em->flush();
-                $managermail->nouveaupasswordparmail($users[0], $nouveaupassword);
+                $managermail->nouveaupasswordparmail($users, $nouveaupassword);
                 return $this->redirect($this->generateUrl('my_app_backoffice_login'));
             }
         }

@@ -406,7 +406,12 @@
                         		<a href="#" class="content-color bold">Forgotten Password ?</a>
                         	</span>
                         </div>
+                        <div style="float: right!important; font-family: 'Open Sans', sans-serif;color: dodgerblue;font-weight: bold;">
 
+                            {% for flashMessage in app.session.flashbag.get('message') %}
+                                {{ flashMessage }}
+                            {% endfor %}
+                        </div>
                         <div class="buttons-holder">
                             <button type="submit" class="le-button huge">Secure Sign In</button>
                         </div><!-- /.buttons-holder -->
@@ -431,6 +436,11 @@
 
                         <div class="buttons-holder">
                             <button type="submit" class="le-button huge">Sign Up</button>
+                            <div style="position: relative; margin-left: 400px; margin-top: -40px; font-family: 'Open Sans', sans-serif;color: dodgerblue;font-weight: bold;">
+                                {% for flashMessage in app.session.flashbag.get('messageinscrit') %}
+                                    {{ flashMessage }}
+                                {% endfor %}
+                            </div>
                         </div><!-- /.buttons-holder -->
 					</form>
 

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="034e8706-e90c-429b-b4c5-598544b76e3e" name="Default" comment="connexion et inscription pour client">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Mail.php" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Mail.php" />
+    <list default="true" id="034e8706-e90c-429b-b4c5-598544b76e3e" name="Default" comment="mail d'activation">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/loginType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/loginType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/registrerType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/registrerType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Mehrez.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Mehrez.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/UtilisateurBundle/Entity/Utilisateur.php" afterPath="$PROJECT_DIR$/src/MyApp/UtilisateurBundle/Entity/Utilisateur.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php" afterPath="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig" afterPath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php" afterPath="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="citerne-plast.iws" />
@@ -40,43 +44,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Utilisateur.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MyApp/UtilisateurBundle/Entity/Utilisateur.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.653846">
-              <caret line="120" column="30" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.2090396">
-              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Security.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.307693">
-              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clientController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="clientController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.23077">
-              <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.15947467">
+              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
               <folding>
-                <element signature="e#3106#3203#0#PHP" expanded="false" />
+                <element signature="e#54#101#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authentification.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.692307">
+              <caret line="439" column="95" selection-start-line="439" selection-start-column="95" selection-end-line="439" selection-end-column="95" />
+              <folding>
+                <element signature="e#16349#18093#0#HTML" expanded="true" />
+                <element signature="e#16483#17952#0#HTML" expanded="true" />
+                <element signature="e#16513#17925#0#HTML" expanded="true" />
+                <element signature="e#16545#17882#0#HTML" expanded="true" />
+                <element signature="e#16601#17867#0#HTML" expanded="true" />
+                <element signature="e#17632#17723#0#HTML" expanded="true" />
+                <element signature="e#17740#17849#0#HTML" expanded="true" />
+                <element signature="e#18209#20803#0#HTML" expanded="true" />
+                <element signature="e#18236#20775#0#HTML" expanded="true" />
+                <element signature="e#18802#20738#0#HTML" expanded="true" />
+                <element signature="e#19009#19289#0#HTML" expanded="true" />
+                <element signature="e#19335#19621#0#HTML" expanded="true" />
+                <element signature="e#19667#20149#0#HTML" expanded="true" />
+                <element signature="e#19725#19944#0#HTML" expanded="true" />
+                <element signature="e#19970#20118#0#HTML" expanded="true" />
+                <element signature="e#20183#20288#0#HTML" expanded="true" />
+                <element signature="e#20178#20519#0#HTML" expanded="true" />
+                <element signature="e#20544#20700#0#HTML" expanded="true" />
+                <element signature="e#21206#21483#0#HTML" expanded="true" />
+                <element signature="e#21681#21821#0#HTML" expanded="true" />
+                <element signature="e#22205#22524#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/login.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.307693">
+              <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="57" selection-end-column="41" />
+              <folding>
+                <element signature="n#script#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,28 +114,54 @@
         <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="27" />
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilisateur.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/routing/utilisateur.yml">
+      <file leaf-file-name="adminController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="21" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="21" />
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+              <folding>
+                <element signature="e#53#100#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Security.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.8846154">
+              <caret line="123" column="42" selection-start-line="123" selection-start-column="42" selection-end-line="123" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mail.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Mail.php">
+      <file leaf-file-name="registrerType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/registrerType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6923075">
-              <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
-              <folding />
+            <state vertical-scroll-proportion="8.269231">
+              <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+              <folding>
+                <element signature="e#49#89#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loginType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/loginType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.3076923">
+              <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+              <folding>
+                <element signature="e#49#89#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,9 +198,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -173,18 +224,22 @@
         <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/routing/manage.yml" />
         <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/messageController.php" />
         <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/manageController.php" />
-        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/UserManager.php" />
-        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig" />
         <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php" />
         <option value="$PROJECT_DIR$/src/MyApp/UtilisateurBundle/Entity/Utilisateur.php" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Mail.php" />
-        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/loginType.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/registrerType.php" />
         <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/loginType.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/registrerType.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php" />
+        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig" />
+        <option value="$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php" />
       </list>
     </option>
   </component>
@@ -235,7 +290,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1376" />
-    <option name="height" value="740" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -522,6 +577,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FrontofficeBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -655,6 +736,40 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackofficeBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -742,6 +857,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citerne-plast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackofficeBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -794,11 +935,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\citerne-plast\src\MyApp\FrontofficeBundle\Form" />
+      <recent name="C:\wamp\www\citerne-plast\src\MyApp\BackofficeBundle\Form" />
       <recent name="C:\wamp\www\citerne-plast\src\MyApp\BackofficeBundle\Resources\config\routing" />
       <recent name="C:\wamp\www\citerne-plast\src\MyApp\BackofficeBundle\Services" />
       <recent name="C:\wamp\www\citerne-plast\src\MyApp\BackofficeBundle\Controller" />
-      <recent name="C:\wamp\www\citerne-plast\src\MyApp\FrontofficeBundle\Resources\config\routing" />
-      <recent name="C:\wamp\www\citerne-plast\src\MyApp\FrontofficeBundle\Controller" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.citerne-plast (1)">
@@ -938,7 +1079,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439990155422</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="mail d'activation">
+      <created>1440009179683</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1440009179683</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -952,15 +1099,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="740" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2814871" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22989377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32933104" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50769234" sideWeight="0.50758725" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28816468" sideWeight="0.49241275" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6683761" sideWeight="0.49468893" order="11" side_tool="false" content_ui="tabs" />
@@ -971,6 +1117,7 @@
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28816468" sideWeight="0.49241275" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58833617" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.4970588" order="1" side_tool="false" content_ui="tabs" />
@@ -999,7 +1146,8 @@
     <MESSAGE value="inscri client" />
     <MESSAGE value="pages clients&#10;Signed-off-by: MehezLabidi &lt;mehrez.labidi@esprit.tn&gt;&#10;" />
     <MESSAGE value="connexion et inscription pour client" />
-    <option name="LAST_COMMIT_MESSAGE" value="connexion et inscription pour client" />
+    <MESSAGE value="mail d'activation" />
+    <option name="LAST_COMMIT_MESSAGE" value="mail d'activation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1017,47 +1165,17 @@
           <line>4</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/loginType.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/ui.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.697464">
-          <caret line="58" column="26" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/public/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1184,13 +1302,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.416309">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/routing/manage.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1268,13 +1379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/changepassword.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1282,24 +1386,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384">
           <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="391" column="56" selection-start-line="391" selection-start-column="51" selection-end-line="391" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -1317,51 +1407,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8846154">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3734291">
           <caret line="45" column="24" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/routing/utilisateur.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.76301616">
           <caret line="25" column="21" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Mail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6923075">
-          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5432331">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-          <folding />
+        <state vertical-scroll-proportion="0.37664783">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -1373,29 +1436,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php">
+    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.23077">
-          <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51699466">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/loginType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.5384617">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
           <folding>
-            <element signature="e#3106#3203#0#PHP" expanded="false" />
+            <element signature="e#48#88#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php">
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Form/registrerType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.307693">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+        <state vertical-scroll-proportion="-0.5628518">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Entities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.521576">
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5134168">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/loginType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3076923">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding>
+            <element signature="e#49#89#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Form/registrerType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.269231">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding>
+            <element signature="e#49#89#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.307693">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="57" selection-end-column="41" />
+          <folding>
+            <element signature="n#script#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Resources/views/admin/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Controller/adminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2090396">
-          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="76" />
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+          <folding>
+            <element signature="e#53#100#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/BackofficeBundle/Services/Security.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="123" column="42" selection-start-line="123" selection-start-column="42" selection-end-line="123" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/views/client/authentification.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.692307">
+          <caret line="439" column="95" selection-start-line="439" selection-start-column="95" selection-end-line="439" selection-end-column="95" />
+          <folding>
+            <element signature="e#16349#18093#0#HTML" expanded="true" />
+            <element signature="e#16483#17952#0#HTML" expanded="true" />
+            <element signature="e#16513#17925#0#HTML" expanded="true" />
+            <element signature="e#16545#17882#0#HTML" expanded="true" />
+            <element signature="e#16601#17867#0#HTML" expanded="true" />
+            <element signature="e#17632#17723#0#HTML" expanded="true" />
+            <element signature="e#17740#17849#0#HTML" expanded="true" />
+            <element signature="e#18209#20803#0#HTML" expanded="true" />
+            <element signature="e#18236#20775#0#HTML" expanded="true" />
+            <element signature="e#18802#20738#0#HTML" expanded="true" />
+            <element signature="e#19009#19289#0#HTML" expanded="true" />
+            <element signature="e#19335#19621#0#HTML" expanded="true" />
+            <element signature="e#19667#20149#0#HTML" expanded="true" />
+            <element signature="e#19725#19944#0#HTML" expanded="true" />
+            <element signature="e#19970#20118#0#HTML" expanded="true" />
+            <element signature="e#20183#20288#0#HTML" expanded="true" />
+            <element signature="e#20178#20519#0#HTML" expanded="true" />
+            <element signature="e#20544#20700#0#HTML" expanded="true" />
+            <element signature="e#21206#21483#0#HTML" expanded="true" />
+            <element signature="e#21681#21821#0#HTML" expanded="true" />
+            <element signature="e#22205#22524#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyApp/FrontofficeBundle/Controller/clientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15947467">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+          <folding>
+            <element signature="e#54#101#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
