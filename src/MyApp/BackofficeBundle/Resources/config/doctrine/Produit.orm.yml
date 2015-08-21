@@ -1,0 +1,24 @@
+MyApp\BackofficeBundle\Entity\Produit:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        image:
+            type: string
+            length: 255
+        nouveauprix:
+            type: float
+        ancienprix:
+            type: float
+        nomproduit:
+            type: string
+            length: 255
+        detailsproduit:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

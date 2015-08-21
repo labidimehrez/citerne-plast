@@ -81,7 +81,6 @@ class clientController extends Controller
         }
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
             'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView()));
-
     }
 
 
