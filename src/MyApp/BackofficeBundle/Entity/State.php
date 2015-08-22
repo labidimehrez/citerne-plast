@@ -5,20 +5,28 @@ namespace MyApp\BackofficeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * State
+ * @ORM\Entity
+ * @ORM\Table(name="state")
+ * @ORM\Entity(repositoryClass="MyApp\BackofficeBundle\Repository\StateRepository")
  */
+
 class State
 {
+    protected $produits;
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
+     * @var string $nomState
+     * @ORM\Column(name="nomState", type="string", length=255,nullable=true)
+     *
      */
     private $nomState;
-
 
     /**
      * Get id
@@ -52,4 +60,21 @@ class State
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+    /**
+     * @param mixed $produits
+     */
+    public function setProduits($produits)
+    {
+        $this->produits = $produits;
+    }
+
 }

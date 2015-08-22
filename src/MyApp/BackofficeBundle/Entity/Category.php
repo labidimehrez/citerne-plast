@@ -1,29 +1,36 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * @ORM\Entity
+ * @ORM\Table(name="category")
+ * @ORM\Entity(repositoryClass="MyApp\BackofficeBundle\Repository\CategoryRepository")
  */
 class Category
 {
+    protected $produits;
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
+     * @var string $nom
+     * @ORM\Column(name="nom", type="string", length=255,nullable=true)
+     *
      */
     private $nom;
-
     /**
      * @var integer
+     *
+     * @ORM\Column(name="position", type="integer", length=255,nullable=true)
      */
     private $position;
-
 
     /**
      * Get id
@@ -80,4 +87,21 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+    /**
+     * @param mixed $produits
+     */
+    public function setProduits($produits)
+    {
+        $this->produits = $produits;
+    }
+
 }

@@ -1,44 +1,81 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produit
+ * @ORM\Entity
+ * @ORM\Table(name="produit")
+ * @ORM\Entity(repositoryClass="MyApp\BackofficeBundle\Repository\ProduitRepository")
  */
+
 class Produit
 {
     /**
+     * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\State")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id",nullable=true)
+     */
+    protected $state;
+    /**
+     * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id",nullable=true)
+     */
+    protected $category;
+    /**
+     * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\Departement")
+     * @ORM\JoinColumn(name="departement_id", referencedColumnName="id",nullable=true)
+     */
+    protected $departement;
+    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255,nullable=true)
      */
     private $image;
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qteStock", type="integer", length=255,nullable=true)
+     */
+    private $qteStock;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qteCommand", type="integer", length=255,nullable=true)
+     */
+    private $qteCommand;
     /**
      * @var float
+     *
+     * @ORM\Column(name="nouveauprix", type="float", length=255,nullable=true)
      */
     private $nouveauprix;
-
     /**
      * @var float
+     *
+     * @ORM\Column(name="ancienprix", type="float", length=255,nullable=true)
      */
     private $ancienprix;
-
     /**
      * @var string
+     *
+     * @ORM\Column(name="nomproduit", type="string", length=255,nullable=true)
      */
     private $nomproduit;
-
     /**
      * @var string
+     *
+     * @ORM\Column(name="detailsproduit", type="string", length=255,nullable=true)
      */
     private $detailsproduit;
-
 
     /**
      * Get id
@@ -164,4 +201,85 @@ class Produit
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getQteStock()
+    {
+        return $this->qteStock;
+    }
+
+    /**
+     * @param int $qteStock
+     */
+    public function setQteStock($qteStock)
+    {
+        $this->qteStock = $qteStock;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQteCommand()
+    {
+        return $this->qteCommand;
+    }
+
+    /**
+     * @param int $qteCommand
+     */
+    public function setQteCommand($qteCommand)
+    {
+        $this->qteCommand = $qteCommand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+    /**
+     * @param mixed $departement
+     */
+    public function setDepartement($departement)
+    {
+        $this->departement = $departement;
+    }
+
 }
