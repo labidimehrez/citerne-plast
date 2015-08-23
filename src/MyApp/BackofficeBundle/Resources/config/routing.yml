@@ -2,6 +2,10 @@ my_app_backoffice_homepage:
     path:     /index.php
     defaults: { _controller: MyAppBackofficeBundle:admin:index }
     
+my_app_backoffice_manage:
+    path:     /manage
+    defaults: { _controller: MyAppBackofficeBundle:admin:manage }
+    
     
 my_app_backoffice_form:
     path:     /form

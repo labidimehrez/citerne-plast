@@ -61,19 +61,18 @@ class Security
     public function login($identifiant, $password)
     {
         $users = $this->repository->findAll();
-        $access = FALSE;
+        $access = 'FALSE';
         foreach ($users as $user) {
             $userlog = $user->getLogin();
             $usermail = $user->getEmail();
             $userpassword = $user->getPassword(); //
             if ((($identifiant === $userlog) && ($password === $userpassword)) || (($identifiant === $usermail) && ($password === $userpassword))) {
-
                 if ($user->getEnabled() == TRUE) {
                     $user->setDatelastlog($user->getDatecurrentlog());
                     $user->setDatecurrentlog(new \DateTime());
                     $this->doFlush($user);
-                    $access = TRUE;
-                }
+                    $access = 'TRUE';
+                }else{ $access = 'LOCKED';}
             }
 
         }

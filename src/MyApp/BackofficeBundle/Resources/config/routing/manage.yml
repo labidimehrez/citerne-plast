@@ -2,3 +2,23 @@
 my_app_backoffice_manage_message:
     pattern:  /message
     defaults: { _controller: MyAppBackofficeBundle:manage:message }
+    
+    
+my_app_backoffice_manage_produit:
+    pattern:  /produit
+    defaults: { _controller: MyAppBackofficeBundle:manage:produit }
+    
+    
+    
+my_app_backoffice_manage_category:
+    pattern:  /category
+    defaults: { _controller: MyAppBackofficeBundle:manage:category }
+    
+    
+my_app_backoffice_manage_state:
+    pattern:  /state
+    defaults: { _controller: MyAppBackofficeBundle:manage:state }
+    
+my_app_backoffice_manage_departement:
+    pattern:  /departement
+    defaults: { _controller: MyAppBackofficeBundle:manage:departement }

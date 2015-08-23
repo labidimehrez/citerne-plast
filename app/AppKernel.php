@@ -39,9 +39,10 @@ class AppKernel extends Kernel
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 
-    public function init()
+    // DEPRECATED DEPRECATED DEPRECATED DEPRECATED
+    /*public function init()
     {
         date_default_timezone_set('Africa/Tunis');
         parent::init();
-    }
+    }*/
 }

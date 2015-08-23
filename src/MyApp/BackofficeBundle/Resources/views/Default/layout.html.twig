@@ -103,7 +103,7 @@
                             </ul>
                         </li>  
                         <li  >
-                            <a  href="#"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                           <a   href="{{path('my_app_backoffice_manage')}}"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
                         </li>	
                     </ul>
 
@@ -124,15 +124,19 @@
                 
                 
                 
-                  {% block index%} {% endblock %} 
-                  {% block ui%} {% endblock %} 
-                   {% block form%} {% endblock %} 
+                  {% block index %} {% endblock %} 
+                  {% block ui %} {% endblock %} 
+                   {% block form %} {% endblock %} 
               
-                {% block chart%} {% endblock %} 
-                {% block table%} {% endblock %} 
-                {% block tabpanel%} {% endblock %} 
+                {% block chart %} {% endblock %} 
+                {% block table %} {% endblock %} 
+                {% block tabpanel %} {% endblock %} 
                 
-                
+                {% block manage %}{% endblock %} 
+
+
+
+
                 
                 
                 
