@@ -28,51 +28,62 @@ class Entities {
     public function AllMessages() {
         return $this->repository_message->findAll();
     }
+     public function OneMessage($id) {
+        return $this->repository->findOneBy(array('id' => $id));
+    }
       public function AllCategorys() {
         return $this->repository_category->findAll();
+    }
+      public function OneCategory($id) {
+        return $this->repository->findOneBy(array('id' => $id));
     }
     public function AllProduits() {
         return $this->repository_produit->findAll();
     }
+        public function OneProduit($id) {
+        return $this->repository->findOneBy(array('id' => $id));
+    }
        public function AllDepartements() {
         return $this->repository_departement->findAll();
+    }
+        public function OneDepartement($id) {
+        return $this->repository->findOneBy(array('id' => $id));
     }
     public function AllStates() {
         return $this->repository_state->findAll();
     }
-    
-    
-    
+        public function OneState($id) {
+        return $this->repository->findOneBy(array('id' => $id));
+    }
     
     public function AllUsers()
     {
         return $this->repository_user->findAll();
     }
+        public function OneUser($id) {
+        return $this->repository->findOneBy(array('id' => $id));
+    }
 
-    /*
-      public function getOne($id)
-      {
-      return $this->repository->find($id);
-      }
+     public function persist($x)
+    {
+        $this->doFlush($x);
+    }
 
+    public function doFlush($x)
+    {
+        $this->em->persist($x);
+        $this->em->flush();
 
-      public function persist($user)
-      {
-      $this->doFlush($user);
-      }
+        return $x;
+    }
 
-      public function doFlush($user)
-      {
-      $this->em->persist($user);
-      $this->em->flush();
-
-      return $user;
-      }
-
-      public function remove($user)
-      {
-      $this->em->remove($user);
-      $this->em->flush();
-      }
-     */
+    public function remove($x)
+    {
+        $this->em->remove($x);
+        $this->em->flush();
+    }
+      public function flush()
+    {
+        $this->em->flush();
+    }
 }

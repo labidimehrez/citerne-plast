@@ -10,9 +10,35 @@ my_app_backoffice_manage_produit:
     
     
     
-my_app_backoffice_manage_category:
+my_app_backoffice_manage_category_add:
     pattern:  /category
-    defaults: { _controller: MyAppBackofficeBundle:manage:category }
+    defaults: { _controller: MyAppBackofficeBundle:manage:categoryadd }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true   
+        
+my_app_backoffice_manage_category_delete:
+    pattern:  /{id}/category
+    defaults: { _controller: MyAppBackofficeBundle:manage:categorydelete }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true    
+        
+my_app_backoffice_manage_category_edit:
+    pattern:  /{id}/category
+    defaults: { _controller: MyAppBackofficeBundle:manage:categoryedit }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true     
+    
+    
+    
+    
+    
+    
     
     
 my_app_backoffice_manage_state:

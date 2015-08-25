@@ -3,13 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/config/routing.yml</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/config/routing/manage.yml</file>
-            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/ajax%20response/liste%20category.html.twig</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/config/routing/utilisateur.yml</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Form/CategoryType.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/FrontofficeBundle/Controller/messageController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/public/js/jqueryajax.min.js</file>
-            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/category.html.twig</file>
-            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Services/Entities.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Entity/Category.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/Default/layout.html.twig</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Controller/manageController.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/ajax_response/liste_category.html.twig</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Services/Security.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Controller/adminController.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/category.html.twig</file>
+            <file>file:/C:/wamp/www/citerne-plast/app/config/routing.yml</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Services/Entities.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Services/UserManager.php</file>
         </group>
     </open-files>
 </project-private>
