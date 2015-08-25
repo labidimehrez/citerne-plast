@@ -1,29 +1,48 @@
 {# empty Twig template #}
 {% if app.request.isXmlHttpRequest == true %}
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-                                                            <th width="13"><input type="checkbox" class="checkbox" style="margin-left:10px;"/></th>
-								<th>Nom</th>
-								<th>Position</th>
-								<th>Added by</th>
-								<th width="110" class="ac">Content Control</th>
-	 </tr>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+        <tr>
+            <th width="13"><input type="checkbox" class="checkbox" style="margin-left:10px;"/></th>
+            <th>Nom</th>
+            <th>Position</th>
+            <th>Added by</th>
+            <th width="110" class="ac">Content Control</th>
+        </tr>
 
-{% for categorys in categorys %}      
-    <tr>
-        <td><input type="checkbox" class="checkbox" /></td>
-        <!--<td><h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3></td>-->
-         <td><h3><a href="#">{{categorys.nom}}</a></h3></td>
-        <!--<td>12.05.09</td> -->
-        <td>{{categorys.position}}</td>
-        <td><a href="#">Administrator</a></td>
-        <td><a href="#" class="ico del">Delete</a><a href="#" class="ico edit">Edit</a></td>
-    </tr>
-{%endfor%}
+        {% for categorys in categorys %}      
+            <tr>
+                <td><input type="checkbox" class="checkbox" /></td>
+                <!--<td><h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3></td>-->
+                <td><h3><a href="#">{{categorys.nom}}</a></h3></td>
+                <!--<td>12.05.09</td> -->
+                <td>{{categorys.position}}</td>
+                <td><a href="#">Administrator</a></td>
+                <td><a href="#" class="ico del" id="deletecategory{{categorys.id}}">Delete</a>
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#deletecategory{{categorys.id}}").click(function (e) { // On sélectionne le formulaire par son identifiant                                                    
+                                e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire         
+                                $.ajax({
+                                    type: 'post',
+                                    url: "{{path('my_app_backoffice_manage_category_delete',{id:categorys.id} ) }}",
+                                    data: $(this).serialize(),
+                                    datatype: "json",
+                                    cache: false,
+                                    success: function (data)
+                                    {
+                                      $('#category_afficher').html(data);
+                                    }
+                                });
+                                return false;
+                            });
+                        });
+                    </script>        
+                    <a href="#" class="ico edit">Edit</a></td>
+            </tr>
+        {%endfor%}
 
 
-</table>
+    </table>
 
-      {% endif %}
-   
-   
+{% endif %}
+

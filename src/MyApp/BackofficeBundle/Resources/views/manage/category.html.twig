@@ -2,192 +2,199 @@
 {% extends 'MyAppBackofficeBundle:Default:layout.html.twig' %}
 
 {% block manage %}
- <script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>  
- <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/style.css') }}"/> 
+    <script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>  
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myappbackoffice/css/style.css') }}"/> 
 
-	<!-- Content -->
-			<div id="content">
-				
-				<!-- Box -->
-                                <div class="box">
-					<!-- Box Head -->
-					<div class="box-head">
-					<!--	<h2 class="left">Current Articles</h2>-->
-						<div class="right">
-							<label>search articles</label>
-							<input type="text" class="field small-field" />
-							<input type="submit" class="button" value="search" />
-						</div>
-					</div>
-					<!-- End Box Head -->	
+    <!-- Content -->
+    <div id="content">
 
-					<!-- Table -->
-					<div class="table">
-						 <div class="tablee">
-                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="hideifajax">
-							<tr>
-                                                            <th width="13"><input type="checkbox" class="checkbox" style="margin-left:10px;"/></th>
-								<th>Nom</th>
-								<th>Position</th>
-								<th>Added by</th>
-								<th width="110" class="ac">Content Control</th>
-							</tr>
-                                                        
-                                                            {% for categorys in categorys %}      
-                                                           <tr>
-                                                                    <td><input type="checkbox" class="checkbox" /></td>
-                                                                    <!--<td><h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3></td>-->
-                                                                    <td><h3><a href="#">{{categorys.nom}}</a></h3></td>
-                                                                    <!--<td>12.05.09</td> -->
-                                                                    <td>{{categorys.position}}</td>
-                                                                    <td><a href="#">Administrator</a></td>
-                                                                    <td>
-                                                                        <a href="#" class="ico del{{categorys.id}}">Delete</a>
-                                                                              <script type="text/javascript">
-                                                                              
-                                                                                    $(function() {
-                                                                                        $(".ico del{{categorys.id}}").click(function(e) { // On sélectionne le formulaire par son identifiant                                                    
-                                                                                            e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire                                                     
-                                                                                            $.ajax({
-                                                                                                type: 'post',
-                                                                                                url: "{{path('my_app_backoffice_manage_category_delete',{id:categorys.id} ) }}",
-                                                                                                data: $(this).serialize(),
-                                                                                                datatype: "json",
-                                                                                                cache: false,
-                                                                                                success: function(data)
-                                                                                                {
-                                                                                                    $('.commentaireafficher').html(data);                                                       
-                                                                                                }
-                                                                                            });
-                                                                                            return false;
-                                                                                        });
-                                                                                    });
-                                                                                </script> 
-                                                                        <a href="#" class="ico edit{{categorys.id}}">Edit</a>
-                                                                                  <script type="text/javascript">
-                                                                                     $(function() {
-                                                                                        $(".ico edit{{categorys.id}}").click(function(e) { // On sélectionne le formulaire par son identifiant                                                    
-                                                                                            e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire                                                     
-                                                                                            $.ajax({
-                                                                                                type: 'post',
-                                                                                                url: "{{path('my_app_backoffice_manage_category_edit',{id:categorys.id} ) }}",
-                                                                                                data: $(this).serialize(),
-                                                                                                datatype: "json",
-                                                                                                cache: false,
-                                                                                                success: function(data)
-                                                                                                {
-                                                                                                    $('.commentaireafficher').html(data);                                                       
-                                                                                                }
-                                                                                            });
-                                                                                            return false;
-                                                                                        });
-                                                                                    });
-                                                                                </script> 
-                                                                    </td>
-                                                            </tr>
-                                                   
-                                                                {%endfor%}
-                                                            <div  id="category_afficher">
-                                                                {% include 'MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig' %}
-                                                            </div>
-                                                 
-                                                   
-					 </table> 
-                                                 </div>
-	 
-						<!-- Pagging -->
-						<div class="pagging">
-							<div class="left">Showing 1-12 of 44</div>
-							<div class="right">
-								<a href="#">Previous</a>
-								<a href="#">1</a>
-								<a href="#">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<a href="#">245</a>
-								<span>...</span>
-								<a href="#">Next</a>
-								<a href="#">View all</a>
-							</div>
-						</div>
-						<!-- End Pagging -->
-						
-					</div>
-					<!-- Table -->
-					
-				</div>
-				<!-- End Box -->
-				
-				<!-- Box -->
-                           <div class="box">
-					<!-- Box Head -->
-					<div class="box-head">
-					 
-					</div>
-					<!-- End Box Head -->
-					
-					<form  action='{{path('my_app_backoffice_manage_category_add')}}' method="post" {{ form_enctype(form) }} id="form_add_category">
-						
-						<!-- Form -->
-						<div class="form">
-								<p>
-									<!--<span class="req">max 100 symbols</span>-->
-									<label>Article Title <span>(Required Field)</span></label>
-									<!--<input type="text" class="field size1" />-->
-                                                                <tr>    {{form_widget(form.nom, { 'attr': { 'class':'field size4'} } )}}                                 
-								  
-                                                                        {{form_widget(form.position, { 'attr': { 'class':'field size2'} } )}} 
-                                                                </tr>                               
-								</p>
-                                          
-                                                                <a href="#" class="add-button"><span>Add new Category</span></a>
-                                                                <a href="#" class="add-button"><span>Add new State</span></a>
-                                                                <a href="#" class="add-button"><span>Add new Depart</span></a>
-                                                                <a href="#" class="add-button"><span>Add new Product</span></a>
-							 
-						</div>
-						<!-- End Form -->
-                                                                {{form_widget(form._token)}}
-						<!-- Form Buttons -->
-						<div class="buttons">
-							<input type="reset" class="button" value="reset" />
-							<input type="submit" class="button" value="submit" />
-						</div>
-						<!-- End Form Buttons -->
-					</form>
-                                      <script type="text/javascript">    
-                                             $(function() {
-                                                 $("#form_add_category").submit(function(e) {                                                         
-                                                 e.preventDefault(); 
-                                                        $.ajax({
-                                                            type: 'post',
-                                                            url: Routing.generate('my_app_backoffice_manage_category_add'),
-                                                            data: $(this).serialize(),
-                                                            datatype: "json",
-                                                            cache: false,
-                                                            success: function(data)
-                                                            {  
-                                                                //  $("#form_add_category").reset();
-                                                                $(".hideifajax").hide();
-                                                                $('#category_afficher').html(data);
-                                                                // $(".inputajoutcommentaire").hide();                              
-                                                            }
-                                                        });
-                                                return false;
-                                               });
+        <!-- Box -->
+        <div class="box">
+            <!-- Box Head -->
+            <div class="box-head">
+                <!--	<h2 class="left">Current Articles</h2>-->
+                <div class="right">
+                    <label>search articles</label>
+                    <input type="text" class="field small-field" />
+                    <input type="submit" class="button" value="search" />
+                </div>
+            </div>
+            <!-- End Box Head -->	
+
+            <!-- Table -->
+            <div class="table">
+                <div class="tablee">
+                
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="hideifajax">
+                        <tr>
+                            <th width="13"><input type="checkbox" class="checkbox" style="margin-left:10px;"/></th>
+                            <th>Nom</th>
+                            <th>Position</th>
+                            <th>Added by</th>
+                            <th width="110" class="ac">Content Control</th>
+                        </tr>
+
+                        {% for categorys in categorys %}   {% set categorysid = categorys.id %}    
+                            <tr>
+                                <td><input type="checkbox" class="checkbox" /></td>
+                                <!--<td><h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3></td>-->
+                                <td><h3><a href="#">{{categorys.nom}}</a></h3></td>
+                                <!--<td>12.05.09</td> -->
+                                <td>{{categorys.position}}</td>
+                                <td><a href="#">Administrator</a></td>
+                                <td>
+                                    
+                                    <a href="#" class="ico del" id="deletecategory{{categorys.id}}">Delete</a>
+                                    <script type="text/javascript">
+                                        $(function() {
+                                        $("#deletecategory{{categorys.id}}").click(function (e) { // On sélectionne le formulaire par son identifiant                                                    
+                                            e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire  
+                                            {#    var categoryseid = {{categorysid}};#}
+                                             
+                                            $.ajax({
+                                                type: 'post',
+                                                url: "{{path('my_app_backoffice_manage_category_delete',{id:categorys.id} ) }}",
+                                                data: $(this).serialize(),
+                                                datatype: "json",
+                                                cache: false,
+                                                success: function (data)
+                                                {             
+                                                                           
+                                                   $('#category_afficher').html(data);
+                                                }
+                                            });
+                                            return false;
                                            });
-                                        </script> 
-                                        
-                                        
-                                        <!-- pour les ajax call FOSJSrouting Bundle -->
-                                        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-                                        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-                                        <!-- pour les ajax call FOSJSrouting Bundle -->
-				</div>   
-				<!-- End Box -->
+                                          });
+                                    </script> 
+                                    
+                                    <a href="#" class="ico edit{{categorys.id}}">Edit</a>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $(".ico edit{{categorys.id}}").click(function (e) { // On sélectionne le formulaire par son identifiant                                                    
+                                                e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire                                                     
+                                                $.ajax({
+                                                    type: 'post',
+                                                    url: "{{path('my_app_backoffice_manage_category_edit',{id:categorys.id} ) }}",
+                                                    data: $(this).serialize(),
+                                                    datatype: "json",
+                                                    cache: false,
+                                                    success: function (data)
+                                                    {
+                                                        $('.commentaireafficher').html(data);
+                                                    }
+                                                });
+                                                return false;
+                                            });
+                                        });
+                                    </script> 
+                                    
+                                </td>
+                            </tr>
 
-			</div>
-			<!-- End Content -->
-			
- 
+                        {%endfor%}
+                        <div  id="category_afficher">
+                            {% include 'MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig' %}
+                        </div>
+
+
+                    </table> 
+                      
+                </div>
+
+                <!-- Pagging -->
+                <div class="pagging">
+                    <div class="left">Showing 1-12 of 44</div>
+                    <div class="right">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">245</a>
+                        <span>...</span>
+                        <a href="#">Next</a>
+                        <a href="#">View all</a>
+                    </div>
+                </div>
+                <!-- End Pagging -->
+
+            </div>
+            <!-- Table -->
+
+        </div>
+        <!-- End Box -->
+
+        <!-- Box -->
+        <div class="box">
+            <!-- Box Head -->
+            <div class="box-head">
+
+            </div>
+            <!-- End Box Head -->
+
+            <form  action='{{path('my_app_backoffice_manage_category_add')}}' method="post" {{ form_enctype(form) }} id="form_add_category">
+
+                <!-- Form -->
+                <div class="form">
+                    <p>
+                        <!--<span class="req">max 100 symbols</span>-->
+                        <label>Article Title <span>(Required Field)</span></label>
+                        <!--<input type="text" class="field size1" />-->
+                    <tr>    {{form_widget(form.nom, { 'attr': { 'class':'field size4'} } )}}                                 
+
+                        {{form_widget(form.position, { 'attr': { 'class':'field size2'} } )}} 
+                    </tr>                               
+                    </p>
+
+                    <a href="#" class="add-button"><span>Add new Category</span></a>
+                    <a href="#" class="add-button"><span>Add new State</span></a>
+                    <a href="#" class="add-button"><span>Add new Depart</span></a>
+                    <a href="#" class="add-button"><span>Add new Product</span></a>
+
+                </div>
+                <!-- End Form -->
+                {{form_widget(form._token)}}
+                <!-- Form Buttons -->
+                <div class="buttons">
+                    <input type="reset" class="button" value="reset" />
+                    <input type="submit" class="button" value="submit" />
+                </div>
+                <!-- End Form Buttons -->
+            </form>
+            <script type="text/javascript">
+                $(function () {
+                    $("#form_add_category").submit(function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            type: 'post',
+                            url: Routing.generate('my_app_backoffice_manage_category_add'),
+                            data: $(this).serialize(),
+                            datatype: "json",
+                            cache: false,
+                            success: function (data)
+                            {
+                                //  $("#form_add_category").reset();
+                                $(".hideifajax").hide();
+                                $('#category_afficher').html(data);
+                                // $(".inputajoutcommentaire").hide();                              
+                            }
+                        });
+                        return false;
+                    });
+                });
+            </script> 
+
+
+            <!-- pour les ajax call FOSJSrouting Bundle -->
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+            <!-- pour les ajax call FOSJSrouting Bundle -->
+        </div>   
+        <!-- End Box -->
+
+    </div>
+    <!-- End Content -->
+
+
 {% endblock %} 

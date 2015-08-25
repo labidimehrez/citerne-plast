@@ -10,10 +10,12 @@
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/FrontofficeBundle/Controller/messageController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/public/js/jqueryajax.min.js</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Entity/Category.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/FrontofficeBundle/Controller/userController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/Default/layout.html.twig</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Controller/manageController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/ajax_response/liste_category.html.twig</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Services/Security.php</file>
+            <file>file:/C:/wamp/www/citerne-plast/src/MyApp/FrontofficeBundle/Controller/clientController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Controller/adminController.php</file>
             <file>file:/C:/wamp/www/citerne-plast/src/MyApp/BackofficeBundle/Resources/views/manage/category.html.twig</file>
             <file>file:/C:/wamp/www/citerne-plast/app/config/routing.yml</file>

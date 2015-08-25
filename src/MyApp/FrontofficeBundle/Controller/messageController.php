@@ -5,7 +5,7 @@ namespace MyApp\FrontofficeBundle\Controller;
 use MyApp\FrontofficeBundle\Entity\Message;
 use MyApp\FrontofficeBundle\Form\MessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
 
 class  messageController extends Controller
 {
