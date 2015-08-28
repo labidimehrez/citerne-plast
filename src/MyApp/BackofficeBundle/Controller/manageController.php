@@ -18,10 +18,7 @@ class manageController extends Controller {
         //    'messages' => $messages
         // ));
     }
-
-    public function rubriqueAction() {
-        
-    }
+ 
 
     public function categoryaddAction() {
         $manager_category = $this->get('entities');/** equivalent de em manager * */
