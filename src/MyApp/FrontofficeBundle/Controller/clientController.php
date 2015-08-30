@@ -15,23 +15,23 @@ class clientController extends Controller {
         $manager_produit = $this->get('entities');
 
         $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
-        /*var_dump($produitStateFeatured);
-        exit;*/
-
         $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
-        /*var_dump($produitStateOnSale);
-        exit;*/
-
         $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
-        /*var_dump($produitStateTopRated);
-        exit;*/
+
 
         return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
                 ));
     }
 
-    public function authentificationAction(Request $request) {
+    public function authentificationAction(Request $request)
+    {
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
         $this->getRequest()->getSession()->clear(); //d�truire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
@@ -93,43 +93,120 @@ class clientController extends Controller {
             }
         }
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
-                    'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView()));
+            'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView(),
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function aboutAction() {
-        return $this->render('MyAppFrontofficeBundle:client:about.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+
+        return $this->render('MyAppFrontofficeBundle:client:about.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function contactAction() {
-        return $this->render('MyAppFrontofficeBundle:client:contact.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+        return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function blogAction() {
-        return $this->render('MyAppFrontofficeBundle:client:blog.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+        return $this->render('MyAppFrontofficeBundle:client:blog.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function faqAction() {
-        return $this->render('MyAppFrontofficeBundle:client:faq.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+        return $this->render('MyAppFrontofficeBundle:client:faq.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function termsAction() {
-        return $this->render('MyAppFrontofficeBundle:client:terms.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+        return $this->render('MyAppFrontofficeBundle:client:terms.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function checkoutAction() {
-        return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+        return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function cartAction() {
-        return $this->render('MyAppFrontofficeBundle:client:cart.html.twig');
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+
+        return $this->render('MyAppFrontofficeBundle:client:cart.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function singleproductAction() {
-        return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+
+        return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
     public function singleproductsidebarAction() {
-        return $this->render('MyAppFrontofficeBundle:client:singleproductsidebar.html.twig');
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+
+
+        return $this->render('MyAppFrontofficeBundle:client:singleproductsidebar.html.twig', array(
+            'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+        ));
     }
 
 }
