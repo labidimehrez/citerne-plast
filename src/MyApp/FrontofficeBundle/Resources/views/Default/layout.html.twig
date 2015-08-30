@@ -331,27 +331,27 @@
         </header>
         <!-- ============================================================= HEADER : END ============================================================= -->		
 
- {% block index%}{% endblock %} 
+ {% block index %}{% endblock %} 
 
 
- {% block authentification%}{% endblock %}
+ {% block authentification %}{% endblock %}
 
 
-{% block about%} {% endblock %}
-{% block contact%} {% endblock %}
-{% block blog%}{% endblock %}
+{% block about %} {% endblock %}
+{% block contact %} {% endblock %}
+{% block blog %}{% endblock %}
 
 
-{% block faq%}{% endblock %}
-{% block terms%}{% endblock %}
+{% block faq %}{% endblock %}
+{% block terms %}{% endblock %}
 
-{% block checkout%}{% endblock %}
+{% block checkout %}{% endblock %}
 
-{% block cart%}{% endblock%}
+{% block cart %}{% endblock%}
 
         
-    {% block singleproduct%}{% endblock%}    
-          {% block singleproductsidebar%}{% endblock%} 
+    {% block singleproduct %}{% endblock%}    
+          {% block singleproductsideba %}{% endblock%} 
         
 
 
@@ -368,13 +368,17 @@
                             <h2>Featured products</h2>
                             <div class="body">
                                 <ul>
+                                  {% for produitStateFeatured in produitStateFeatured %}   
                                     <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
-                                                <a href="single-product.html">Netbook Acer Travel B113-E-10072</a>
+                                              <!--  <a href="single-product.html">Netbook Acer Travel B113-E-10072</a>-->
+                                               <a href="single-product.html">{{produitStateFeatured.nomproduit}}</a>
                                                 <div class="price">
-                                                    <div class="price-prev">$2000</div>
-                                                    <div class="price-current">$1873</div>
+                                                    <!--  <div class="price-prev">$2000</div>-->
+                                                    <div class="price-prev">${{produitStateFeatured.ancienprix}}</div>
+                                                   <!--   <div class="price-current">$1873</div>-->
+                                                   <div class="price-current">${{produitStateFeatured.nouveauprix}}</div>
                                                 </div>
                                             </div>  
 
@@ -387,8 +391,9 @@
                                             </div>
                                         </div>
                                     </li>
-
-                                    <li>
+                                     {%endfor%}
+                                   
+                                 {#   <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
                                                 <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
@@ -423,7 +428,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li>  #}
                                 </ul>
                             </div><!-- /.body -->
                         </div> <!-- /.widget -->
@@ -435,13 +440,18 @@
                             <h2>On-Sale Products</h2>
                             <div class="body">
                                 <ul>
+                                      {% for produitStateOnSale in produitStateOnSale %} 
+                                    
                                     <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
-                                                <a href="single-product.html">HP Scanner 2910P</a>
+                                        <!--        <a href="single-product.html">HP Scanner 2910P</a> -->
+                                        <a href="single-product.html">{{produitStateOnSale.nomproduit}}</a>
                                                 <div class="price">
-                                                    <div class="price-prev">$2000</div>
-                                                    <div class="price-current">$1873</div>
+                                         <!--              <div class="price-prev">$2000</div> -->
+                                                           <div class="price-prev">${{produitStateOnSale.ancienprix}}</div>
+                                          <!--             <div class="price-current">$1873</div> -->
+                                                            <div class="price-current">${{produitStateOnSale.nouveauprix}}</div>
                                                 </div>
                                             </div>  
 
@@ -454,7 +464,9 @@
                                         </div>
 
                                     </li>
-                                    <li>
+                                     {%endfor%}
+                                    
+                                 {#   <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
                                                 <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in - White</a>
@@ -490,7 +502,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li>#}
                                 </ul>
                             </div><!-- /.body -->
                         </div> <!-- /.widget -->
@@ -502,13 +514,17 @@
                             <h2>Top Rated Products</h2>
                             <div class="body">
                                 <ul>
+                                    {% for produitStateTopRated in produitStateTopRated %} 
                                     <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
-                                                <a href="single-product.html">Galaxy Tab GT-P5210, 10" 16GB Wi-Fi</a>
+                                               <!--   <a href="single-product.html">Galaxy Tab GT-P5210, 10" 16GB Wi-Fi</a>  -->
+                                               <a href="single-product.html">{{produitStateTopRated.nomproduit}}</a> 
                                                 <div class="price">
-                                                    <div class="price-prev">$2000</div>
-                                                    <div class="price-current">$1873</div>
+                                                  <!--  <div class="price-prev">$2000</div>  -->
+                                                   <div class="price-prev">${{produitStateTopRated.ancienprix}}</div> 
+                                                   <!--   <div class="price-current">$1873</div> -->
+                                                   <div class="price-current">${{produitStateTopRated.nouveauprix}}</div>
                                                 </div>
                                             </div>  
 
@@ -520,7 +536,8 @@
                                             </div>
                                         </div>
                                     </li>
-
+                                     {%endfor%}
+                        {#
                                     <li>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-9 no-margin">
@@ -558,7 +575,7 @@
                                             </div>
 
                                         </div>
-                                    </li>
+                                    </li>#}
                                 </ul>
                             </div><!-- /.body -->
                         </div><!-- /.widget -->

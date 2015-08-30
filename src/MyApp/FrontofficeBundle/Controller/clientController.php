@@ -9,22 +9,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class clientController extends Controller
-{
-    public function indexAction()
-    {
-        return $this->render('MyAppFrontofficeBundle:client:index.html.twig');
+class clientController extends Controller {
+
+    public function indexAction() {
+        $manager_produit = $this->get('entities');
+
+        $produitStateFeatured = $manager_produit->ProduitByState($manager_produit->OneStateByName('Featured products'));
+        /*var_dump($produitStateFeatured);
+        exit;*/
+
+        $produitStateOnSale = $manager_produit->ProduitByState($manager_produit->OneStateByName('On-Sale Products'));
+        /*var_dump($produitStateOnSale);
+        exit;*/
+
+        $produitStateTopRated = $manager_produit->ProduitByState($manager_produit->OneStateByName('Top Rated Products'));
+        /*var_dump($produitStateTopRated);
+        exit;*/
+
+        return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
+                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated
+                ));
     }
 
-
-    public function authentificationAction(Request $request)
-    {
-        $this->getRequest()->getSession()->clear();//détruire la session ici
+    public function authentificationAction(Request $request) {
+        $this->getRequest()->getSession()->clear(); //dï¿½truire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         /* $form1 = $this->createFormBuilder()
-             ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))
-             ->getForm();*/
+          ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))
+          ->getForm(); */
         $form1 = $this->createForm(new loginType());
         $request = $this->getRequest();
         $form1->bind($request);
@@ -47,13 +60,13 @@ class clientController extends Controller
                 return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
             }
         }
-        /*********************************************************************************************************/
+        /*         * ****************************************************************************************************** */
         /* $form2 = $this->createFormBuilder()
-             ->add('login', 'text',
-                 array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
-             ->add('password', 'password',
-                 array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
-             ->getForm();*/
+          ->add('login', 'text',
+          array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
+          ->add('password', 'password',
+          array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
+          ->getForm(); */
         $form2 = $this->createForm(new registrerType());
         $form2->bind($request);
         if (($form2["login"]->getData() != NULL) && ($form2["password"]->getData() != NULL)) {
@@ -80,55 +93,42 @@ class clientController extends Controller
             }
         }
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
-            'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView()));
+                    'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView()));
     }
 
-
-    public function aboutAction()
-    {
+    public function aboutAction() {
         return $this->render('MyAppFrontofficeBundle:client:about.html.twig');
     }
 
-    public function contactAction()
-    {
+    public function contactAction() {
         return $this->render('MyAppFrontofficeBundle:client:contact.html.twig');
     }
 
-
-    public function blogAction()
-    {
+    public function blogAction() {
         return $this->render('MyAppFrontofficeBundle:client:blog.html.twig');
     }
 
-
-    public function faqAction()
-    {
+    public function faqAction() {
         return $this->render('MyAppFrontofficeBundle:client:faq.html.twig');
     }
 
-    public function termsAction()
-    {
+    public function termsAction() {
         return $this->render('MyAppFrontofficeBundle:client:terms.html.twig');
     }
 
-
-    public function checkoutAction()
-    {
+    public function checkoutAction() {
         return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig');
     }
 
-    public function cartAction()
-    {
+    public function cartAction() {
         return $this->render('MyAppFrontofficeBundle:client:cart.html.twig');
     }
 
-    public function singleproductAction()
-    {
+    public function singleproductAction() {
         return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig');
     }
 
-    public function singleproductsidebarAction()
-    {
+    public function singleproductsidebarAction() {
         return $this->render('MyAppFrontofficeBundle:client:singleproductsidebar.html.twig');
     }
 

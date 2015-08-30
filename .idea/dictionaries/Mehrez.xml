@@ -3,21 +3,31 @@
     <words>
       <w>abcdefghijklmnopqrstuvwxyz</w>
       <w>activer</w>
+      <w>afficher</w>
       <w>ancienprix</w>
       <w>authentification</w>
       <w>authentifsucces</w>
       <w>avant</w>
       <w>backoffice</w>
+      <w>categoryadd</w>
+      <w>categorydelete</w>
+      <w>categoryedit</w>
+      <w>categorys</w>
+      <w>categorysid</w>
       <w>changecolor</w>
       <w>changepassword</w>
       <w>citerne</w>
       <w>cliquer</w>
       <w>collectify</w>
+      <w>commentaireafficher</w>
       <w>compte</w>
+      <w>consectetur</w>
       <w>correspondre</w>
+      <w>datatype</w>
       <w>datecurrentlog</w>
       <w>datelastlog</w>
       <w>datelog</w>
+      <w>deletecategory</w>
       <w>departement</w>
       <w>detailsproduit</w>
       <w>detruire</w>
@@ -28,17 +38,21 @@
       <w>dropdown</w>
       <w>déja</w>
       <w>détruire</w>
+      <w>editcategory</w>
       <w>envoi</w>
       <w>existe</w>
       <w>filtre</w>
       <w>formconnexion</w>
       <w>forminscri</w>
+      <w>fosjsrouting</w>
       <w>frontoffice</w>
       <w>frontofficebundle</w>
       <w>gmail</w>
+      <w>hideifajax</w>
       <w>identifiant</w>
       <w>idtoken</w>
       <w>inexistant</w>
+      <w>inputajoutcommentaire</w>
       <w>inscri</w>
       <w>invalide</w>
       <w>invalides</w>
@@ -75,8 +89,10 @@
       <w>singleproduct</w>
       <w>singleproductsidebar</w>
       <w>smtp</w>
+      <w>srouting</w>
       <w>symfony</w>
       <w>tabpanel</w>
+      <w>templating</w>
       <w>userlog</w>
       <w>usermail</w>
       <w>usermanager</w>

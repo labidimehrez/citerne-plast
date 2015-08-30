@@ -4,6 +4,7 @@ namespace MyApp\BackofficeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use MyApp\BackofficeBundle\Entity\Produit;
 
 class LoadingFixturesMessage implements FixtureInterface
 {

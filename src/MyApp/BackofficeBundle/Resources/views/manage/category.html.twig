@@ -64,16 +64,16 @@
                                                 return false;
                                             });
                                         });
-                                    </script> 
+                                    </script>
 
-                                    <a href="#" class="ico edit{{categorys.id}}">Edit</a>
+                                    <a href="#" class="ico edit"  id="editcategory{{categorysid}}" >Edit</a>
                                     <script type="text/javascript">
                                         $(function () {
-                                            $(".ico edit{{categorys.id}}").click(function (e) { // On sélectionne le formulaire par son identifiant                                                    
-                                                e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire                                                     
+                                            $("#editcategory{{categorysid}}").click(function (e) { // On sélectionne le formulaire par son identifiant
+                                                e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire
                                                 $.ajax({
                                                     type: 'post',
-                                                    url: "{{path('my_app_backoffice_manage_category_edit',{id:categorys.id} ) }}",
+                                                    url: "{{path('my_app_backoffice_manage_category_edit',{id:categorysid} ) }}",
                                                     data: $(this).serialize(),
                                                     datatype: "json",
                                                     cache: false,
@@ -172,7 +172,7 @@
                             cache: false,
                             success: function (data)
                             {
-                                //  $("#form_add_category").reset();
+                                $('#form_add_category')[0].reset();
                                 $(".hideifajax").hide();
                                 $('#category_afficher').html(data);
                                 // $(".inputajoutcommentaire").hide();                              

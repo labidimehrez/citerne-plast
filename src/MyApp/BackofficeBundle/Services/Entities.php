@@ -23,7 +23,7 @@ class Entities {
         $this->repository_state = $em->getRepository('MyAppBackofficeBundle:State');
         $this->repository_departement = $em->getRepository('MyAppBackofficeBundle:Departement');
     }
-
+/*********************************************************************************************************************/
     public function AllMessages() {
         return $this->repository_message->findAll();
     }
@@ -31,7 +31,7 @@ class Entities {
     public function OneMessage($id) {
         return $this->repository_message->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function AllCategorys() {
         return $this->repository_category->findAll();
     }
@@ -39,15 +39,23 @@ class Entities {
     public function OneCategory($id) {
         return $this->repository_category->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function AllProduits() {
         return $this->repository_produit->findAll();
     }
-
+    
+   public function ProduitByState($state) {
+        $ProduitByState= $this->repository_produit->findBy(array('state' => $state));
+        if(count($ProduitByState)>=3){
+            return array( '0' => $ProduitByState[0],'1' =>  $ProduitByState[1],'2' =>  $ProduitByState[2]);          
+        }
+        else{return $ProduitByState;}
+       // return $ProduitByState;
+    }
     public function OneProduit($id) {
         return $this->repository_produit->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function AllDepartements() {
         return $this->repository_departement->findAll();
     }
@@ -55,15 +63,17 @@ class Entities {
     public function OneDepartement($id) {
         return $this->repository_departement->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function AllStates() {
         return $this->repository_state->findAll();
     }
-
+  public function OneStateByName($name) {
+        return $this->repository_state->findOneBy(array('nomState' => $name));
+    }
     public function OneState($id) {
         return $this->repository_state->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function AllUsers() {
         return $this->repository_user->findAll();
     }
@@ -71,7 +81,7 @@ class Entities {
     public function OneUser($id) {
         return $this->repository_user->findOneBy(array('id' => $id));
     }
-
+/*********************************************************************************************************************/
     public function persist($x) {
         $this->doFlush($x);
     }
