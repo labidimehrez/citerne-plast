@@ -43,7 +43,7 @@ my_app_frontoffice_singleproductsidebar:
     defaults: { _controller: MyAppFrontofficeBundle:client:singleproductsidebar }
     
 my_app_frontoffice_singleproduct:
-    path:     /singleproduct
+    path:     /singleproduct/{id}
     defaults: { _controller: MyAppFrontofficeBundle:client:singleproduct }
 
 utilisateur:

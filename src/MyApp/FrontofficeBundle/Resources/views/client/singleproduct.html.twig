@@ -543,7 +543,8 @@
         <div class="star-holder inline">
             <div class="star" data-score="4" style="cursor: pointer; width: 80px;">
                <!--  <img src="assets/images/star-on.png" alt="1" title="bad">-->
-         <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="1" title="bad">      
+         <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="1" title="bad">    
+         
                <!--  <img src="assets/images/star-on.png" alt="2" title="bad">-->
          <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="2" title="poor"> 
          
@@ -556,8 +557,7 @@
          
                          <!--  <img src="assets/images/star-on.png" alt="5" title="bad">-->
          <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="5" title="gorgeous">   
-         
-                
+            
                 <input type="hidden" name="score" value="4">
             </div>
         </div>
@@ -594,7 +594,7 @@
                     <a class="plus" href="#add"></a>
                 </form>
             </div>
-            <a id="addto-cart" href="cart.html" class="le-button huge">add to cart</a>
+            <a id="addto-cart" href="{{path('my_app_frontoffice_cart')}}" class="le-button huge">add to cart</a>
         </div><!-- /.qnt-holder -->
     </div><!-- /.body -->
 
@@ -713,7 +713,7 @@
                             <div class="row no-margin">
                                 <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
                                     <div class="avatar">
-                                        <img alt="avatar" src="assets/images/default-avatar.jpg">
+                                       <img alt="avatar" src="{{ asset('bundles/myappfrontoffice/images/default-avatar.jpg') }}"> 
                                     </div><!-- /.avatar -->
                                 </div><!-- /.col -->
 
@@ -724,7 +724,15 @@
                                                 <a href="#" class="bold">John Smith</a>
                                             </div>
                                             <div class="star-holder inline">
-                                                <div class="star" data-score="4" style="cursor: pointer; width: 80px;"><img src="assets/images/star-on.png" alt="1" title="bad"><img src="assets/images/star-on.png" alt="2" title="poor"><img src="assets/images/star-on.png" alt="3" title="regular"><img src="assets/images/star-on.png" alt="4" title="good"><img src="assets/images/star-off.png" alt="5" title="gorgeous"><input type="hidden" name="score" value="4"></div>
+                                                <div class="star" data-score="4" style="cursor: pointer; width: 80px;">
+                                                 <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="1" title="bad">      
+                                                 <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="2" title="poor"> 
+                                                 <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="3" title="regular"> 
+                                                 <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="4" title="good">      
+                                                 <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="5" title="gorgeous"> 
+         
+                                                    <input type="hidden" name="score" value="4">
+                                                </div>
                                             </div>
                                             <div class="date inline pull-right">
                                                 12.07.2013
@@ -744,7 +752,8 @@
                             <div class="row no-margin">
                                 <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
                                     <div class="avatar">
-                                        <img alt="avatar" src="assets/images/default-avatar.jpg">
+                                   <!--     <img alt="avatar" src="assets/images/default-avatar.jpg">  -->
+                                         <img alt="avatar" src="{{ asset('bundles/myappfrontoffice/images/default-avatar.jpg') }}"> 
                                     </div><!-- /.avatar -->
                                 </div><!-- /.col -->
 
@@ -764,7 +773,8 @@
                                                  <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="4" title="good">      
                                                  <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="5" title="gorgeous"> 
          
-                                                    <input type="hidden" name="score" value="5"></div>
+                                                    <input type="hidden" name="score" value="5">
+                                                </div>
                                             </div>
                                             <div class="date inline pull-right">
                                                 12.07.2013
@@ -784,7 +794,7 @@
                             <div class="row no-margin">
                                 <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
                                     <div class="avatar">
-                                        <img alt="avatar" src="assets/images/default-avatar.jpg">
+                                        <img alt="avatar" src="{{ asset('bundles/myappfrontoffice/images/default-avatar.jpg') }}"> 
                                     </div><!-- /.avatar -->
                                 </div><!-- /.col -->
 
@@ -913,7 +923,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to Cart</a>
+                                 <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -922,12 +932,15 @@
                         </div>
                     </div><!-- /.product-item -->
                 </div></div>
-                        <div class="owl-item" style="width: 195px;"><div class="no-margin carousel-item product-item-holder size-small hover">
+                        <div class="owl-item" style="width: 195px;">
+                            <div class="no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
                         <div class="ribbon blue"><span>new!</span></div> 
                         <div class="image">
                             <img class="" alt="" src="/citerne-plast/web/bundles/myappfrontoffice/images/products/product-12.jpg"> 
                             <!--   <img alt="" src="assets/images/blank.gif" data-echo="assets/images/products/product-12.jpg" />-->  
+                            
+                            
                         </div>
                         <div class="body">
                             <div class="title">
@@ -940,7 +953,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                             <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -949,7 +962,8 @@
                         </div>
                     </div><!-- /.product-item -->
                 </div></div>
-                        <div class="owl-item" style="width: 195px;"><div class=" no-margin carousel-item product-item-holder size-small hover">
+                        <div class="owl-item" style="width: 195px;">
+                            <div class=" no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
 
                         <div class="image">
@@ -967,7 +981,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                              <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -995,7 +1009,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                                <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -1003,7 +1017,8 @@
                             </div>
                         </div>
                     </div><!-- /.product-item -->
-                </div></div><div class="owl-item" style="width: 195px;"><div class=" no-margin carousel-item product-item-holder size-small hover">
+                </div></div><div class="owl-item" style="width: 195px;">
+                    <div class=" no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
                         <div class="ribbon green"><span>bestseller</span></div> 
                         <div class="image">
@@ -1021,7 +1036,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                                 <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -1030,7 +1045,8 @@
                         </div>
                     </div><!-- /.product-item -->
                 </div></div>
-                        <div class="owl-item" style="width: 195px;"><div class=" no-margin carousel-item product-item-holder size-small hover">
+                        <div class="owl-item" style="width: 195px;">
+                            <div class=" no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
 
                         <div class="image">
@@ -1048,7 +1064,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                                  <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -1057,7 +1073,8 @@
                         </div>
                     </div><!-- /.product-item -->
                 </div></div>
-                        <div class="owl-item" style="width: 195px;"><div class=" no-margin carousel-item product-item-holder size-small hover">
+                        <div class="owl-item" style="width: 195px;">
+                            <div class=" no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
 
                         <div class="image">
@@ -1075,7 +1092,8 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                                <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
+                                   
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>
@@ -1084,7 +1102,8 @@
                         </div>
                     </div><!-- /.product-item -->
                 </div></div>
-                        <div class="owl-item" style="width: 195px;"><div class=" no-margin carousel-item product-item-holder size-small hover">
+                        <div class="owl-item" style="width: 195px;">
+                            <div class=" no-margin carousel-item product-item-holder size-small hover">
                     <div class="product-item">
                         <div class="ribbon blue"><span>new!</span></div> 
                         <div class="image">
@@ -1102,7 +1121,7 @@
                         </div>
                         <div class="hover-area">
                             <div class="add-cart-button">
-                                <a class="le-button" href="single-product.html">Add to cart</a>
+                                  <a class="le-button" href="{{path('my_app_frontoffice_cart')}}" >Add to cart</a>
                             </div>
                             <div class="wish-compare">
                                 <a href="#" class="btn-add-to-wishlist">Add to Wishlist</a>

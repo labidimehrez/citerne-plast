@@ -84,7 +84,14 @@ class Produit
      * @ORM\Column(name="detailsproduit", type="string", length=255,nullable=true)
      */
     private $detailsproduit;
-
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255,nullable=true)
+     */
+    private $description;
+    
     /**
      * Get id
      *
@@ -296,6 +303,14 @@ class Produit
     function setMarque($marque) {
         $this->marque = $marque;
     }
+    function getDescription() {
+        return $this->description;
+    }
+
+    function setDescription($description) {
+        $this->description = $description;
+    }
+
 
 
 }

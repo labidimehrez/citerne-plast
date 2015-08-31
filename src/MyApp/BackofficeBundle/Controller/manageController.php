@@ -77,10 +77,10 @@ class manageController extends Controller
         return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
     }
 
-    public function categoryeditAction($id, Request $request)
+   /* public function categoryeditAction($id, Request $request)
     {
         $manager_category = $this->get('entities');
-        /** equivalent de em manager * */
+     
         $form = $this->createFormBuilder($manager_category->OneCategory($id))
             ->add('nom', 'text', array('required' => TRUE))
             ->add('position', 'integer', array('required' => TRUE))
@@ -113,7 +113,7 @@ class manageController extends Controller
         $categorys = $manager_category->AllCategorys();
         return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
 
-    }
+    }*/
 
     public function produitAction()
     {

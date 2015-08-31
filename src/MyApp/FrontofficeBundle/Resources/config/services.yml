@@ -2,3 +2,12 @@ services:
 #    my_app_frontoffice.example:
 #        class: MyApp\FrontofficeBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+services:  
+    panier:
+        class: %panier.manager.class%
+        arguments: [@service_container]
+
+parameters:
+    panier.manager.class: MyApp\FrontofficeBundle\Services\Panier
+
