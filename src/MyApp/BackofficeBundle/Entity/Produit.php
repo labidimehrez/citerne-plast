@@ -70,6 +70,14 @@ class Produit
      * @ORM\Column(name="nomproduit", type="string", length=255,nullable=true)
      */
     private $nomproduit;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marque", type="string", length=255,nullable=true)
+     */
+    private $marque;
+    
     /**
      * @var string
      *
@@ -281,5 +289,13 @@ class Produit
     {
         $this->departement = $departement;
     }
+    function getMarque() {
+        return $this->marque;
+    }
+
+    function setMarque($marque) {
+        $this->marque = $marque;
+    }
+
 
 }

@@ -511,24 +511,39 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="featured">
                     <div class="product-grid-holder">
+                         {% for produitState_Featured in produitState_Featured %} 
                         <div class="col-sm-4 col-md-3  no-margin product-item-holder hover">
                             <div class="product-item">
+                                
+                                {% if 'sale' in  produitState_Featured.detailsproduit  %}
                                 <div class="ribbon red"><span>sale</span></div> 
+                                {% elseif 'new' in  produitState_Featured.detailsproduit %}
+                                <div class="ribbon blue"><span>new!</span></div>    
+                                {% endif %}
+                                
+                                
                                 <div class="image">
                                     <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-01.jpg') }}"  class="banner-image"/> 
                                     <!--   <img alt="" src="assets/images/blank.gif" data-echo="assets/images/products/product-01.jpg" />-->                                   
 
                                 </div>
                                 <div class="body">
-                                    <div class="label-discount green">-50% sale</div>
+                                    {% if 'sale' in  produitState_Featured.detailsproduit  %}
+                                    <div class="label-discount green">{{produitState_Featured.detailsproduit}}</div>
+                                     {% endif %}
+                                     
                                     <div class="title">
-                                        <a href="single-product.html">VAIO Fit Laptop - Windows 8 SVF14322CXW</a>
+                                      <!--  <a href="single-product.html">VAIO Fit Laptop - Windows 8 SVF14322CXW</a>-->
+                                      <a href="single-product.html">{{produitState_Featured.nomproduit}}</a>
                                     </div>
-                                    <div class="brand">sony</div>
+                                      <!-- <div class="brand">sony</div>-->
+                                      <div class="brand">{{produitState_Featured.marque}}</div>
                                 </div>
                                 <div class="prices">
-                                    <div class="price-prev">$1399.00</div>
-                                    <div class="price-current pull-right">$1199.00</div>
+                                    <!--   <div class="price-prev">$1399.00</div>-->
+                                    <div class="price-prev">${{produitState_Featured.ancienprix}}</div>
+                                     <!--  <div class="price-current pull-right">$1199.00</div>-->
+                                     <div class="price-current pull-right">${{produitState_Featured.nouveauprix}}</div>
                                 </div>
 
                                 <div class="hover-area">
@@ -541,7 +556,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
+                         {%endfor%}
+                        {#            
                         <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
                             <div class="product-item">
                                 <div class="ribbon blue"><span>new!</span></div> 
@@ -611,8 +628,8 @@
                                 <div class="body">
                                     <div class="label-discount clear"></div>
                                     <div class="title">
-                                        <a href="single-product.html">Netbook Acer TravelMate 
-                                            B113-E-10072</a>
+                                        <a href="single-product.html">Netbook Acer TravelMate  B113-E-10072</a>
+                                            
                                     </div>
                                     <div class="brand">acer</div>
                                 </div>
@@ -631,6 +648,7 @@
                                 </div>
                             </div>
                         </div>
+                          #}
                     </div>
                     <div class="loadmore-holder text-center">
                         <a class="btn-loadmore" href="#">
