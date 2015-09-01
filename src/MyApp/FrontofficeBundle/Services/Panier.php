@@ -16,13 +16,13 @@ namespace MyApp\FrontofficeBundle\Services;
 use Doctrine\ORM\EntityManager;
 
 class Panier {
-/*
+ 
    protected $items;
    private $total;
    
    public function __construct()
    {
-      parent::__construct();
+//      parent::__construct();
       session_start();
      
       if (!isset($_SESSION['cart'])) 
@@ -81,5 +81,5 @@ class Panier {
    {
       $_SESSION['cart'] = serialize($this->items);
    }
-*/
+ 
 }

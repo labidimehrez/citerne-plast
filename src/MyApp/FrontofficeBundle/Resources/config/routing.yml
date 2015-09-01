@@ -35,7 +35,7 @@ my_app_frontoffice_checkout:
     defaults: { _controller: MyAppFrontofficeBundle:client:checkout }
     
 my_app_frontoffice_cart:
-    path:     /cart
+    path:     /cart/{id}
     defaults: { _controller: MyAppFrontofficeBundle:client:cart }
 
 my_app_frontoffice_singleproductsidebar:

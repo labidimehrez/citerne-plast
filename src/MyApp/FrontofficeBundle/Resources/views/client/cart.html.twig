@@ -366,7 +366,7 @@
     <div class="container">
         <!-- ========================================= CONTENT ========================================= -->
         <div class="col-xs-12 col-md-9 items-holder no-margin">
-            
+            {% for key,value in panier %}
             <div class="row no-margin cart-item">
                 <div class="col-xs-12 col-sm-2 no-margin">
                     <a href="#" class="thumb-holder">
@@ -376,9 +376,17 @@
 
                 <div class="col-xs-12 col-sm-5 ">
                     <div class="title">
-                        <a href="#">white lumia 9001</a>
+                       <!--  <a href="#">white lumia 9001</a>-->
+                        {% for allproduit in allproduit %}
+                       {% if key is defined %}  
+                       {%if key == allproduit.id %}         
+                        
+                     <a href="#">{{allproduit.nomproduit}}</a>
+                        {%endif%} 
+                        {%endif%}
+                        {% endfor %}
                     </div>
-                    <div class="brand">sony</div>
+                 <!--   <div class="brand">sony</div>-->
                 </div> 
 
                 <div class="col-xs-12 col-sm-3 no-margin">
@@ -386,7 +394,7 @@
                         <div class="le-quantity">
                             <form>
                                 <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1">
+                                <input name="quantity" readonly="readonly" type="text" value="{{value}}">
                                 <a class="plus" href="#add"></a>
                             </form>
                         </div>
@@ -394,13 +402,14 @@
                 </div> 
 
                 <div class="col-xs-12 col-sm-2 no-margin">
-                    <div class="price">
-                        $2000.00
-                    </div>
+                    <!-- <div class="price"> $2000.00  </div>-->
+                       <div class="price"> $2000.00  </div>
+                  
                     <a class="close-btn" href="#"></a>
                 </div>
-            </div><!-- /.cart-item -->
-
+            </div> 
+             {% endfor %}
+       {#
             <div class="row no-margin cart-item">
                 <div class="col-xs-12 col-sm-2 no-margin">
                     <a href="#" class="thumb-holder">
@@ -501,7 +510,8 @@
                     </div>
                     <a class="close-btn" href="#"></a>
                 </div>
-            </div><!-- /.cart-item -->
+            </div>
+            #}
         </div>
         <!-- ========================================= CONTENT : END ========================================= -->
 

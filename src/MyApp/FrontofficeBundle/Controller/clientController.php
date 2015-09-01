@@ -24,9 +24,9 @@ class clientController extends Controller {
         $produitState_TopSales = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('Top Sales'));
 
         return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys,
-                    'produitState_Featured' => $produitState_Featured, 'produitState_Newarrivals' => $produitState_Newarrivals, 'produitState_TopSales' => $produitState_TopSales
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys,
+'produitState_Featured' => $produitState_Featured, 'produitState_Newarrivals' => $produitState_Newarrivals, 'produitState_TopSales' => $produitState_TopSales
         ));
     }
 
@@ -99,9 +99,9 @@ class clientController extends Controller {
             }
         }
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
-                    'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView(),
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView(),
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -114,8 +114,8 @@ class clientController extends Controller {
         $allCategorys = $this->get('entities')->AllCategorys();
 
         return $this->render('MyAppFrontofficeBundle:client:about.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -127,8 +127,8 @@ class clientController extends Controller {
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
         return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -140,8 +140,8 @@ class clientController extends Controller {
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
         return $this->render('MyAppFrontofficeBundle:client:blog.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -153,8 +153,8 @@ class clientController extends Controller {
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
         return $this->render('MyAppFrontofficeBundle:client:faq.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -167,8 +167,8 @@ class clientController extends Controller {
         $allCategorys = $this->get('entities')->AllCategorys();
 
         return $this->render('MyAppFrontofficeBundle:client:terms.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
@@ -181,19 +181,26 @@ class clientController extends Controller {
         $allCategorys = $this->get('entities')->AllCategorys();
 
         return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+        'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+        'allCategorys' => $allCategorys
         ));
     }
 
-    public function cartAction(Request $request) {
+    public function cartAction($id) {
+
+
         $manager_produit = $this->get('entities');
+        $allproduit = $this->get('entities')->AllProduits();
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
 
-        $panierSession = $this->get('panier');// objet de la classe service panier //
+        $panierSession = $this->get('panier'); // objet de la classe service panier //
+
+        if ($id != NULL){
+            $panierSession->additem($id);
+        }
 
         $session = new Session();
         if ($session->isStarted() != FALSE) {
@@ -202,15 +209,18 @@ class clientController extends Controller {
         if (count($panierSession) > 0) {
             $session->set('panierSession', $panierSession);
         }
+        
         $panier = $this->getRequest()->getSession()->get('panierSession');
-        // var_dump($session);
-        var_dump($panier);
-        exit;
+        //var_dump($panierSession->viewcart());
+
+        // var_dump($panier); exit;
+       
+
 
 
         return $this->render('MyAppFrontofficeBundle:client:cart.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+    'allCategorys' => $allCategorys,'panier'=>$panier->viewcart() ,'allproduit'=>$allproduit
         ));
     }
 
@@ -225,8 +235,8 @@ class clientController extends Controller {
 
         $singleproduct = $this->get('entities')->OneProduit($id);
         return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct
         ));
     }
 
@@ -239,8 +249,8 @@ class clientController extends Controller {
         $allCategorys = $this->get('entities')->AllCategorys();
 
         return $this->render('MyAppFrontofficeBundle:client:singleproductsidebar.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys
+'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+'allCategorys' => $allCategorys
         ));
     }
 
