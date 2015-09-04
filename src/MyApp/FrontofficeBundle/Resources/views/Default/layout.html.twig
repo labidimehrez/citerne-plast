@@ -246,11 +246,12 @@
                                         <img src="{{ asset('bundles/myappfrontoffice/images/icon-cart.png') }}" alt="" />
                                         <!-- <img src="assets/images/icon-cart.png" alt="" /> -->
                                     </div>
-
+                                        
                                     <div class="total-price-basket"> 
                                         <span class="lbl">your cart:</span>
                                         <span class="total-price">
-                                            <span class="sign">$</span><span class="value">3219,00</span>
+                                          <!--  <span class="sign">$</span><span class="value">3219,00</span>  --->
+                                          <span class="sign">$</span><span class="value">{% if carttotal is not null %}{{carttotal}}{%else%}00{%endif%},00</span> 
                                         </span>
                                     </div>
                                 </a>

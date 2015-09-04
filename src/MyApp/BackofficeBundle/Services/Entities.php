@@ -66,6 +66,10 @@ class Entities {
     public function OneProduit($id) {
         return $this->repository_produit->findOneBy(array('id' => $id));
     }
+    
+        public function PriceByProduit($id) {
+        return $this->repository_produit->findOneBy(array('id' => $id))->getNouveauprix();
+    }
 /*********************************************************************************************************************/
     public function AllDepartements() {
         return $this->repository_departement->findAll();

@@ -547,8 +547,10 @@
                                 </div>
 
                                 <div class="hover-area">
-                                    <div class="add-cart-button">
-                                        <a href="single-product.html" class="le-button">add to cart</a>
+                                    <div class="add-cart-button">                                     
+                                    <!--    <a href="single-product.html" class="le-button">add to cart</a> -->
+                                    <a href="{{path('my_app_frontoffice_singleproduct',{'id':produitState_Featured.id})}}" class="le-button">add to cart</a> 
+                                   
                                     </div>
                                     <div class="wish-compare">
                                         <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
@@ -680,7 +682,7 @@
                                 </div>
                                 <div class="hover-area">
                                     <div class="add-cart-button">
-                                        <a href="single-product.html" class="le-button">add to cart</a>
+                                        <a href="single-product.html" class="le-button">add to cart</a> ->
                                     </div>
                                     <div class="wish-compare">
                                         <a class="btn-add-to-wishlist" href="#">add to wishlist</a>

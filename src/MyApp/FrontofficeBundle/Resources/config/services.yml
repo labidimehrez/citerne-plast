@@ -6,7 +6,7 @@ services:
 services:  
     panier:
         class: %panier.manager.class%
-        arguments: [@service_container]
+        arguments: [@doctrine.orm.entity_manager,@service_container, @router ]
 
 parameters:
     panier.manager.class: MyApp\FrontofficeBundle\Services\Panier
