@@ -64,4 +64,21 @@ message:
 #fos_user_security_logout_client:
 #    path:     /logout
 #    defaults: { _controller: FOSUserBundle:Security:logout }
+
+
+my_app_frontoffice_supprimerdepanier:
+    path:     /supprimerdepanier/{id}
+    defaults: { _controller: MyAppFrontofficeBundle:client:supprimerdepanier }
+
+
+
+
+my_app_frontoffice_addquantity:
+    path:     /addquantity
+    defaults: { _controller: MyAppFrontofficeBundle:client:addquantity }
+
+
     
+my_app_frontoffice_reducequantity:
+    path:     /reducequantity
+    defaults: { _controller: MyAppFrontofficeBundle:client:reducequantity }

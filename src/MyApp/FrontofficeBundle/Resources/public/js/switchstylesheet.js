@@ -1,33 +1,3 @@
-/*--------------------------------------------------------------------
- * Copyright (c) 2009 Vision Master Designs
- * Licensed under GPL (http://www.opensource.org/licenses/gpl-license.php)
-
- * JQuery Plugin : "Switch Stylesheet"
- * Author : Michael (http://www.visionmasterdesigns.com)
- * Version : 1.0
- * Description : Based on the superb stylesheet switcher plugin by By Kelvin Luck ( http://www.kelvinluck.com/ ).
-					Can create multiple groups of alternate stylesheets to change
-				 
-Ex :
-Alternate Stylesheets :
-<!-- alternate css for colors -->
-<link href="green.css" type="text/css" rel="alternate stylesheet" title="green-color" />
-<link href="blue.css" type="text/css" rel="alternate stylesheet" title="blue-color" />
-
-JS Code :
-<script type="text/javascript">
-$(document).ready(function(){ 
-	$(".changecolor").switchstylesheet( { seperator:"color"} );
-});
-</script>
-
-Usage :
-<a href="#" class="changecolor" title="red-color">Red</a> |
-<a href="#" class="changecolor" title="green-color">Green</a> |
-<a href="#" class="changecolor" title="blue-color">Blue</a>
-
-------------------------------------------------------------------------*/
-
 $.fn.switchstylesheet = function(options) {
 
 	//default vals

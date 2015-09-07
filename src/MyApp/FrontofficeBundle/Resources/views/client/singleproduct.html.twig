@@ -599,17 +599,19 @@
                         <div class="price-current">${{singleproduct.nouveauprix}}</div>
                         <div class="price-prev">${{singleproduct.ancienprix}}</div>
                     </div>
+                        <form  action='{{path('my_app_frontoffice_cart',{'id':singleproduct.id})}}' method="post" {{ form_enctype(form) }}  > 
+                                <div class="qnt-holder">
+                                    <div class="le-quantity">
 
-                    <div class="qnt-holder">
-                        <div class="le-quantity">
-                            <form>
-                                <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1">
-                                <a class="plus" href="#add"></a>
-                            </form>
-                        </div> 
-                        <a id="addto-cart" href="{{path('my_app_frontoffice_cart',{'id':singleproduct.id}) }}" class="le-button huge">add to cart</a>
-                    </div><!-- /.qnt-holder -->
+                                        <a class="minus" style="cursor:pointer"></a>
+                                            <input name="quantity"   type="text" value="1">
+                                        <a class="plus" style="cursor:pointer"></a>
+
+                                    </div>
+                                    <button type="submit" value="add to cart" class="le-button huge">add to cart
+                                    </button>
+                                </div>  
+                       </form>
                 </div><!-- /.body -->
 
             </div><!-- /.body-holder -->
@@ -1149,20 +1151,7 @@
                                         </div>
                                     </div><!-- /.product-item -->
                                 </div></div></div></div><!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
-
-                    <!-- /.product-item-holder -->
+ 
                 </div><!-- /#recently-carousel -->
 
             </div><!-- /.carousel-holder -->

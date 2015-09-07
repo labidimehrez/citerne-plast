@@ -4,32 +4,42 @@ namespace MyApp\FrontofficeBundle\Controller;
 
 use MyApp\FrontofficeBundle\Form\loginType;
 use MyApp\FrontofficeBundle\Form\registrerType;
+use MyApp\FrontofficeBundle\Services\Panier;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+
 class clientController extends Controller {
 
     public function indexAction() {
-        $manager_produit = $this->get('entities');
 
+        $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
+        $allproduit = $this->get('entities')->AllProduits();
 
         $produitState_Featured = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('Featured'));
         $produitState_Newarrivals = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('New arrivals'));
         $produitState_TopSales = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('Top Sales'));
 
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
 
+
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+           
+        
         return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
                     'allCategorys' => $allCategorys,
                     'produitState_Featured' => $produitState_Featured, 'produitState_Newarrivals' => $produitState_Newarrivals, 'produitState_TopSales' => $produitState_TopSales,
-                    'carttotal' => $cart_subtotal
+                    'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
@@ -40,17 +50,21 @@ class clientController extends Controller {
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
+        $allproduit = $this->get('entities')->AllProduits();
 
-        $this->getRequest()->getSession()->clear(); //d�truire la session ici
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
-
+        $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //d�truire la session ici
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         /* $form1 = $this->createFormBuilder()
           ->add('email', 'email', array('required' => TRUE, 'attr' => array('placeholder' => 'Put your mail here')))
           ->getForm(); */
         $form1 = $this->createForm(new loginType());
-        $request = $this->getRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
         $form1->bind($request);
         if (($form1["email"]->getData() != NULL)) {
             $EXIST = $manager->getUserByMail($form1["email"]->getData());
@@ -71,13 +85,7 @@ class clientController extends Controller {
                 return $this->redirect($this->generateUrl('my_app_frontoffice_homepage'));
             }
         }
-        /*         * ****************************************************************************************************** */
-        /* $form2 = $this->createFormBuilder()
-          ->add('login', 'text',
-          array('required' => TRUE, 'attr' => array('placeholder' => 'Put your login or mail  here')))
-          ->add('password', 'password',
-          array('required' => TRUE, 'attr' => array('placeholder' => 'Put your password  here')))
-          ->getForm(); */
+
         $form2 = $this->createForm(new registrerType());
         $form2->bind($request);
         if (($form2["login"]->getData() != NULL) && ($form2["password"]->getData() != NULL)) {
@@ -106,96 +114,143 @@ class clientController extends Controller {
         return $this->render('MyAppFrontofficeBundle:client:authentification.html.twig', array(
                     'forminscri' => $form1->createView(), 'formconnexion' => $form2->createView(),
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function aboutAction() {
+    public function aboutAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:about.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function contactAction() {
+    public function contactAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function blogAction() {
+    public function blogAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:blog.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function faqAction() {
+    public function faqAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:faq.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function termsAction() {
+    public function termsAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:terms.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function checkoutAction() {
+    public function checkoutAction(Request $request) {
 
         $manager_produit = $this->get('entities');
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:checkout.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
 
-    public function cartAction($id) {
+    public function cartAction($id, Request $request) {
 
+        $quantity = intval($this->get('request_stack')->getCurrentRequest()->get('quantity'));
+//        var_dump($quantity);
 
         $manager_produit = $this->get('entities');
         $allproduit = $this->get('entities')->AllProduits();
@@ -204,50 +259,78 @@ class clientController extends Controller {
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
 
-        $session = new Session();
-        if ($session->isStarted() != FALSE) {
-            $session->start();
-        }
 
-        $panierSession = $this->get('panier'); // objet de la classe service panier //
-        if (count($panierSession) > 0) {
-            $session->set('panierSession', $panierSession);
-        }
+        $panier = $this->get('panier'); // objet de la classe service panier //
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $session = new Session();
+            if ($session->isStarted() != FALSE) {
+                $session->start();
+            }
 
-        $panier = $this->getRequest()->getSession()->get('panierSession');
-        if ($id != NULL) {
-            $panierSession->additem($id);
-        }
+            $id_Ajouté_panier = array();
+            $cart_subtotal = 0;
 
-        // var_dump($panier->viewcart());exit;
-        $cart_subtotal = 0;
-        foreach ($panier->viewcart() as $id => $qty) {
-            $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
-        }
+            $i = 0;
+            while ($i < $quantity) {
+                if ($id != NULL) {
+                    $panier->additem($id);
+                    array_push($id_Ajouté_panier, $id);
+                }
+                $i++;
+            }
 
-        if (count($panierSession) > 0) {
+
+            foreach ($panier->viewcart() as $id => $qty) {
+                $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
+            }
+
+            $session->set('idajoutépanier', $id_Ajouté_panier);
+            $session->set('panierSession', $panier);
+            $session->set('carttotal', $cart_subtotal);
+        } else {
+            $session = $this->get('request_stack')->getCurrentRequest()->getSession();
+
+
+
+            if ($quantity > 0) {
+                $cart_subtotal = 0;
+            } else {
+                $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+            }
+
+
+            $id_Ajouté_panier = $this->get('request_stack')->getCurrentRequest()->getSession()->get('idajoutépanier');
+            $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+            $panier = $panierSession;
+            if ((!in_array($id, $id_Ajouté_panier)) && ($id != NULL)) {
+                $i = 0;
+                while ($i < $quantity) {
+                    $panierSession->additem($id);
+                    array_push($id_Ajouté_panier, $id);
+                    $i++;
+                }
+            }
+
+
+
+            if ($quantity > 0) {
+                foreach ($panierSession->viewcart() as $id => $qty) {
+                    $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
+                }
+            }
+
+
+
+            $session->set('idajoutépanier', $id_Ajouté_panier);
+            $session->set('panierSession', $panier);
             $session->set('carttotal', $cart_subtotal);
         }
+
 
         return $this->render('MyAppFrontofficeBundle:client:cart.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
                     'allCategorys' => $allCategorys, 'panier' => $panier->viewcart(), 'allproduit' => $allproduit, 'carttotal' => $cart_subtotal
-        ));
-    }
-
-    public function singleproductAction($id) {
-
-        $manager_produit = $this->get('entities');
-        $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
-        $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
-        $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-        $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
-
-        $singleproduct = $this->get('entities')->OneProduit($id);
-        return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct, 'carttotal' => $cart_subtotal
         ));
     }
 
@@ -258,11 +341,67 @@ class clientController extends Controller {
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $allCategorys = $this->get('entities')->AllCategorys();
-        $cart_subtotal = $this->getRequest()->getSession()->get('carttotal');
+        $allproduit = $this->get('entities')->AllProduits();
+
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if (!$panierSession instanceof Panier) {
+            $panierSession = $this->get('panier');
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:singleproductsidebar.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal
+                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
+
+    public function singleproductAction($id, Request $request) {
+
+        $manager_produit = $this->get('entities');
+        $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
+        $allCategorys = $this->get('entities')->AllCategorys();
+        $allproduit = $this->get('entities')->AllProduits();
+
+        $singleproduct = $this->get('entities')->OneProduit($id);
+        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+        if ($cart_subtotal == NULL) {
+            $cart_subtotal = 0;
+        }
+
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        if ($panierSession == NULL) {
+            $panierSession = $this->get('panier');
+        }
+
+        $form = $this->createFormBuilder()
+                ->add('quantity', 'text')
+                ->getForm();
+
+        return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
+                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+                    'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct, 'carttotal' => $cart_subtotal,
+                    'form' => $form->createView(), 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
+        ));
+    }
+
+
+    public function supprimerdepanierAction($id, Request $request)
+    {
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        $id = intval($id);
+        if ($request->isXmlHttpRequest()) {
+            /*
+             *           var_dump($id);
+
+                     unset($panierSession->viewcart[$id]);
+                      var_dump($panierSession->viewcart());
+                      var_dump($panierSession);
+          */
+            exit;
+        }
+    }
+
 
 }

@@ -30,7 +30,7 @@ class manageController extends Controller
         /** equivalent de em manager * */
         $category = new Category();
         $form = $this->createForm(new CategoryType, $category);
-        $request = $this->getRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->isXmlHttpRequest()) {
             $form->handleRequest($request);

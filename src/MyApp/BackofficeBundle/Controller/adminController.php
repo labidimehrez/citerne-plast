@@ -16,7 +16,7 @@ class adminController extends Controller {
 
 
     public function indexAction(Request $request) {
-        $userSession = $this->getRequest()->getSession()->get('user');
+        $userSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('user');
         if ((!empty($userSession))) {
             if ($userSession->getPrivilege() === 'ADMIN') {
                 return $this->render('MyAppBackofficeBundle:admin:index.html.twig');
@@ -31,16 +31,16 @@ class adminController extends Controller {
     }
 
     public function loginAction(Request $request) {
-        $this->getRequest()->getSession()->clear(); //détruire la session ici
+        $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
         $form = $this->createForm(new loginType());
-        $identifiant = $this->getRequest()->get('identifiant');
-        $password = sha1(md5($this->getRequest()->get('password')));
+        $identifiant = $this->get('request_stack')->getCurrentRequest()->get('identifiant');
+        $password = sha1(md5($this->get('request_stack')->getCurrentRequest()->get('password')));
         $manager = $this->get('collectify_security_manager');
         $authentifsucces = $manager->login($identifiant, $password);
         $user = $manager->getUserByPassword($password);
         if (($identifiant != NULL) && ($password != NULL)) {
             if ($authentifsucces == 'LOCKED') {
-                $this->getRequest()->getSession()->clear(); //détruire la session ici
+                $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
                 $this->get('session')->getFlashBag()->set('message', 'Not Activated Count');
             }
             if (($authentifsucces == 'TRUE') && ($user != NULL)) {
@@ -52,7 +52,7 @@ class adminController extends Controller {
                 return $this->redirect($this->generateUrl('my_app_backoffice_homepage'));
             }
             if ($authentifsucces == 'FALSE') {
-                $this->getRequest()->getSession()->clear(); //détruire la session ici
+                $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
                 $this->get('session')->getFlashBag()->set('message', 'Invalid login/password combination');
                 return $this->render('MyAppBackofficeBundle:admin:login.html.twig', array(
                             'form' => $form->createView()
@@ -65,19 +65,19 @@ class adminController extends Controller {
     }
 
     public function logoutAction(Request $request) {
-        $this->getRequest()->getSession()->clear(); //détruire la session ici
+        $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
         return $this->redirect($this->generateUrl('my_app_backoffice_login'));
     }
 
     public function registerAction(Request $request) {
 
-        $this->getRequest()->getSession()->clear(); //détruire la session ici
+        $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
 
         $user = new Utilisateur();
         $form = $this->createForm(new registrerType());
-        $request = $this->getRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
         $form->bind($request);
         $OK = FALSE;
         $Valid = $this->get('Valid');
@@ -109,7 +109,7 @@ class adminController extends Controller {
     }
 
     public function changepasswordAction(Request $request) {
-        $this->getRequest()->getSession()->clear(); //détruire la session ici
+        $this->get('request_stack')->getCurrentRequest()->getSession()->clear(); //détruire la session ici
         $manager = $this->get('collectify_security_manager');
         $managermail = $this->get('collectify_mail_manager');
         $em = $this->getDoctrine()->getManager();
@@ -117,7 +117,7 @@ class adminController extends Controller {
         $form = $this->createFormBuilder()
                 ->add('email', 'email', array('required' => TRUE))
                 ->getForm();
-        $email = $this->getRequest()->get('email');
+        $email = $this->get('request_stack')->getCurrentRequest()->get('email');
         $users = $manager->getUserByMail($email);
         /* var_dump($email);var_dump($users[0]);exit; */
         if ($email != NULL) {

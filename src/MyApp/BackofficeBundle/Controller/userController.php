@@ -57,7 +57,7 @@ class userController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
         $form = $this->createForm(new UtilisateurType, $user);
-        $request = $this->getRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
         if ($request->isMethod('Post')) {
             $form->bind($request);
             if ($form->isValid()) {

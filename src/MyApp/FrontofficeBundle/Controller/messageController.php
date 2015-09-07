@@ -16,7 +16,7 @@ class  messageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $message = new Message();
         $form = $this->createForm(new MessageType, $message);
-        $request = $this->getRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
         if ($request->isMethod('Post')) {
             $form->bind($request);
 
