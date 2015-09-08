@@ -4,11 +4,14 @@
       <w>abcdefghijklmnopqrstuvwxyz</w>
       <w>activer</w>
       <w>afficher</w>
+      <w>ajouté</w>
+      <w>allproduit</w>
       <w>ancienprix</w>
       <w>authentification</w>
       <w>authentifsucces</w>
       <w>avant</w>
       <w>backoffice</w>
+      <w>carttotal</w>
       <w>categoryadd</w>
       <w>categorydelete</w>
       <w>categoryedit</w>
@@ -49,7 +52,9 @@
       <w>frontofficebundle</w>
       <w>gmail</w>
       <w>hideifajax</w>
+      <w>idajoutépanier</w>
       <w>identifiant</w>
+      <w>idproduitpanier</w>
       <w>idtoken</w>
       <w>inexistant</w>
       <w>inputajoutcommentaire</w>
@@ -77,9 +82,11 @@
       <w>nouveauprix</w>
       <w>nullable</w>
       <w>onkeypress</w>
+      <w>panier</w>
       <w>persistclient</w>
       <w>plast</w>
       <w>produit</w>
+      <w>produitdanspanier</w>
       <w>produits</w>
       <w>projectui</w>
       <w>registrer</w>
@@ -90,6 +97,7 @@
       <w>singleproductsidebar</w>
       <w>smtp</w>
       <w>srouting</w>
+      <w>supprimerdepanier</w>
       <w>symfony</w>
       <w>tabpanel</w>
       <w>templating</w>
