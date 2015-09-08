@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-
 class clientController extends Controller {
 
     public function indexAction() {
@@ -33,8 +32,8 @@ class clientController extends Controller {
         if (!$panierSession instanceof Panier) {
             $panierSession = $this->get('panier');
         }
-           
-        
+
+
         return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
                     'allCategorys' => $allCategorys,
@@ -386,22 +385,24 @@ class clientController extends Controller {
         ));
     }
 
-
-    public function supprimerdepanierAction($id, Request $request)
-    {
+    public function supprimerdepanierAction($id, Request $request) {
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
+        var_dump($id);
         if ($request->isXmlHttpRequest()) {
-            /*
-             *           var_dump($id);
+            $panierSession->delmoreitem($id);
+            var_dump($panierSession);
+            $session->set('panierSession', $panierSession);
 
-                     unset($panierSession->viewcart[$id]);
-                      var_dump($panierSession->viewcart());
-                      var_dump($panierSession);
-          */
+            $cart_subtotal = 0;
+            foreach ($panierSession->viewcart() as $id => $qty) {
+                $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
+            }
+            $session->set('carttotal', $cart_subtotal);
+
             exit;
         }
     }
-
 
 }
