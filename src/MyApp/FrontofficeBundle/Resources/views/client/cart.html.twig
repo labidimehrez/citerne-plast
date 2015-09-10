@@ -2,9 +2,9 @@
 {% extends 'MyAppFrontofficeBundle:Default:layout.html.twig' %}
 
 {% block cart %}
-    <script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>
 
-    <style type="text/css">  #top-megamenu-nav {margin: 0 0 0; position: relative; }</style> 
+<script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>
+<style type="text/css">  #top-megamenu-nav {margin: 0 0 0; position: relative; }</style> 
        
             
            
@@ -412,11 +412,11 @@
 
 
                             <div class="price"> ${{ allproduit.nouveauprix }}  </div>
-                            <a class="close-btn" id="{{ allproduit.id }}"></a>
+                            <a class="close-btn" id="close-btn{{allproduit.id}}"></a>
 
                             <script type="text/javascript">
                                 $(function () {
-                                    $("#{{allproduit.id}}").click(function (e) {
+                                    $("#close-btn{{allproduit.id}}").click(function (e) {
                                         $.ajax({
                                             type: 'post',
                                             url: "{{path('my_app_frontoffice_supprimerdepanier',{id:allproduit.id} ) }}",
@@ -424,7 +424,7 @@
                                             datatype: "json",
                                             cache: false,
                                             success: function (data) {
-                                                $('div#{{allproduit.id}}').hide();//$('#category_afficher').html(data); //$('.hideifajax').hide();                                             
+                                                $('div#{{allproduit.id}}').hide();                                          
                                               //  $('div#NOTajax').hide();
                                                 $('a#classdropdown-toggle').html(data);
                                                 $('div.widget cart-summary').html(data);

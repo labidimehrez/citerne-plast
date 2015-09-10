@@ -11,20 +11,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response; 
-
+use Symfony\Component\HttpFoundation\Response;
 
 class clientController extends Controller {
 
     public function indexAction() {
 
         $manager_produit = $this->get('entities');
-        $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
-        $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
-        $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
+
         $allCategorys = $this->get('entities')->AllCategorys();
         $allproduit = $this->get('entities')->AllProduits();
 
+        $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
+        $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
+        $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
         $produitState_Featured = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('Featured'));
         $produitState_Newarrivals = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('New arrivals'));
         $produitState_TopSales = $manager_produit->ProduitByStateFourMax($manager_produit->OneStateByName('Top Sales'));
@@ -253,9 +253,8 @@ class clientController extends Controller {
     public function cartAction($id, Request $request) {
 
         $quantity = intval($this->get('request_stack')->getCurrentRequest()->get('quantity'));
-//        var_dump($quantity);
-
         $manager_produit = $this->get('entities');
+        
         $allproduit = $this->get('entities')->AllProduits();
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
@@ -270,10 +269,8 @@ class clientController extends Controller {
             if ($session->isStarted() != FALSE) {
                 $session->start();
             }
-
             $id_Ajouté_panier = array();
             $cart_subtotal = 0;
-
             $i = 0;
             while ($i < $quantity) {
                 if ($id != NULL) {
@@ -282,27 +279,20 @@ class clientController extends Controller {
                 }
                 $i++;
             }
-
-
             foreach ($panier->viewcart() as $id => $qty) {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
-
             $session->set('idajoutépanier', $id_Ajouté_panier);
             $session->set('panierSession', $panier);
             $session->set('carttotal', $cart_subtotal);
-        } else {
+        }
+        else {
             $session = $this->get('request_stack')->getCurrentRequest()->getSession();
-
-
-
             if ($quantity > 0) {
                 $cart_subtotal = 0;
             } else {
                 $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
             }
-
-
             $id_Ajouté_panier = $this->get('request_stack')->getCurrentRequest()->getSession()->get('idajoutépanier');
             $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
             $panier = $panierSession;
@@ -314,17 +304,11 @@ class clientController extends Controller {
                     $i++;
                 }
             }
-
-
-
             if ($quantity > 0) {
                 foreach ($panierSession->viewcart() as $id => $qty) {
                     $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
                 }
             }
-
-
-
             $session->set('idajoutépanier', $id_Ajouté_panier);
             $session->set('panierSession', $panier);
             $session->set('carttotal', $cart_subtotal);
@@ -393,23 +377,17 @@ class clientController extends Controller {
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
-       // var_dump($id);
         if ($request->isXmlHttpRequest()) {
             $panierSession->delmoreitem($id);
-        //    var_dump($panierSession);
             $session->set('panierSession', $panierSession);
-
             $cart_subtotal = 0;
             foreach ($panierSession->viewcart() as $id => $qty) {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
             $session->set('carttotal', $cart_subtotal);
-//            var_dump($panierSession);
-//            var_dump($cart_subtotal);
-//            exit; 
-              return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:cartajax.html.twig' , array(
-                              'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
-                      ));
+            return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:cartajax.html.twig', array(
+                        'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
+            ));
         }
     }
 
