@@ -9,6 +9,10 @@ use MyApp\UtilisateurBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response; 
+
 
 class clientController extends Controller {
 
@@ -389,10 +393,10 @@ class clientController extends Controller {
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
-        var_dump($id);
+       // var_dump($id);
         if ($request->isXmlHttpRequest()) {
             $panierSession->delmoreitem($id);
-            var_dump($panierSession);
+        //    var_dump($panierSession);
             $session->set('panierSession', $panierSession);
 
             $cart_subtotal = 0;
@@ -400,8 +404,12 @@ class clientController extends Controller {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
             $session->set('carttotal', $cart_subtotal);
-
-            exit;
+//            var_dump($panierSession);
+//            var_dump($cart_subtotal);
+//            exit; 
+              return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:cartajax.html.twig' , array(
+                              'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
+                      ));
         }
     }
 

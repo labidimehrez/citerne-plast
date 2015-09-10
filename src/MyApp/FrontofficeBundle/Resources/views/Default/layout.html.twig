@@ -240,7 +240,12 @@
 
                                 <div class="basket">
 
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {#<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="classdropdown-toggle" >
+                                          {% include 'MyAppFrontofficeBundle:client/cart:cartajax.html.twig'%}
+                                    </a>#}
+                                    {################################################################# #}
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="classdropdown-toggle">
+         
                                         <div class="basket-item-count">
                                            <!-- <span class="count">3</span> -->
                                            <span class="count">{{panier|length}}</span> 
@@ -255,8 +260,9 @@
                                                 <span class="sign">$</span><span class="value">{% if carttotal is not null %}{{carttotal}}{%else%}00{%endif%},00</span> 
                                             </span>
                                         </div>
+                                           
                                     </a>
-
+                                    {################################################################# #}  
                                     <ul class="dropdown-menu">
 
                                         {% for key,value in panier %}   
@@ -287,44 +293,7 @@
                                             {% endfor %}
                                         {% endfor %}
 
-                                        {#{dump(panier)}#}
-                                        {#
-                                        <li>
-                                            <div class="basket-item">
-                                                <div class="row">
-                                                    <div class="col-xs-4 col-sm-4 no-margin text-center">
-                                                        <div class="thumb">
-                                                            <img src="{{ asset('bundles/myappfrontoffice/images/products/product-small-01.jpg') }}" alt="" />
-                                                            <!--    <img alt="" src="assets/images/products/product-small-01.jpg" />-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-8 col-sm-8 no-margin">
-                                                        <div class="title">Blueberry</div>
-                                                        <div class="price">$270.00</div>
-                                                    </div>
-                                                </div>
-                                                <a class="close-btn" href="#"></a>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="basket-item">
-                                                <div class="row">
-                                                    <div class="col-xs-4 col-sm-4 no-margin text-center">
-                                                        <div class="thumb">
-                                                            <img src="{{ asset('bundles/myappfrontoffice/images/products/product-small-01.jpg') }}" alt="" />
-                                                            <!--    <img alt="" src="assets/images/products/product-small-01.jpg" />-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-8 col-sm-8 no-margin">
-                                                        <div class="title">Blueberry</div>
-                                                        <div class="price">$270.00</div>
-                                                    </div>
-                                                </div>
-                                                <a class="close-btn" href="#"></a>
-                                            </div>
-                                        </li> #}
-
+                                     
 
                                         <li class="checkout">
                                             <div class="basket-item">
@@ -341,8 +310,8 @@
 
                                     </ul>
                                 </div><!-- /.basket -->
-                            </div><!-- /.top-cart-holder -->
-                        </div><!-- /.top-cart-row-container -->
+                            </div> 
+                        </div> 
                         <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->		</div><!-- /.top-cart-row -->
 
                 </div><!-- /.container -->
@@ -408,43 +377,7 @@
                                     </div>
                                 </li>
                             {%endfor%}
-
-                            {#   <li>
-                                   <div class="row">
-                                       <div class="col-xs-12 col-sm-9 no-margin">
-                                           <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                           <div class="price">
-                                               <div class="price-prev">$2000</div>
-                                               <div class="price-current">$1873</div>
-                                           </div>
-                                       </div>
-                                       <div class="col-xs-12 col-sm-3 no-margin">
-                                           <a href="#" class="thumb-holder">
-                                               <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-02.jpg') }}" />
-                                               <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-02.jpg') }}" />-->
-                                           </a>
-                                       </div>
-                                   </div>
-                               </li>
-
-                               <li>
-                                   <div class="row">                        
-                                       <div class="col-xs-12 col-sm-9 no-margin">
-                                           <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                           <div class="price">
-                                               <div class="price-prev">$2000</div>
-                                               <div class="price-current">$1873</div>
-                                           </div>
-                                       </div>  
-
-                                       <div class="col-xs-12 col-sm-3 no-margin">
-                                           <a href="#" class="thumb-holder">
-                                               <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-03.jpg') }}" />
-                                               <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-03.jpg') }}" />-->
-                                           </a>
-                                       </div>
-                                   </div>
-                               </li>  #}
+ 
                         </ul>
                     </div><!-- /.body -->
                 </div> <!-- /.widget -->
@@ -481,44 +414,7 @@
 
                                 </li>
                             {%endfor%}
-
-                            {#   <li>
-                                   <div class="row">
-                                       <div class="col-xs-12 col-sm-9 no-margin">
-                                           <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in - White</a>
-                                           <div class="price">
-                                               <div class="price-prev">$2000</div>
-                                               <div class="price-current">$1873</div>
-                                           </div>
-                                       </div>  
-
-                                       <div class="col-xs-12 col-sm-3 no-margin">
-                                           <a href="#" class="thumb-holder">
-                                               <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-05.jpg') }}" />
-                                               <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-05.jpg') }}" />-->
-                                           </a>
-                                       </div>
-                                   </div>
-                               </li>
-
-                               <li>
-                                   <div class="row">
-                                       <div class="col-xs-12 col-sm-9 no-margin">
-                                           <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                           <div class="price">
-                                               <div class="price-prev">$2000</div>
-                                               <div class="price-current">$1873</div>
-                                           </div>
-                                       </div>  
-
-                                       <div class="col-xs-12 col-sm-3 no-margin">
-                                           <a href="#" class="thumb-holder">
-                                               <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-06.jpg') }}" />
-                                               <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-06.jpg') }}" />-->
-                                           </a>
-                                       </div>
-                                   </div>
-                               </li>#}
+ 
                         </ul>
                     </div><!-- /.body -->
                 </div> <!-- /.widget -->
@@ -554,45 +450,7 @@
                                     </div>
                                 </li>
                             {%endfor%}
-                            {#
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-9 no-margin">
-                                                    <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                                    <div class="price">
-                                                        <div class="price-prev">$2000</div>
-                                                        <div class="price-current">$1873</div>
-                                                    </div>
-                                                </div>  
-    
-                                                <div class="col-xs-12 col-sm-3 no-margin">
-                                                    <a href="#" class="thumb-holder">
-                                                        <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-08.jpg') }}" />
-                                                        <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-08.jpg') }}" />-->
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </li>
-    
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-9 no-margin">
-                                                    <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark Titanium</a>
-                                                    <div class="price">
-                                                        <div class="price-prev">$2000</div>
-                                                        <div class="price-current">$1873</div>
-                                                    </div>
-                                                </div>  
-    
-                                                <div class="col-xs-12 col-sm-3 no-margin">
-                                                    <a href="#" class="thumb-holder">
-                                                        <img src="{{ asset('bundles/myappfrontoffice/images/blank.gif') }}" alt="" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-09.jpg') }}" />
-                                                        <!--          <img alt="" src="assets/images/blank.gif" data-echo="{{ asset('bundles/myappfrontoffice/images/products/product-small-09.jpg') }}" />-->
-                                                    </a>
-                                                </div>
-    
-                                            </div>
-                                        </li>#}
+                         
                         </ul>
                     </div><!-- /.body -->
                 </div><!-- /.widget -->
@@ -865,4 +723,12 @@
 <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript" ></script>
 
 </body>
+
+
+  <!-- pour les ajax call FOSJSrouting Bundle -->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <!-- pour les ajax call FOSJSrouting Bundle -->
+    
+    
 </html> 
