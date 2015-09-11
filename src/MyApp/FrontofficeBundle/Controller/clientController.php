@@ -324,11 +324,13 @@ class clientController extends Controller {
     public function singleproductsidebarAction() {
 
         $manager_produit = $this->get('entities');
+            $allCategorys = $this->get('entities')->AllCategorys();
+        $allproduit = $this->get('entities')->AllProduits();
+        
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-        $allCategorys = $this->get('entities')->AllCategorys();
-        $allproduit = $this->get('entities')->AllProduits();
+    
 
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
@@ -345,12 +347,13 @@ class clientController extends Controller {
     public function singleproductAction($id, Request $request) {
 
         $manager_produit = $this->get('entities');
+         $allCategorys = $this->get('entities')->AllCategorys();
+        $allproduit = $this->get('entities')->AllProduits();
+        
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-        $allCategorys = $this->get('entities')->AllCategorys();
-        $allproduit = $this->get('entities')->AllProduits();
-
+       
         $singleproduct = $this->get('entities')->OneProduit($id);
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         if ($cart_subtotal == NULL) {
@@ -374,6 +377,7 @@ class clientController extends Controller {
     }
 
     public function supprimerdepanierAction($id, Request $request) {
+        
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
@@ -384,11 +388,34 @@ class clientController extends Controller {
             foreach ($panierSession->viewcart() as $id => $qty) {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
+ 
             $session->set('carttotal', $cart_subtotal);
             return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:cartajax.html.twig', array(
                         'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
             ));
         }
     }
+    
+        public function supprimerdeshoppingcartAction($id, Request $request) {
+        
+        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+        $session = $this->get('request_stack')->getCurrentRequest()->getSession();
+        $id = intval($id);
+        if ($request->isXmlHttpRequest()) {
+            $panierSession->delmoreitem($id);
+            $session->set('panierSession', $panierSession);
+            $cart_subtotal = 0;
+            foreach ($panierSession->viewcart() as $id => $qty) {
+                $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
+            }
+        
+            $session->set('carttotal', $cart_subtotal);
+            return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:shoppingcart.html.twig', array(
+                        'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
+            ));
+        }
+    }
+    
+    
 
 }

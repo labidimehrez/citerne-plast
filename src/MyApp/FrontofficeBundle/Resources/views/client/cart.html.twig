@@ -3,13 +3,13 @@
 
 {% block cart %}
 
-<script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>
-<style type="text/css">  #top-megamenu-nav {margin: 0 0 0; position: relative; }</style> 
-       
-            
-           
-       
-      
+    <script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>
+    <style type="text/css">  #top-megamenu-nav {margin: 0 0 0; position: relative; }</style> 
+
+
+
+
+
 
     <nav id="top-megamenu-nav" class="megamenu-vertical animate-dropdown">
         <div class="container">
@@ -372,76 +372,90 @@
                 {% for allproduit in allproduit %} {% for key,value in panier %}  {% if key is defined  and key == allproduit.id %}
 
 
-                    <div class="row no-margin cart-item" id="{{ allproduit.id }}">
+                            <div class="row no-margin cart-item" id="{{ allproduit.id }}">
 
-                        <div class="col-xs-12 col-sm-2 no-margin">
-                            <a href="#" class="thumb-holder">
-                                <img class="lazy" alt="" src="http://placehold.it/73x73">
-                            </a>
-                        </div>
+                                <div class="col-xs-12 col-sm-2 no-margin">
+                                    <a href="#" class="thumb-holder">
+                                        <img class="lazy" alt="" src="http://placehold.it/73x73">
+                                    </a>
+                                </div>
 
-                        <div class="col-xs-12 col-sm-5 ">
-                            <div class="title">
-                                <!--  <a href="#">white lumia 9001</a>-->
-                                <a href="#">{{ allproduit.nomproduit }}</a>
+                                <div class="col-xs-12 col-sm-5 ">
+                                    <div class="title">
+                                        <!--  <a href="#">white lumia 9001</a>-->
+                                        <a href="#">{{ allproduit.nomproduit }}</a>
 
-                            </div>
-                            <!--   <div class="brand">sony</div>-->
-                        </div> 
+                                    </div>
+                                    <!--   <div class="brand">sony</div>-->
+                                </div> 
 
-                        <div class="col-xs-12 col-sm-3 no-margin">
-                            <div class="quantity">
-                                <div class="le-quantity">
-                                    <form>
-                                        <a class="minus" style="cursor:pointer"></a>
-                                        <script type="text/javascript">
+                                <div class="col-xs-12 col-sm-3 no-margin">
+                                    <div class="quantity">
+                                        <div class="le-quantity">
+                                            <form>
+                                                <a class="minus" style="cursor:pointer"></a>
+                                                <script type="text/javascript">
 
-                                        </script>
-                                        <input name="quantity" readonly="readonly" type="text" value="{{value}}">
-                                        <a class="plus" style="cursor:pointer"></a>
-                                        <script type="text/javascript">
+                                                </script>
+                                                <input name="quantity" readonly="readonly" type="text" value="{{value}}">
+                                                <a class="plus" style="cursor:pointer"></a>
+                                                <script type="text/javascript">
 
-                                        </script>
-                                    </form>
+                                                </script>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="col-xs-12 col-sm-2 no-margin">
+                                    <!-- <div class="price"> $2000.00  </div>-->
+
+
+                                    <div class="price"> ${{ allproduit.nouveauprix }}  </div>
+                                    <a class="close-btn" id="close-btn{{allproduit.id}}"></a>
+
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $("#close-btn{{allproduit.id}}").click(function (e) {
+                                                /**************************************************************************** ***/
+                                                $.ajax({
+                                                    type: 'post',
+                                                    url: "{{path('my_app_frontoffice_supprimerdepanier',{id:allproduit.id} ) }}",
+                                                    data: $(this).serialize(),
+                                                    datatype: "json",
+                                                    cache: false,
+                                                    success: function (data) {
+                                                        $('div#{{allproduit.id}}').hide();
+                                                        $('a#classdropdown-toggle').html(data);
+                                                    }
+                                                });
+                                                //          return false;
+                                                /******************************************************************************* */
+                                                $.ajax({
+                                                    type: 'post',
+                                                    url: "{{path('my_app_frontoffice_supprimerdeshoppingcart',{id:allproduit.id} ) }}",
+                                                    data: $(this).serialize(),
+                                                    datatype: "json",
+                                                    cache: false,
+                                                    success: function (data) {
+                                                        $('div#{{allproduit.id}}').hide();
+                                                        $('div.body').html(data);
+                                                    }
+                                                });
+                                                //       return false;                                                        
+                                                /******************************************************************************* *****/
+                                            }
+                                            );
+                                        });
+                                    </script>
+
+
                                 </div>
                             </div>
-                        </div> 
-
-                        <div class="col-xs-12 col-sm-2 no-margin">
-                            <!-- <div class="price"> $2000.00  </div>-->
 
 
-                            <div class="price"> ${{ allproduit.nouveauprix }}  </div>
-                            <a class="close-btn" id="close-btn{{allproduit.id}}"></a>
-
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#close-btn{{allproduit.id}}").click(function (e) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: "{{path('my_app_frontoffice_supprimerdepanier',{id:allproduit.id} ) }}",
-                                            data: $(this).serialize(),
-                                            datatype: "json",
-                                            cache: false,
-                                            success: function (data) {
-                                                $('div#{{allproduit.id}}').hide();                                          
-                                              //  $('div#NOTajax').hide();
-                                                $('a#classdropdown-toggle').html(data);
-                                                $('div.widget cart-summary').html(data);
-                                            }
-                                        });
-                                        return false;
-                                    });
-                                });
-                            </script>
-
-
-                        </div>
-                    </div>
-
-
-                {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
 
             </div>
@@ -500,6 +514,6 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <!-- pour les ajax call FOSJSrouting Bundle -->
-    
-    
+
+
 {% endblock %}

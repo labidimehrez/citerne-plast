@@ -69,16 +69,20 @@ message:
 my_app_frontoffice_supprimerdepanier:
     path:     /supprimerdepanier/{id}
     defaults: { _controller: MyAppFrontofficeBundle:client:supprimerdepanier }
-
-
-
-
-my_app_frontoffice_addquantity:
-    path:     /addquantity
-    defaults: { _controller: MyAppFrontofficeBundle:client:addquantity }
-
-
     
-my_app_frontoffice_reducequantity:
-    path:     /reducequantity
-    defaults: { _controller: MyAppFrontofficeBundle:client:reducequantity }
+my_app_frontoffice_supprimerdeshoppingcart:
+    path:     /supprimerdeshoppingcart/{id}
+    defaults: { _controller: MyAppFrontofficeBundle:client:supprimerdeshoppingcart }
+
+
+
+
+#my_app_frontoffice_addquantity:
+#    path:     /addquantity
+#    defaults: { _controller: MyAppFrontofficeBundle:client:addquantity }
+#
+#
+#    
+#my_app_frontoffice_reducequantity:
+#    path:     /reducequantity
+#    defaults: { _controller: MyAppFrontofficeBundle:client:reducequantity }
