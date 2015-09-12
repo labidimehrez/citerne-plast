@@ -269,8 +269,8 @@
                                             {% for allproduit in allproduit %}
                                                 {% if key is defined %}  
                                                     {%if key == allproduit.id %}     
-                                                        <li>
-                                                            <div class="basket-item">
+                                                        <li id="basket-item{{allproduit.id}}">
+                                                            <div class="basket-item" >
                                                                 <div class="row">
                                                                     <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                                         <div class="thumb">

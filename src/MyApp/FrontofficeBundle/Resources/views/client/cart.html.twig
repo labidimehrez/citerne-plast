@@ -406,11 +406,8 @@
                                         </div>
                                     </div>
                                 </div> 
-
                                 <div class="col-xs-12 col-sm-2 no-margin">
                                     <!-- <div class="price"> $2000.00  </div>-->
-
-
                                     <div class="price"> ${{ allproduit.nouveauprix }}  </div>
                                     <a class="close-btn" id="close-btn{{allproduit.id}}"></a>
 
@@ -426,6 +423,7 @@
                                                     cache: false,
                                                     success: function (data) {
                                                         $('div#{{allproduit.id}}').hide();
+                                                        $('li#basket-item{{allproduit.id}}').hide();
                                                         $('a#classdropdown-toggle').html(data);
                                                     }
                                                 });

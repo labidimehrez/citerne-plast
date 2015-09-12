@@ -73,9 +73,8 @@ my_app_frontoffice_supprimerdepanier:
 my_app_frontoffice_supprimerdeshoppingcart:
     path:     /supprimerdeshoppingcart/{id}
     defaults: { _controller: MyAppFrontofficeBundle:client:supprimerdeshoppingcart }
-
-
-
+    
+ 
 
 #my_app_frontoffice_addquantity:
 #    path:     /addquantity

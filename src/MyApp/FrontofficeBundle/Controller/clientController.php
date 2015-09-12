@@ -254,7 +254,7 @@ class clientController extends Controller {
 
         $quantity = intval($this->get('request_stack')->getCurrentRequest()->get('quantity'));
         $manager_produit = $this->get('entities');
-        
+
         $allproduit = $this->get('entities')->AllProduits();
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
@@ -285,8 +285,7 @@ class clientController extends Controller {
             $session->set('idajoutépanier', $id_Ajouté_panier);
             $session->set('panierSession', $panier);
             $session->set('carttotal', $cart_subtotal);
-        }
-        else {
+        } else {
             $session = $this->get('request_stack')->getCurrentRequest()->getSession();
             if ($quantity > 0) {
                 $cart_subtotal = 0;
@@ -324,13 +323,13 @@ class clientController extends Controller {
     public function singleproductsidebarAction() {
 
         $manager_produit = $this->get('entities');
-            $allCategorys = $this->get('entities')->AllCategorys();
+        $allCategorys = $this->get('entities')->AllCategorys();
         $allproduit = $this->get('entities')->AllProduits();
-        
+
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-    
+
 
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
@@ -347,13 +346,13 @@ class clientController extends Controller {
     public function singleproductAction($id, Request $request) {
 
         $manager_produit = $this->get('entities');
-         $allCategorys = $this->get('entities')->AllCategorys();
+        $allCategorys = $this->get('entities')->AllCategorys();
         $allproduit = $this->get('entities')->AllProduits();
-        
+
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-       
+
         $singleproduct = $this->get('entities')->OneProduit($id);
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         if ($cart_subtotal == NULL) {
@@ -377,7 +376,7 @@ class clientController extends Controller {
     }
 
     public function supprimerdepanierAction($id, Request $request) {
-        
+
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
@@ -388,16 +387,16 @@ class clientController extends Controller {
             foreach ($panierSession->viewcart() as $id => $qty) {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
- 
+
             $session->set('carttotal', $cart_subtotal);
             return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:cartajax.html.twig', array(
                         'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
             ));
         }
     }
-    
-        public function supprimerdeshoppingcartAction($id, Request $request) {
-        
+
+    public function supprimerdeshoppingcartAction($id, Request $request) {
+
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $id = intval($id);
@@ -408,14 +407,12 @@ class clientController extends Controller {
             foreach ($panierSession->viewcart() as $id => $qty) {
                 $cart_subtotal = $cart_subtotal + ($this->get('entities')->PriceByProduit($id) * $qty); // float total cart //
             }
-        
+
             $session->set('carttotal', $cart_subtotal);
             return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:shoppingcart.html.twig', array(
                         'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
             ));
         }
     }
-    
-    
 
 }
