@@ -250,11 +250,11 @@ class clientController extends Controller {
         ));
     }
 
-    public function cartAction($id, Request $request) {
+    public function cartAction($slug, Request $request) {
 
         $quantity = intval($this->get('request_stack')->getCurrentRequest()->get('quantity'));
         $manager_produit = $this->get('entities');
-
+        $id = $manager_produit->ProduitIdBySlug($slug);
         $allproduit = $this->get('entities')->AllProduits();
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
@@ -343,9 +343,10 @@ class clientController extends Controller {
         ));
     }
 
-    public function singleproductAction($id, Request $request) {
+    public function singleproductAction($slug, Request $request) {
 
         $manager_produit = $this->get('entities');
+        $id = $manager_produit->ProduitIdBySlug($slug);
         $allCategorys = $this->get('entities')->AllCategorys();
         $allproduit = $this->get('entities')->AllProduits();
 

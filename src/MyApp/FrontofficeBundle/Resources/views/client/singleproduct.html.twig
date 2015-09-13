@@ -599,7 +599,7 @@
                         <div class="price-current">${{singleproduct.nouveauprix}}</div>
                         <div class="price-prev">${{singleproduct.ancienprix}}</div>
                     </div>
-                        <form  action='{{path('my_app_frontoffice_cart',{'id':singleproduct.id})}}' method="post" {{ form_enctype(form) }}  > 
+                        <form  action='{{path('my_app_frontoffice_cart',{'slug':singleproduct.slug})}}' method="post" {{ form_enctype(form) }}  > 
                                 <div class="qnt-holder">
                                     <div class="le-quantity">
 

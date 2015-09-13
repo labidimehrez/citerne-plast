@@ -534,7 +534,7 @@
                                      
                                     <div class="title">
                                       <!--  <a href="single-product.html">VAIO Fit Laptop - Windows 8 SVF14322CXW</a>-->
-                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'id':produitState_Featured.id}) }}">{{ produitState_Featured.nomproduit }}</a>
+                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'slug':produitState_Featured.slug}) }}">{{ produitState_Featured.nomproduit }}</a>
                                     </div>
                                       <!-- <div class="brand">sony</div>-->
                                       <div class="brand">{{produitState_Featured.marque}}</div>
@@ -549,7 +549,7 @@
                                 <div class="hover-area">
                                     <div class="add-cart-button">                                     
                                     <!--    <a href="single-product.html" class="le-button">add to cart</a> -->
-                                    <a href="{{path('my_app_frontoffice_singleproduct',{'id':produitState_Featured.id})}}" class="le-button">add to cart</a> 
+                                    <a href="{{path('my_app_frontoffice_singleproduct',{'slug':produitState_Featured.slug})}}" class="le-button">add to cart</a> 
                                    
                                     </div>
                                     <div class="wish-compare">
@@ -593,7 +593,7 @@
                                     <div class="label-discount clear"></div>
                                     <div class="title">
                                         <!--      <a href="single-product.html">White lumia 9001</a> -->
-                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'id':produitState_Newarrivals.id}) }}">{{ produitState_Newarrivals.nomproduit }}</a>
+                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'slug':produitState_Newarrivals.slug}) }}">{{ produitState_Newarrivals.nomproduit }}</a>
                                     </div>
                                     <!-- <div class="brand">nokia</div> -->
                                     <div class="brand">{{ produitState_Newarrivals.marque }}</div>
@@ -608,7 +608,7 @@
                                 <div class="hover-area">
                                     <div class="add-cart-button">
                                         <!--      <a href="single-product.html" class="le-button">add to cart</a>  -->
-                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'id':produitState_Newarrivals.id}) }}"
+                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'slug':produitState_Newarrivals.slug}) }}"
                                            class="le-button">add to cart</a>
                                     </div>
                                     <div class="wish-compare">
@@ -657,7 +657,7 @@
                                     <div class="label-discount clear"></div>
                                     <div class="title">
                                         <!-- <a href="single-product.html">Netbook Acer TravelMate   B113-E-10072</a>-->
-                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'id':produitState_TopSales.id}) }}">{{ produitState_TopSales.nomproduit }}</a>
+                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'slug':produitState_TopSales.slug}) }}">{{ produitState_TopSales.nomproduit }}</a>
                                     </div>
                                     <!--<div class="brand">acer</div> -->
                                     <div class="brand">{{ produitState_TopSales.marque }}</div>
@@ -671,7 +671,7 @@
                                 <div class="hover-area">
                                     <div class="add-cart-button">
                                         <!--      <a href="single-product.html" class="le-button">add to cart</a>  -->
-                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'id':produitState_TopSales.id}) }}"
+                                        <a href="{{ path('my_app_frontoffice_singleproduct',{'slug':produitState_TopSales.slug}) }}"
                                            class="le-button">add to cart</a>
                                     </div>
                                     <div class="wish-compare">

@@ -6,16 +6,12 @@ use MyApp\BackofficeBundle\Entity\Category;
 use MyApp\BackofficeBundle\Form\CategoryType;
 use MyApp\BackofficeBundle\Entity\Produit;
 use MyApp\BackofficeBundle\Form\ProduitType;
-
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class manageController extends Controller
-{
+class manageController extends Controller {
 
-    public function messageAction()
-    {
+    public function messageAction() {
 
         $manager_entities = $this->get('entities');
         /** equivalent de em manager * */
@@ -27,9 +23,7 @@ class manageController extends Controller
         // ));
     }
 
-
-    public function categoryaddAction()
-    {
+    public function categoryaddAction() {
         $manager_category = $this->get('entities');
         /** equivalent de em manager * */
         $category = new Category();
@@ -43,7 +37,7 @@ class manageController extends Controller
                 $manager_category->persist($category);
                 $categorys = $manager_category->AllCategorys();
                 return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig', array(
-                    'categorys' => $categorys
+                            'categorys' => $categorys
                 ));
             }
         } elseif ($request->isMethod('Post')) {
@@ -60,8 +54,7 @@ class manageController extends Controller
         }
     }
 
-    public function categorydeleteAction($id, Request $request)
-    {
+    public function categorydeleteAction($id, Request $request) {
         $manager_category = $this->get('entities');
         /** equivalent de em manager * */
         if (!$manager_category->OneCategory($id)) {
@@ -71,7 +64,7 @@ class manageController extends Controller
                 $manager_category->remove($manager_category->OneCategory($id));
                 $categorys = $manager_category->AllCategorys();
                 return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig', array(
-                    'categorys' => $categorys
+                            'categorys' => $categorys
                 ));
             }
         }
@@ -81,48 +74,46 @@ class manageController extends Controller
         return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
     }
 
-   /* public function categoryeditAction($id, Request $request)
-    {
-        $manager_category = $this->get('entities');
-     
-        $form = $this->createFormBuilder($manager_category->OneCategory($id))
-            ->add('nom', 'text', array('required' => TRUE))
-            ->add('position', 'integer', array('required' => TRUE))
-            ->getForm();
+    /* public function categoryeditAction($id, Request $request)
+      {
+      $manager_category = $this->get('entities');
 
-        if (!$manager_category->OneCategory($id)) {
-            throw $this->createNotFoundException('No Menu found for id ' . $id);
-        } elseif ($manager_category->OneCategory($id) != NULL) {
+      $form = $this->createFormBuilder($manager_category->OneCategory($id))
+      ->add('nom', 'text', array('required' => TRUE))
+      ->add('position', 'integer', array('required' => TRUE))
+      ->getForm();
+
+      if (!$manager_category->OneCategory($id)) {
+      throw $this->createNotFoundException('No Menu found for id ' . $id);
+      } elseif ($manager_category->OneCategory($id) != NULL) {
 
 
-            if ($request->isXmlHttpRequest()) {
-                $form->bind($request);
-                if ($form->isValid()) {
-                    $manager_category->flush();
-                    $categorys = $manager_category->AllCategorys();
-                    return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig', array(
-                        'categorys' => $categorys
-                    ));
-                }
-            } elseif ($request->isMethod('Post')) {
+      if ($request->isXmlHttpRequest()) {
+      $form->bind($request);
+      if ($form->isValid()) {
+      $manager_category->flush();
+      $categorys = $manager_category->AllCategorys();
+      return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_category.html.twig', array(
+      'categorys' => $categorys
+      ));
+      }
+      } elseif ($request->isMethod('Post')) {
 
-                if ($form->isValid()) {
-                    $manager_category->flush();
-                    $categorys = $manager_category->AllCategorys();
-                    return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
-                }
-            }
-        }
+      if ($form->isValid()) {
+      $manager_category->flush();
+      $categorys = $manager_category->AllCategorys();
+      return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
+      }
+      }
+      }
 
-        $categorys = $manager_category->AllCategorys();
-        return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
+      $categorys = $manager_category->AllCategorys();
+      return $this->render('MyAppBackofficeBundle:manage:category.html.twig', array('form' => $form->createView(), 'categorys' => $categorys));
 
-    }*/
+      } */
 
-   public function produitaddAction()
-    {
+    public function produitaddAction() {
         $manager_produit = $this->get('entities');
-        /** equivalent de em manager * */
         $produit = new Produit();
         $form = $this->createForm(new ProduitType, $produit);
         $request = $this->get('request_stack')->getCurrentRequest();
@@ -134,7 +125,7 @@ class manageController extends Controller
                 $manager_produit->persist($produit);
                 $produits = $manager_produit->AllProduits();
                 return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_product.html.twig', array(
-                    'produits' => $produits
+                            'produits' => $produits
                 ));
             }
         } elseif ($request->isMethod('Post')) {
@@ -146,14 +137,12 @@ class manageController extends Controller
                 return $this->redirect($this->generateUrl('my_app_backoffice_manage_produit_add'));
             }
         } else {
-           $produits = $manager_produit->AllProduits();
+            $produits = $manager_produit->AllProduits();
             return $this->render('MyAppBackofficeBundle:manage:product.html.twig', array('form' => $form->createView(), 'produits' => $produits));
         }
     }
-    
-    
-        public function produitdeleteAction($id, Request $request)
-    {
+
+    public function produitdeleteAction($id, Request $request) {
         $manager_produit = $this->get('entities');
         if (!$manager_produit->OneProduit($id)) {
             throw $this->createNotFoundException('No Menu found for id ' . $id);
@@ -162,7 +151,7 @@ class manageController extends Controller
                 $manager_produit->remove($manager_produit->OneProduit($id));
                 $produits = $manager_produit->AllProduits();
                 return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_product.html.twig', array(
-                    'produits' => $produits
+                            'produits' => $produits
                 ));
             }
         }

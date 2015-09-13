@@ -26,7 +26,7 @@ class ProduitType extends AbstractType {
 
                 # ->add('state')
                 ->add('state', 'entity', array('class' => 'MyApp\BackofficeBundle\Entity\State',
-                    'property' => 'nomState',
+                    'choice_label' => 'nomState',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => true))
@@ -35,24 +35,31 @@ class ProduitType extends AbstractType {
 
 //            ->add('category')
                 ->add('category', 'entity', array('class' => 'MyApp\BackofficeBundle\Entity\Category',
-                    'property' => 'nom',
+                    'choice_label' => 'nom', // avoid deprecated 'property'=>'' since sf2.7
                     'expanded' => false,
                     'multiple' => false,
                     'required' => true))
                 
 //            ->add('departement')
                    ->add('departement', 'entity', array('class' => 'MyApp\BackofficeBundle\Entity\Departement',
-                    'property' => 'nom',
+                    'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => true))
         ;
     }
 
-    /**
+     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function __construct(array $options = array()) {
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+
+        $this->options = $resolver->resolve($options);
+    }
+
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'MyApp\BackofficeBundle\Entity\Produit'
         ));
