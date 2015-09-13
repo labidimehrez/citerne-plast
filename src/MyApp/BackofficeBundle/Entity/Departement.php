@@ -105,5 +105,7 @@ class Departement
     {
         $this->produits = $produits;
     }
-
+    public function __toString() {
+        return $this->nom . '';
+    }
 }

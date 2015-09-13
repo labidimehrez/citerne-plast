@@ -9,10 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="state")
  * @ORM\Entity(repositoryClass="MyApp\BackofficeBundle\Repository\StateRepository")
  */
+class State {
 
-class State
-{
     protected $produits;
+
     /**
      * @var integer
      *
@@ -21,6 +21,7 @@ class State
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var string $nomState
      * @ORM\Column(name="nomState", type="string", length=255,nullable=true)
@@ -33,8 +34,7 @@ class State
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -43,8 +43,7 @@ class State
      *
      * @return string
      */
-    public function getNomState()
-    {
+    public function getNomState() {
         return $this->nomState;
     }
 
@@ -54,8 +53,7 @@ class State
      * @param string $nomState
      * @return State
      */
-    public function setNomState($nomState)
-    {
+    public function setNomState($nomState) {
         $this->nomState = $nomState;
 
         return $this;
@@ -64,17 +62,19 @@ class State
     /**
      * @return mixed
      */
-    public function getProduits()
-    {
+    public function getProduits() {
         return $this->produits;
     }
 
     /**
      * @param mixed $produits
      */
-    public function setProduits($produits)
-    {
+    public function setProduits($produits) {
         $this->produits = $produits;
+    }
+
+    public function __toString() {
+        return $this->nomState . '';
     }
 
 }

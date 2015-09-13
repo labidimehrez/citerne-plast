@@ -4,6 +4,10 @@ namespace MyApp\BackofficeBundle\Controller;
 
 use MyApp\BackofficeBundle\Entity\Category;
 use MyApp\BackofficeBundle\Form\CategoryType;
+use MyApp\BackofficeBundle\Entity\Produit;
+use MyApp\BackofficeBundle\Form\ProduitType;
+
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -115,9 +119,57 @@ class manageController extends Controller
 
     }*/
 
-    public function produitAction()
+   public function produitaddAction()
     {
+        $manager_produit = $this->get('entities');
+        /** equivalent de em manager * */
+        $produit = new Produit();
+        $form = $this->createForm(new ProduitType, $produit);
+        $request = $this->get('request_stack')->getCurrentRequest();
 
+        if ($request->isXmlHttpRequest()) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $produit = $form->getData();
+                $manager_produit->persist($produit);
+                $produits = $manager_produit->AllProduits();
+                return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_product.html.twig', array(
+                    'produits' => $produits
+                ));
+            }
+        } elseif ($request->isMethod('Post')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $produit = $form->getData();
+                $manager_produit->persist($produit);
+                $produits = $manager_produit->AllProduits();
+                return $this->redirect($this->generateUrl('my_app_backoffice_manage_produit_add'));
+            }
+        } else {
+           $produits = $manager_produit->AllProduits();
+            return $this->render('MyAppBackofficeBundle:manage:product.html.twig', array('form' => $form->createView(), 'produits' => $produits));
+        }
+    }
+    
+    
+        public function produitdeleteAction($id, Request $request)
+    {
+        $manager_produit = $this->get('entities');
+        if (!$manager_produit->OneProduit($id)) {
+            throw $this->createNotFoundException('No Menu found for id ' . $id);
+        } else {
+            if ($request->isXmlHttpRequest()) {
+                $manager_produit->remove($manager_produit->OneProduit($id));
+                $produits = $manager_produit->AllProduits();
+                return $this->container->get('templating')->renderResponse('MyAppBackofficeBundle:manage/ajax_response:liste_product.html.twig', array(
+                    'produits' => $produits
+                ));
+            }
+        }
+
+        $form = $this->createForm(new ProduitType);
+        $produits = $manager_produit->AllProduits();
+        return $this->render('MyAppBackofficeBundle:manage:product.html.twig', array('form' => $form->createView(), 'produits' => $produits));
     }
 
 }

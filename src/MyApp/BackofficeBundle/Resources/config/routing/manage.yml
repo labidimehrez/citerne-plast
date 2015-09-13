@@ -4,12 +4,29 @@ my_app_backoffice_manage_message:
     defaults: { _controller: MyAppBackofficeBundle:manage:message }
     
 ##################################################################################################################################################
-my_app_backoffice_manage_produit:
-    pattern:  /produit
-    defaults: { _controller: MyAppBackofficeBundle:manage:produit }
+#my_app_backoffice_manage_produit:
+#    pattern:  /produit
+#    defaults: { _controller: MyAppBackofficeBundle:manage:produit }
+    
+    
+my_app_backoffice_manage_produit_add:
+    pattern:  /produit 
+    defaults: { _controller: MyAppBackofficeBundle:manage:produitadd }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true   
+        
+my_app_backoffice_manage_produit_delete:
+    pattern:  /{id}/produitdelete
+    defaults: { _controller: MyAppBackofficeBundle:manage:produitdelete }
+ 
+        
+my_app_backoffice_manage_produit_edit:
+    pattern:  /{id}/produitedit
+    defaults: { _controller: MyAppBackofficeBundle:manage:produitedit } 
 ################################################################################################################################################## 
-    
-    
+       
 my_app_backoffice_manage_category_add:
     pattern:  /category 
     defaults: { _controller: MyAppBackofficeBundle:manage:categoryadd }

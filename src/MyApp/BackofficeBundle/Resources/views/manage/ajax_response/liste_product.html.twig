@@ -1,0 +1,53 @@
+{# empty Twig template #}
+<script src="{{ asset('bundles/myappbackoffice/js/jqueryajax.min.js') }}" type="text/javascript"></script>  
+{% if app.request.isXmlHttpRequest == true %}
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+        <tr>
+            <th width="13"><input type="checkbox" class="checkbox" style="margin-left:10px;"/></th>
+            <th>Nom</th>
+            <th>Position</th>
+            <th>Added by</th>
+            <th width="110" class="ac">Content Control</th>
+        </tr>
+
+        {% for produits in produits %}  {% set produitsid = produits.id %}      
+            <tr id="{{produitsid}}">
+                <td><input type="checkbox" class="checkbox" /></td>
+                <!--<td><h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3></td>-->
+                <td><h3><a href="#">{{produits.nomproduit}}</a></h3></td>
+                <!--<td>12.05.09</td> -->
+                <td>{{produits.qteStock}}</td>
+                <td><a href="#">Administrator</a></td>
+                <td><a href="#" class="ico del" id="deleteproduct{{produitsid}}">Delete</a>
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#deleteproduct{{produitsid}}").click(function (e) { // On sélectionne le formulaire par son identifiant                                                    
+                                e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire         
+                                $.ajax({
+                                    type: 'post',
+                                    url: "{{path('my_app_backoffice_manage_produit_delete',{id:produits.id} ) }}",
+                                    data: $(this).serialize(),
+                                    datatype: "json",
+                                    cache: false,
+                                    success: function (data)
+                                    {
+                                        $('tr#{{produitsid}}').hide();
+                                    }
+                                });
+                                return false;
+                            });
+                        });
+                    </script>        
+                    <a href="#" class="ico edit">Edit</a></td>
+            </tr>
+        {%endfor%}
+
+
+    </table>
+
+{% endif %}
+
+<!-- pour les ajax call FOSJSrouting Bundle -->
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+<!-- pour les ajax call FOSJSrouting Bundle -->
