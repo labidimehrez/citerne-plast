@@ -1,6 +1,7 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -8,24 +9,26 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="MyApp\BackofficeBundle\Repository\ProduitRepository")
  */
+class Produit {
 
-class Produit
-{
     /**
      * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="id",nullable=true)
      */
     protected $state;
+
     /**
      * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id",nullable=true)
      */
     protected $category;
+
     /**
      * @ORM\ManyToOne(targetEntity="MyApp\BackofficeBundle\Entity\Departement")
      * @ORM\JoinColumn(name="departement_id", referencedColumnName="id",nullable=true)
      */
     protected $departement;
+
     /**
      * @var integer
      *
@@ -34,71 +37,81 @@ class Produit
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255,nullable=true)
      */
     private $image;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="qteStock", type="integer", length=255,nullable=true)
      */
     private $qteStock;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="qteCommand", type="integer", length=255,nullable=true)
      */
     private $qteCommand;
+
     /**
      * @var float
      *
      * @ORM\Column(name="nouveauprix", type="float", length=255,nullable=true)
      */
     private $nouveauprix;
+
     /**
      * @var float
      *
      * @ORM\Column(name="ancienprix", type="float", length=255,nullable=true)
      */
     private $ancienprix;
+
     /**
      * @var string
      *
      * @ORM\Column(name="nomproduit", type="string", length=255,nullable=true)
      */
     private $nomproduit;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="marque", type="string", length=255,nullable=true)
      */
     private $marque;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="detailsproduit", type="string", length=255,nullable=true)
      */
     private $detailsproduit;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255,nullable=true)
      */
     private $description;
-    
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -107,8 +120,7 @@ class Produit
      *
      * @return string
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
 
@@ -118,8 +130,7 @@ class Produit
      * @param string $image
      * @return Produit
      */
-    public function setImage($image)
-    {
+    public function setImage($image) {
         $this->image = $image;
 
         return $this;
@@ -130,8 +141,7 @@ class Produit
      *
      * @return float
      */
-    public function getNouveauprix()
-    {
+    public function getNouveauprix() {
         return $this->nouveauprix;
     }
 
@@ -141,8 +151,7 @@ class Produit
      * @param float $nouveauprix
      * @return Produit
      */
-    public function setNouveauprix($nouveauprix)
-    {
+    public function setNouveauprix($nouveauprix) {
         $this->nouveauprix = $nouveauprix;
 
         return $this;
@@ -153,8 +162,7 @@ class Produit
      *
      * @return float
      */
-    public function getAncienprix()
-    {
+    public function getAncienprix() {
         return $this->ancienprix;
     }
 
@@ -164,8 +172,7 @@ class Produit
      * @param float $ancienprix
      * @return Produit
      */
-    public function setAncienprix($ancienprix)
-    {
+    public function setAncienprix($ancienprix) {
         $this->ancienprix = $ancienprix;
 
         return $this;
@@ -176,8 +183,7 @@ class Produit
      *
      * @return string
      */
-    public function getNomproduit()
-    {
+    public function getNomproduit() {
         return $this->nomproduit;
     }
 
@@ -187,10 +193,9 @@ class Produit
      * @param string $nomproduit
      * @return Produit
      */
-    public function setNomproduit($nomproduit)
-    {
+    public function setNomproduit($nomproduit) {
         $this->nomproduit = $nomproduit;
-
+        $this->setSlug($this->nomproduit);
         return $this;
     }
 
@@ -199,8 +204,7 @@ class Produit
      *
      * @return string
      */
-    public function getDetailsproduit()
-    {
+    public function getDetailsproduit() {
         return $this->detailsproduit;
     }
 
@@ -210,8 +214,7 @@ class Produit
      * @param string $detailsproduit
      * @return Produit
      */
-    public function setDetailsproduit($detailsproduit)
-    {
+    public function setDetailsproduit($detailsproduit) {
         $this->detailsproduit = $detailsproduit;
 
         return $this;
@@ -220,82 +223,73 @@ class Produit
     /**
      * @return int
      */
-    public function getQteStock()
-    {
+    public function getQteStock() {
         return $this->qteStock;
     }
 
     /**
      * @param int $qteStock
      */
-    public function setQteStock($qteStock)
-    {
+    public function setQteStock($qteStock) {
         $this->qteStock = $qteStock;
     }
 
     /**
      * @return int
      */
-    public function getQteCommand()
-    {
+    public function getQteCommand() {
         return $this->qteCommand;
     }
 
     /**
      * @param int $qteCommand
      */
-    public function setQteCommand($qteCommand)
-    {
+    public function setQteCommand($qteCommand) {
         $this->qteCommand = $qteCommand;
     }
 
     /**
      * @return mixed
      */
-    public function getState()
-    {
+    public function getState() {
         return $this->state;
     }
 
     /**
      * @param mixed $state
      */
-    public function setState($state)
-    {
+    public function setState($state) {
         $this->state = $state;
     }
 
     /**
      * @return mixed
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->category;
     }
 
     /**
      * @param mixed $category
      */
-    public function setCategory($category)
-    {
+    public function setCategory($category) {
         $this->category = $category;
     }
 
     /**
      * @return mixed
      */
-    public function getDepartement()
-    {
+    public function getDepartement() {
         return $this->departement;
     }
 
     /**
      * @param mixed $departement
      */
-    public function setDepartement($departement)
-    {
+    public function setDepartement($departement) {
         $this->departement = $departement;
     }
+
     function getMarque() {
         return $this->marque;
     }
@@ -303,6 +297,7 @@ class Produit
     function setMarque($marque) {
         $this->marque = $marque;
     }
+
     function getDescription() {
         return $this->description;
     }
@@ -310,7 +305,27 @@ class Produit
     function setDescription($description) {
         $this->description = $description;
     }
+    
+    function getSlug() {
+        return $this->slug;
+    }
 
+    function setSlug($slug) {
+        $this->slug = $this->slugify($slug);
+    }
 
+        public function slugify($text) {       
+        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);// replace non letter or digits by -      
+        $text = trim($text, '-');// trim      
+        if (function_exists('iconv')) {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text); // transliterate
+        }     
+        $text = strtolower($text); // lowercase       
+        $text = preg_replace('#[^-\w]+#', '', $text);// remove unwanted characters
+        if (empty($text)) {
+            return 'n-a';
+        }
+        return $text;
+    }
 
 }

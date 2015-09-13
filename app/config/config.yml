@@ -98,4 +98,9 @@ swiftmailer:
 #    user_class: MyApp\UserBundle\Entity\User
 
 
-  
+# Stof\DoctrineExtensionBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+            uploadable: true

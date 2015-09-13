@@ -44,7 +44,7 @@ class Entities {
         return $this->repository_produit->findAll();
     }
     
-   public function ProduitByStateThreeMax($state) {
+   public function ProduitByStateThreeMax($state) { //return 3 max
         $ProduitByState= $this->repository_produit->findBy(array('state' => $state));
         if(count($ProduitByState)>=3){
             return array( '0' => $ProduitByState[0],'1' =>  $ProduitByState[1],'2' =>  $ProduitByState[2]);          
@@ -53,7 +53,7 @@ class Entities {
        // return $ProduitByState;
     }
     
-       public function ProduitByStateFourMax($state) {
+       public function ProduitByStateFourMax($state) {//return 4  max
         $ProduitByState= $this->repository_produit->findBy(array('state' => $state));
         if(count($ProduitByState)>=4){
             return array( '0' => $ProduitByState[0],'1' =>  $ProduitByState[1],'2' =>  $ProduitByState[2]
@@ -64,9 +64,11 @@ class Entities {
     }
     
     public function OneProduit($id) {
-        return $this->repository_produit->findOneBy(array('id' => $id));
+        return $this->repository_produit->findOneBy(array('id' => $id)); // return object
     }
-    
+       public function ProduitIdBySlug($slug) {
+        return $this->repository_produit->findOneBy(array('slug' => $slug))->getId();
+    }
         public function PriceByProduit($id) {
         return $this->repository_produit->findOneBy(array('id' => $id))->getNouveauprix();
     }

@@ -14,7 +14,7 @@
             <div class="box-head">
                 <!--	<h2 class="left">Current Articles</h2>-->
                 <div class="right">
-                    <label>search articles</label>
+                    <label>search categorys</label>
                     <input type="text" class="field small-field" />
                     <input type="submit" class="button" value="search" />
                 </div>
@@ -131,13 +131,13 @@
             </div>
             <!-- End Box Head -->
 
-            <form  action='{{path('my_app_backoffice_manage_category_add')}}' method="post" {{ form_enctype(form) }} id="form_add_category">
-
+                {{ form_start(form, {'method': 'POST','attr': { 'id':'form_add_category'}})  }}   
+                    {#### form is deplecated SF3.0 ###}
                 <!-- Form -->
                 <div class="form">
                     <p>
                         <!--<span class="req">max 100 symbols</span>-->
-                        <label>Article Title <span>(Required Field)</span></label>
+                        <label>Category Title <span>(Required Field)</span></label>
                         <!--<input type="text" class="field size1" />-->
                     <tr>    {{form_widget(form.nom, { 'attr': { 'class':'field size4'} } )}}                                 
 
@@ -159,7 +159,7 @@
                     <input type="submit" class="button" value="submit" />
                 </div>
                 <!-- End Form Buttons -->
-            </form>
+            {{ form_end(form) }}
             <script type="text/javascript">
                 $(function () {
                     $("#form_add_category").submit(function (e) {
