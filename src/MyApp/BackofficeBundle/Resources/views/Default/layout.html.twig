@@ -1,5 +1,5 @@
  
-{{dump(app.session.get('user'))}} {# connected user #}
+  {#  {{dump(app.session.get('user'))}} {# connected user #}
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
@@ -51,7 +51,8 @@
 
  
                         <li>
-                            <a class="active-menu"  href="{{path('my_app_backoffice_homepage')}}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                            <a class="active-menu"  href="{{path('my_app_backoffice_homepage')}}">
+                                <i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                         </li>
                         <li>
                             <a  href="{{path('my_app_backoffice_ui')}}"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
@@ -114,17 +115,7 @@
             </nav>  
             <!-- /. NAV SIDE  -->
             <div id="page-wrapper" >
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+ 
                 
                   {% block index %} {% endblock %} 
                   {% block ui %} {% endblock %} 
@@ -136,21 +127,7 @@
                 
                 {% block manage %}{% endblock %} 
 
-
-
-
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+ 
                 <!-- /. PAGE INNER  -->
             </div>
             <!-- /. PAGE WRAPPER  -->

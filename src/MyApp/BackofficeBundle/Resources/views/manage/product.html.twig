@@ -130,40 +130,76 @@
             </div>
             <!-- End Box Head -->
 
-                {{ form_start(form, {'method': 'POST','attr': { 'id':'form_add_product'}})  }}   
-                    {#### form is deplecated SF3.0 ###}
-                <!-- Form -->
-                <div class="form">
-                    <p>
-                        <!--<span class="req">max 100 symbols</span>-->
-                        <label>produit Title <span>(Required Field)</span></label>
-                        <!--<input type="text" class="field size1" />-->
+            {{ form_start(form, {'method': 'POST','attr': { 'id':'form_add_product'}})  }}   
+            {#### form is deplecated SF3.0 ###}
+            <!-- Form -->
+            <div class="form">
+                <table> 
+
                     <tr>  
+                        <th>  <label> Title  </label> </th> 
+                        <th>  {{form_widget(form.nomproduit, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}    </th> 
+
+                        <th>  <label> State  </label> </th>  
+                        <th>   {{form_widget(form.state, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
+
+                        <th>  <label> Departement  </label> </th> 
+                        <th>  {{form_widget(form.departement, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
+
+                        <th>  <label>Category  </label> </th> 
+                        <th>   {{form_widget(form.category, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
+                    </tr>
+
+                    <tr>
+                        <th>  <label> Image  </label> </th> 
+                        <th>  {{form_widget(form.image, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}} </th> 
+
+                        <th>  <label> Qte Stock  </label> </th> 
+                        <th>  {{form_widget(form.qteStock, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
+
+                        <th>  <label> Qte Command  </label> </th> 
+                        <th>  {{form_widget(form.qteCommand, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
                         
-                        {{form_widget(form.nomproduit, { 'attr': { 'class':'field size4'} } )}}                                 
+                        <th>  <label> Nouveau prix  </label> </th> 
+                        <th>  {{form_widget(form.nouveauprix, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
 
-                        {#{form_widget(form.position, { 'attr': { 'class':'field size2'} } )}#} 
-                        
-                         {{form_widget(form.state, { 'attr': { 'class':'field size2'} } )}} 
-                         {{form_widget(form.departement, { 'attr': { 'class':'field size2'} } )}} 
-                          {{form_widget(form.category, { 'attr': { 'class':'field size2'} } )}} 
-                    </tr>                               
-                    </p>
 
-                    <a href="#" class="add-button"><span>Add new Category</span></a>
-                    <a href="#" class="add-button"><span>Add new State</span></a>
-                    <a href="#" class="add-button"><span>Add new Depart</span></a>
-                    <a href="#" class="add-button"><span>Add new Product</span></a>
+                    </tr>
 
-                </div>
-                <!-- End Form -->
-                {{form_widget(form._token)}}
-                <!-- Form Buttons -->
-                <div class="buttons">
-                    <input type="reset" class="button" value="reset" />
-                    <input type="submit" class="button" value="submit" />
-                </div>
-                <!-- End Form Buttons -->
+
+                    <tr>
+
+
+                        <th>  <label> Ancien prix  </label> </th> 
+                        <th>   {{form_widget(form.ancienprix, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}  </th> 
+
+                        <th>  <label> Détails   </label> </th> 
+                        <th>  {{form_widget(form.detailsproduit, { 'attr': { 'class':'field size2','style':' margin-right: 15;'} } )}}    </th> 
+                    </tr>
+
+
+                </table> 
+
+
+
+
+                <!--  </p> -->
+
+                <!--    <a href="#" class="add-button"><span>Add new Category</span></a>   -->
+                <a   href="{{path('my_app_backoffice_manage_category_add')}}" class="add-button"><span>Add new Category</span></a>
+                <a href="#" class="add-button"><span>Add new State</span></a>
+                <a href="#" class="add-button"><span>Add new Depart</span></a>
+                <a href="#" class="add-button"><span>Add new Product</span></a>
+
+            </div>
+            <!-- End Form -->
+            {{form_widget(form._token)}}
+            <!-- Form Buttons -->
+            <div class="buttons">
+                <input type="reset" class="button" value="reset" />
+                <input type="submit" class="button" value="submit" />
+            </div>
+            <!-- End Form Buttons -->
             {{ form_end(form) }}
             <script type="text/javascript">
                 $(function () {

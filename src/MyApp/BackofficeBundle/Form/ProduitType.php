@@ -29,7 +29,7 @@ class ProduitType extends AbstractType {
                     'choice_label' => 'nomState',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true))
+                    'required' => false))
 
 
 
@@ -38,14 +38,14 @@ class ProduitType extends AbstractType {
                     'choice_label' => 'nom', // avoid deprecated 'property'=>'' since sf2.7
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true))
+                    'required' => false))
                 
 //            ->add('departement')
                    ->add('departement', 'entity', array('class' => 'MyApp\BackofficeBundle\Entity\Departement',
                     'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true))
+                    'required' => false))
         ;
     }
 
