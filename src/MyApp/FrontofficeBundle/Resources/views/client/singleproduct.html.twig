@@ -569,7 +569,8 @@
                     </div>
                     <div class="availability"><label>Availability:</label><span class="available">  in stock</span></div>
 
-                    <div class="title"><a href="#">{{singleproduct.nomproduit}}</a></div>
+                    <div class="title">
+						<a href="{{path('my_app_frontoffice_singleproduct',{'slug':singleproduct.slug})}}">{{singleproduct.nomproduit}}</a></div>
                     <div class="brand">{{singleproduct.marque}}</div>
 
                     <div class="social-row">
