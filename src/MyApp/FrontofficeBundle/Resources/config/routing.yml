@@ -45,7 +45,12 @@ my_app_frontoffice_singleproductsidebar:
 my_app_frontoffice_singleproduct:
     path:     /singleproduct/{slug}
     defaults: { _controller: MyAppFrontofficeBundle:client:singleproduct }
-
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true 
+        
+        
 utilisateur:
     resource: "@MyAppBackofficeBundle/Resources/config/routing/utilisateur.yml"
     prefix: /utilisateur 

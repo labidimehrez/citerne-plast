@@ -1,0 +1,48 @@
+{# empty Twig template #}
+
+ 
+
+
+<div class="comments">
+    {% for commentaire in singleproduct.commentaires %}   
+        <div class="comment-item">
+            <div class="row no-margin">
+                <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                    <div class="avatar">
+                        <img alt="avatar" src="{{ asset('bundles/myappfrontoffice/images/default-avatar.jpg') }}"> 
+                    </div><!-- /.avatar -->
+                </div><!-- /.col -->
+
+                <div class="col-xs-12 col-lg-11 col-sm-10 no-margin">
+                    <div class="comment-body">
+                        <div class="meta-info">
+                            <div class="author inline">
+                                <a href="#" class="bold">{{commentaire.name}}</a>
+                            </div>
+                            <div class="star-holder inline">
+                                <div class="star" data-score="4" style="cursor: pointer; width: 80px;">
+                                    <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="1" title="bad">      
+                                    <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="2" title="poor"> 
+                                    <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="3" title="regular"> 
+                                    <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="4" title="good">      
+                                    <img  src="{{ asset('bundles/myappfrontoffice/images/star-on.png') }}"  alt="5" title="gorgeous"> 
+
+                                    <input type="hidden" name="score" value="4">
+                                </div>
+                            </div>
+                            <div class="date inline pull-right">
+                                <!--   12.07.2013 -->  {{commentaire.datecreation|date("d-m-Y")}}
+                            </div>
+                        </div><!-- /.meta-info -->
+                        <p class="comment-text">
+                            {{commentaire.review}}. 
+                        </p><!-- /.comment-text -->
+                    </div><!-- /.comment-body -->
+
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+        </div><!-- /.comment-item -->
+    {% endfor %}   
+
+</div><!-- /.comments -->

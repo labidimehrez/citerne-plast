@@ -4,6 +4,7 @@ namespace MyApp\FrontofficeBundle\Controller;
 
 use MyApp\FrontofficeBundle\Entity\Message;
 use MyApp\FrontofficeBundle\Form\MessageType;
+use MyApp\FrontofficeBundle\Services\Panier;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -23,12 +24,10 @@ class  messageController extends Controller
         $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
         $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-		
-    
- 
+		 
         $message = new Message();
         $form = $this->createForm(new MessageType, $message);
-        $request = $this->get('request_stack')->getCurrentRequest();
+      //  $request = $this->get('request_stack')->getCurrentRequest();
         
         if ($request->isMethod('Post')) {
             $form->bind($request);
@@ -42,13 +41,13 @@ class  messageController extends Controller
                 return $this->redirect($this->generateUrl('my_app_frontoffice_contact'));
             }
         }
-
+       
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
         if (!$panierSession instanceof Panier) {
             $panierSession = $this->get('panier');
         } 
-        
+ 
         return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
         'form' => $form->createView(),'allCategorys' => $allCategorys, 'allproduit' => $allproduit,
         'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(),

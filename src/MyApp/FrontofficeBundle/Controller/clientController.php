@@ -335,6 +335,8 @@ class clientController extends Controller {
         $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
 
         $singleproduct = $this->get('entities')->OneProduit($id);
+        $nbComment= count($manager_produit->nbCommentBysingleproduct($id));/// nombre de commentaire par produit
+ 
         $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
         if ($cart_subtotal == NULL) {
             $cart_subtotal = 0;
@@ -351,23 +353,37 @@ class clientController extends Controller {
 
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(new CommentaireType, $commentaire);
-        if ($request->isMethod('Post')) {
-            $formCommentaire->bind($request);
-            if ($formCommentaire->isValid()) {
-                $commentaire = $formCommentaire->getData();
-                $commentaire->setProduit($singleproduct);
-                $manager_produit->persist($commentaire);
-
-                return $this->redirect($this->generateUrl('my_app_frontoffice_singleproduct', array('slug' => $singleproduct->getSlug())));
-            }
+        
+        if ($request->isXmlHttpRequest()) {
+            $formCommentaire->handleRequest($request);
+               if ($formCommentaire->isValid()) {
+                        $commentaire = $formCommentaire->getData();
+                        $commentaire->setProduit($singleproduct);
+                        $manager_produit->persist($commentaire);
+                          $nbComment =$nbComment+1;
+                return $this->container->get('templating')->renderResponse('MyAppFrontofficeBundle:client/cart:commentaires.html.twig',
+                array('singleproduct' => $singleproduct ,'nbComment'=>$nbComment ));                               
+                                 
+               }
         }
+        elseif ($request->isMethod('Post')) {
+            $formCommentaire->bind($request);
+                if ($formCommentaire->isValid()) {
+                    $commentaire = $formCommentaire->getData();
+                    $commentaire->setProduit($singleproduct);
+                    $manager_produit->persist($commentaire);
 
-        return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct, 'carttotal' => $cart_subtotal,
-                    'form' => $form->createView(), 'formCommentaire' => $formCommentaire->createView(),
-                    'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
-        ));
+                    return $this->redirect($this->generateUrl('my_app_frontoffice_singleproduct', array('slug' => $singleproduct->getSlug())));
+                }
+        }
+        else {
+            return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
+                        'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+                        'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct,'nbComment'=>$nbComment,
+                        'carttotal' => $cart_subtotal,
+                        'form' => $form->createView(), 'formCommentaire' => $formCommentaire->createView(),
+                        'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
+        ));}
     }
 
     /* public function contactAction(Request $request) {
