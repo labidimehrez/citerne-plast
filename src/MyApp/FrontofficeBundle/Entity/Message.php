@@ -1,7 +1,6 @@
 <?php
 
 namespace MyApp\FrontofficeBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**

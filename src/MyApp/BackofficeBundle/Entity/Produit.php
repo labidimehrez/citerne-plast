@@ -1,7 +1,7 @@
 <?php
 
 namespace MyApp\BackofficeBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +28,10 @@ class Produit {
      * @ORM\JoinColumn(name="departement_id", referencedColumnName="id",nullable=true)
      */
     protected $departement;
-
+   /**
+     * @ORM\OneToMany(targetEntity="MyApp\FrontofficeBundle\Entity\Commentaire", mappedBy="produit")
+     */
+    private $commentaires;
     /**
      * @var integer
      *
@@ -326,6 +329,18 @@ class Produit {
             return 'n-a';
         }
         return $text;
+    }
+    function getCommentaires() {
+        return $this->commentaires;
+    }
+
+    function setCommentaires($commentaires) {
+        $this->commentaires = $commentaires;
+    }
+
+       public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
     }
 
 }

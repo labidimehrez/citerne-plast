@@ -369,7 +369,9 @@
             <!-- ========================================= CONTENT ========================================= -->
             <div class="col-xs-12 col-md-9 items-holder no-margin">
 
-                {% for allproduit in allproduit %} {% for key,value in panier %}  {% if key is defined  and key == allproduit.id %}
+                {% for allproduit in allproduit %}
+                    {% for key,value in panier %}
+                        {% if key is defined  and key == allproduit.id %}
 
 
                             <div class="row no-margin cart-item" id="{{ allproduit.id }}">
@@ -383,7 +385,7 @@
                                 <div class="col-xs-12 col-sm-5 ">
                                     <div class="title">
                                         <!--  <a href="#">white lumia 9001</a>-->
-                                        <a href="#">{{ allproduit.nomproduit }}</a>
+                                        <a href="{{path('my_app_frontoffice_singleproduct',{slug:allproduit.slug})}}">{{ allproduit.nomproduit }}</a>
 
                                     </div>
                                     <!--   <div class="brand">sony</div>-->

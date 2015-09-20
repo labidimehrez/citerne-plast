@@ -6,6 +6,8 @@ use MyApp\FrontofficeBundle\Form\loginType;
 use MyApp\FrontofficeBundle\Form\registrerType;
 use MyApp\FrontofficeBundle\Services\Panier;
 use MyApp\UtilisateurBundle\Entity\Utilisateur;
+use MyApp\FrontofficeBundle\Entity\Commentaire;
+use MyApp\FrontofficeBundle\Form\CommentaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -15,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class clientController extends Controller {
 
-    public function indexAction() {
+    public function indexAction(Request $request) {
 
         $manager_produit = $this->get('entities');
 
@@ -40,9 +42,9 @@ class clientController extends Controller {
 
         return $this->render('MyAppFrontofficeBundle:client:index.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys,
+                    'allCategorys' => $allCategorys, 'allproduit' => $allproduit,
                     'produitState_Featured' => $produitState_Featured, 'produitState_Newarrivals' => $produitState_Newarrivals, 'produitState_TopSales' => $produitState_TopSales,
-                    'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
+                    'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart()
         ));
     }
 
@@ -138,28 +140,6 @@ class clientController extends Controller {
         }
 
         return $this->render('MyAppFrontofficeBundle:client:about.html.twig', array(
-                    'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
-                    'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
-        ));
-    }
-
-    public function contactAction(Request $request) {
-
-        $manager_produit = $this->get('entities');
-        $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
-        $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
-        $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
-        $allCategorys = $this->get('entities')->AllCategorys();
-        $allproduit = $this->get('entities')->AllProduits();
-
-
-        $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
-        $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
-        if (!$panierSession instanceof Panier) {
-            $panierSession = $this->get('panier');
-        }
-
-        return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
                     'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
@@ -369,12 +349,48 @@ class clientController extends Controller {
                 ->add('quantity', 'text')
                 ->getForm();
 
+        $commentaire = new Commentaire();
+        $formCommentaire = $this->createForm(new CommentaireType, $commentaire);
+        if ($request->isMethod('Post')) {
+            $formCommentaire->bind($request);
+            if ($formCommentaire->isValid()) {
+                $commentaire = $formCommentaire->getData();
+                $commentaire->setProduit($singleproduct);
+                $manager_produit->persist($commentaire);
+
+                return $this->redirect($this->generateUrl('my_app_frontoffice_singleproduct', array('slug' => $singleproduct->getSlug())));
+            }
+        }
+
         return $this->render('MyAppFrontofficeBundle:client:singleproduct.html.twig', array(
                     'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
                     'allCategorys' => $allCategorys, 'singleproduct' => $singleproduct, 'carttotal' => $cart_subtotal,
-                    'form' => $form->createView(), 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
+                    'form' => $form->createView(), 'formCommentaire' => $formCommentaire->createView(),
+                    'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
         ));
     }
+
+    /* public function contactAction(Request $request) {
+
+      $manager_produit = $this->get('entities');
+      $produitStateFeatured = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Featured products'));
+      $produitStateOnSale = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('On-Sale Products'));
+      $produitStateTopRated = $manager_produit->ProduitByStateThreeMax($manager_produit->OneStateByName('Top Rated Products'));
+      $allCategorys = $this->get('entities')->AllCategorys();
+      $allproduit = $this->get('entities')->AllProduits();
+
+
+      $cart_subtotal = $this->get('request_stack')->getCurrentRequest()->getSession()->get('carttotal');
+      $panierSession = $this->get('request_stack')->getCurrentRequest()->getSession()->get('panierSession');
+      if (!$panierSession instanceof Panier) {
+      $panierSession = $this->get('panier');
+      }
+
+      return $this->render('MyAppFrontofficeBundle:client:contact.html.twig', array(
+      'produitStateFeatured' => $produitStateFeatured, 'produitStateOnSale' => $produitStateOnSale, 'produitStateTopRated' => $produitStateTopRated,
+      'allCategorys' => $allCategorys, 'carttotal' => $cart_subtotal, 'panier' => $panierSession->viewcart(), 'allproduit' => $allproduit
+      ));
+      } */
 
     public function supprimerdepanierAction($id, Request $request) {
 
